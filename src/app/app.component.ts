@@ -2,30 +2,41 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Globals } from '../app/globals';
+import { User } from '../app/user'
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { CheckoutsPage } from '../pages/checkouts/checkouts';
+
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = HomePage;
-
+  @ViewChild('content') nav: Nav
+  checkoutsPage = CheckoutsPage
+  homePage = HomePage
+  public rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-    this.initializeApp();
+  constructor(
+    public platform: Platform, 
+    public statusBar: StatusBar, 
+    public splashScreen: SplashScreen,
+    public globals: Globals,
+    public user: User) 
+    {
+      this.initializeApp();
+      user.auto_login();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
-
+      // used for an example of ngFor and navigation
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'Checkouts', component: CheckoutsPage }
+      ];
   }
+
+
+
 
   initializeApp() {
     this.platform.ready().then(() => {

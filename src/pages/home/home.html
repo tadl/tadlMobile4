@@ -1,18 +1,38 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+  <ion-navbar hideBackButton="true">
+    <button ion-button left menuToggle menuToggle="left" >
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title mode="ios">{{ globals.app_title }}</ion-title>
+    <button ion-button right menuToggle menuToggle="right">
+      <ion-icon name="contact"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button icon-left full>
+    <ion-icon name="search"></ion-icon>  
+    Search Catalog
+  </button>
+  <button ion-button icon-left full>
+    <ion-icon name="compass"></ion-icon>  
+    Hours & Location<span *ngIf="globals.multi_location == true">s</span>
+  </button>
+  <button ion-button icon-left full menuToggle="right">
+    <ion-icon name="contact"></ion-icon>  
+    Account
+  </button>
+  <button ion-button icon-left full>
+    <ion-icon name="md-calendar"></ion-icon>  
+    Upcoming Events
+  </button>
+  <button ion-button icon-left full>
+    <ion-icon name="flag"></ion-icon>  
+    Library News
+  </button>
+  <button ion-button icon-left full>
+    <ion-icon name="star"></ion-icon>  
+    Featured Items
+  </button>
 </ion-content>
