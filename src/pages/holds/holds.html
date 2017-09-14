@@ -32,7 +32,7 @@
                     <button *ngIf="hold.hold_status != 'Suspended'" ion-button block>Suspend</button>
                 </ion-col>
                 <ion-col col-4>
-                    <button ion-button block>Details</button>
+                    <button ion-button block (click)='item.details(hold["record_id"])'>Details</button>
                 </ion-col>
                 <ion-col col-4>
                     <button *ngIf="confirmation != hold.hold_id" ion-button block (click)="confirmation = hold.hold_id;">Cancel</button>
