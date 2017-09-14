@@ -35,10 +35,8 @@
                     <button ion-button block>Details</button>
                 </ion-col>
                 <ion-col col-4>
-                    <!--
-                    <button *ngIf="this.confirmation != true" ion-button block (click)="this.confirmation = true;">Cancel</button>
-                    <button *ngIf="this.confirmation == true" ion-button block color="danger" (click)="">Confirm</button>
-                      -->
+                    <button *ngIf="confirmation != hold.hold_id" ion-button block (click)="confirmation = hold.hold_id;">Cancel</button>
+                    <button *ngIf="confirmation == hold.hold_id" ion-button block color="danger">Confirm</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
