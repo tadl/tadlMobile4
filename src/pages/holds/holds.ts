@@ -15,6 +15,7 @@ import { User } from '../../app/user'
   templateUrl: 'holds.html',
 })
 export class HoldsPage {
+    confirmation: string = "0"
 
   	constructor(
 		public navCtrl: NavController, 

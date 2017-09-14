@@ -11,7 +11,34 @@
 </ion-header>
 
 <ion-content padding>
-    <ul>
-        <li *ngFor="let hold of user.holds">{{hold['title']}} - {{hold['author']}}</li>
-    </ul>
+    <ion-card *ngFor="let hold of user.holds">
+        <ion-card-header><strong>{{hold['title']}}</strong></ion-card-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3>
+                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{hold['record_id']}}"/>
+                </ion-col>
+                <ion-col col-9>
+                    <p><strong>{{hold['author']}}</strong></p>
+                    <p>Position {{hold['queue_state'][0]}} in queue with {{hold['queue_state'][1]}} eligible cop<span *ngIf="hold.queue_state[1] > 1">ies</span><span *ngIf="hold.queue_state[1] == 1">y</span></p>
+                    <p>Pickup location: {{hold['pickup_location']}}</p>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-4>
+                    <button *ngIf="hold.hold_status == 'Suspended'" ion-button block>Activate</button>
+                    <button *ngIf="hold.hold_status != 'Suspended'" ion-button block>Suspend</button>
+                </ion-col>
+                <ion-col col-4>
+                    <button ion-button block>Details</button>
+                </ion-col>
+                <ion-col col-4>
+                    <button *ngIf="confirmation != hold.hold_id" ion-button block (click)="confirmation = hold.hold_id;">Cancel</button>
+                    <button *ngIf="confirmation == hold.hold_id" ion-button block color="danger">Confirm</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
 </ion-content>
