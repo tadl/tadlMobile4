@@ -7,6 +7,7 @@ import { User } from '../app/user'
 import { Item } from '../app/item'
 import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
+import { HoldsPage } from '../pages/holds/holds';
 import { ItemDetailsModal } from '../pages/item_details/item_details'
 
 
@@ -17,6 +18,7 @@ export class MyApp {
   @ViewChild('content') nav: Nav
   checkoutsPage = CheckoutsPage
   homePage = HomePage
+  holdsPage = HoldsPage
   public rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
 

@@ -12,11 +12,13 @@ import { User } from './user';
 import { Item } from './item';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HoldsPage } from '../pages/holds/holds';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    HoldsPage,
     CheckoutsPage,
     ItemDetailsModal,
   ],
@@ -31,6 +33,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     HomePage,
     CheckoutsPage,
+    HoldsPage,
     ItemDetailsModal,
   ],
   providers: [

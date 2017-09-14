@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { User } from '../../app/user'
 
 /**
  * Generated class for the HoldsPage page.
@@ -15,11 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HoldsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  	constructor(
+		public navCtrl: NavController, 
+		public navParams: NavParams,
+		public user: User
+	) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HoldsPage');
+    this.user.load_holds();
   }
 
 }

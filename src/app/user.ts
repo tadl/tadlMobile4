@@ -24,12 +24,13 @@ export class User {
   	logged_in : boolean
   	full_name: string
   	checkout_count: string
-  	holds: string
+  	holds_count: string
   	holds_ready:string
   	fines:string
   	card:string
   	token:string
   	login_error:string
+  	holds:Array<{any}> = []
   	checkouts:Array<{any}> = []
   	checkout_mesages:string
   	checkout_errors:Array<{any}> = []
@@ -57,7 +58,7 @@ export class User {
 				this.logged_in = true
 				this.full_name = data.full_name
 				this.checkout_count = data.checkouts
-				this.holds = data.holds
+				this.holds_count = data.holds
 				this.fines = data.fine
 				this.holds_ready = data.holds_ready
 				this.card = data.card
@@ -123,14 +124,19 @@ export class User {
     }
 
    /* get holds */
+
   	load_holds(){
+  		let loading = this.loadingCtrl.create({content:'Loading Holds...'})
+  		loading.present()
   		this.http.get('https://catalog.tadl.org/holds.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
+			loading.dismiss()
 			if(data.holds){
 				this.holds = data.holds
 			}else{
 			}
   		});
   	}
+
 
 
   	/** Renew all items */

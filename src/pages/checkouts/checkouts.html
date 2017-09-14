@@ -27,7 +27,7 @@
 		<ion-card-content>
 			<ion-row>
 				<ion-col>
-					<img src="https://catalog.tadl.org/opac/extras/ac/jacket/small/r/{{checkout['record_id']}}" class="list_cover_image">
+					<img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{checkout['record_id']}}" class="list_cover_image">
 				</ion-col>
 				<ion-col>
 					<ion-row>
@@ -46,10 +46,8 @@
 			</ion-row>
 			<ion-row>
 				<ion-col>
-					 <button ion-button (click)='user.renew(checkout["checkout_id"], checkout["record_id"])'>Renew</button>
-				</ion-col>
-				<ion-col>
-					<button ion-button (click)='item.details()'>Details</button>
+					<button ion-button float-right color="secondary" (click)='user.renew(checkout["checkout_id"], checkout["record_id"])'>Renew</button> 
+					<button ion-button float-right (click)='item.details()'>Details</button>	
 				</ion-col>
 			</ion-row>
 		</ion-card-content>
