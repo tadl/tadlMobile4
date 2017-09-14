@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, Injectable, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { User } from '../../app/user'
 
 /**
@@ -14,17 +14,24 @@ import { User } from '../../app/user'
   selector: 'page-checkouts',
   templateUrl: 'checkouts.html',
 })
-export class CheckoutsPage {
 
+@Injectable()
+export class CheckoutsPage {
+	@ViewChild(Content) content: Content;
   constructor(
   	public navCtrl: NavController, 
   	public navParams: NavParams,
-  	public user: User) {
-  }
+  	public user: User,
+  	public events: Events,) {
+  		events.subscribe('renew',() =>{
+  			this.content.scrollToTop();
+		});
+  	}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CheckoutsPage');
-    this.user.load_checkouts()
+    this.user.load_checkouts();
   }
-
 }
+
+

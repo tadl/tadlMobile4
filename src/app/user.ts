@@ -1,6 +1,7 @@
-import { NgModule, Component, Injectable, Input} from '@angular/core';
+import { NgModule, Component, ViewChild, Injectable, Input} from '@angular/core';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { AlertController, LoadingController, Content, Events} from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -8,10 +9,18 @@ import 'rxjs/add/operator/map';
 })
 
 export class User {
+	@ViewChild(Content) content: Content;
 	constructor(
+		private alertCtrl: AlertController,
 		private http: Http, 
-		private storage: Storage,){ }
+		public loadingCtrl: LoadingController,
+		private storage: Storage,
+		public events: Events,
+	){ 
+
+	}
   	
+
   	username: string
   	password: string
   	logged_in : boolean
@@ -23,7 +32,9 @@ export class User {
   	card:string
   	token:string
   	login_error:string
-  	checkouts:Array<{any}>
+  	checkouts:Array<{any}> = []
+  	checkout_mesages:string
+  	checkout_errors:Array<{any}> = []
   	
   	/** Auto Log User in if username and password in local storage */
   	auto_login(){
@@ -70,13 +81,64 @@ export class User {
   	}
 
   	/** Get Checkouts */
-
   	load_checkouts(){
+  		let loading = this.loadingCtrl.create({content:'Loading Checkouts...'})
+  		loading.present()
+  		this.checkout_errors.length = 0
   		this.http.get('https://catalog.tadl.org/checkouts.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
+			loading.dismiss()
 			if(data.checkouts){
 				this.checkouts = data.checkouts
 			}else{
 			}
   		});
   	}
+
+  	/** Renew Items */
+  	renew(checkout_ids:string, record_ids:string){
+  		let loading = this.loadingCtrl.create({content:'Attempting renewal...'})
+  		loading.present()
+  		this.checkout_errors.length = 0
+  		this.http.get('https://catalog.tadl.org/main/renew_checkouts.json?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids).map(res => res.json()).subscribe(data=>{
+			if(data.checkouts){
+				loading.dismiss()
+				if(data.errors.length > 0 && !data.message.startsWith("Failed") ){
+					var message:string = data.message + ' ' + 'One or more items failed to renew.'
+				}else{
+					var message:string = data.message
+				}
+				let alert = this.alertCtrl.create({
+					title: message,
+					buttons: [{
+						text: 'Ok',
+						handler: ()=>{
+							this.checkouts = data.checkouts
+							this.checkout_errors = data.errors
+							this.events.publish('renew')
+						},
+					}]
+				});
+				alert.present();
+
+			}else{
+			}
+  		});
+  	}
+
+  	/** Renew all items */
+  	renew_all(){
+  		var record_ids:string = ''
+  		var checkout_ids: string = ''
+  		for(let checkout of this.checkouts){
+  			record_ids = record_ids + checkout['record_id'] + ','
+  			checkout_ids = checkout_ids + checkout['checkout_id'] + ','
+  		};
+  		this.renew(checkout_ids, record_ids)
+  	}
+
+  	/** Remove all checkout error messages */
+  	clear_checkout_errors(){
+  		this.checkout_errors.length = 0
+  	}
+
 }
