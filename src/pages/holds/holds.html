@@ -12,9 +12,6 @@
 
 <ion-content padding>
     <ul>
-        <li *ngFor="let checkout of user.checkouts">
-            {{checkout['title']}} - {{checkout['author']}}
-        </li>
+        <li *ngFor="let hold of user.holds">{{hold['title']}} - {{hold['author']}}</li>
     </ul>
 </ion-content>
-

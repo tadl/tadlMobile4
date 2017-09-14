@@ -70,11 +70,20 @@ export class User {
   	}
 
   	/** Get Checkouts */
-
   	load_checkouts(){
   		this.http.get('https://catalog.tadl.org/checkouts.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
 			if(data.checkouts){
 				this.checkouts = data.checkouts
+			}else{
+			}
+  		});
+  	}
+
+    /* get holds */
+  	load_holds(){
+  		this.http.get('https://catalog.tadl.org/holds.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
+			if(data.holds){
+				this.holds = data.holds
 			}else{
 			}
   		});
