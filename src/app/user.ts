@@ -120,6 +120,11 @@ export class User {
 				});
 				alert.present();
 
+    /* get holds */
+  	load_holds(){
+  		this.http.get('https://catalog.tadl.org/holds.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
+			if(data.holds){
+				this.holds = data.holds
 			}else{
 			}
   		});
@@ -141,4 +146,4 @@ export class User {
   		this.checkout_errors.length = 0
   	}
 
-}
+

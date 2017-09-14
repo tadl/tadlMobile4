@@ -1,102 +1,89 @@
 <ion-menu [content]="content" side="left" id="nav_menu">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-    <ion-list>
-      <button menuClose ion-item (click)="this.nav.push(homePage,{},{animate:false});" menuToggle="left">
-        Home
-      </button>
-      <button menuClose ion-item>
-        Search Catalog
-      </button>
-      <button menuClose ion-item menuToggle="right">
-        Account
-      </button>
-    </ion-list>
-  </ion-content>
-
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button menuClose ion-item (click)="this.nav.push(homePage,{},{animate:false});" menuToggle="left">Home</button>
+            <button menuClose ion-item>Search Catalog</button>
+            <button menuClose ion-item menuToggle="right">Account</button>
+        </ion-list>
+    </ion-content>
 </ion-menu>
 
 <ion-menu [content]="content" side="right" id="account_menu">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Account</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content *ngIf="user.logged_in != true">
-    <div class="login-box">
-      <form>
-        <ion-row>
-          <ion-col>
-            <ion-list inset>
-              <ion-item>
-                <ion-input id="username" type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngIf="user.login_error">
-          <ion-col>
-              <span class="warning">{{user.login_error}}</span>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="signup-col">
-            <button ion-button class="submit-btn" block  (click)="user.login()">Login</button>
-            <button ion-button class="register-btn" block clear (click)="createAccount()">Reset Password</button>
-          </ion-col>
-        </ion-row>      
-      </form>
-    </div>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Account</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content *ngIf="user.logged_in != true">
+        <div class="login-box">
+            <form>
+                <ion-row>
+                    <ion-col>
+                        <ion-list inset>
+                            <ion-item>
+                                <ion-input id="username" type="text" placeholder="Username" name="username" [(ngModel)]="user.username" required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
+                            </ion-item>
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngIf="user.login_error">
+                    <ion-col>
+                        <span class="warning">{{user.login_error}}</span>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="signup-col">
+                        <button ion-button class="submit-btn" block  (click)="user.login()">Login</button>
+                        <button ion-button class="register-btn" block clear (click)="createAccount()">Reset Password</button>
+                    </ion-col>
+                </ion-row>      
+            </form>
+        </div>
     </ion-content>
     <ion-content *ngIf="user.logged_in == true">
-      <ion-row>
-        <ion-item>
-          {{user.full_name}}
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          <a (click)="this.nav.push(checkoutsPage,{},{animate:false});" menuToggle="right">
-            Checkouts: {{user.checkout_count}}
-          </a>
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item>
-          Holds: {{user.holds}}
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item *ngIf="user.holds_ready != 0">
-          Holds Ready for Pickup: {{user.holds_ready}}
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-item *ngIf="user.fines != 0.00">
-          Fines: {{user.fines}}
-        </ion-item>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <button ion-button icon-left class="submit-btn" block >
-            <ion-icon name="card"></ion-icon>  
-            Show Library Card
-          </button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <button ion-button class="submit-btn" color="danger" block (click)="user.logout()">Logout</button>
-        </ion-col>
-      </ion-row>
+        <ion-row>
+            <ion-item>
+                {{user.full_name}}
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <a (click)="this.nav.push(checkoutsPage,{},{animate:false});" menuToggle="right">Checkouts: {{user.checkout_count}}</a>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item>
+                <a (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">Holds: {{user.holds}}</a>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item *ngIf="user.holds_ready != 0">
+                Holds Ready for Pickup: {{user.holds_ready}}
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-item *ngIf="user.fines != 0.00">
+                Fines: {{user.fines}}
+            </ion-item>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left class="submit-btn" block><ion-icon name="card"></ion-icon>Show Library Card</button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button class="submit-btn" color="danger" block (click)="user.logout()">Logout</button>
+            </ion-col>
+        </ion-row>
     </ion-content>
 </ion-menu>
 

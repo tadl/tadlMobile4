@@ -11,9 +11,7 @@
 </ion-header>
 
 <ion-content padding>
-
 	<button *ngIf="user.checkouts.length > 0" ion-button block (click)="user.renew_all()" >Renew All</button>
-
 	<ion-card *ngIf="user.checkout_errors.length > 0">
 		<ion-card-content class="warning">
 			<ion-row padding *ngFor='let error of user.checkout_errors'>
@@ -57,3 +55,4 @@
 		</ion-card-content>
 	</ion-card>
 </ion-content>
+
