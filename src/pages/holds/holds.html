@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar hideBackButton="true">
+        <button ion-button left menuToggle menuToggle="left" >
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title mode="ios">Items Checked Out</ion-title>
+        <button ion-button right menuToggle menuToggle="right">
+            <ion-icon name="contact"></ion-icon>
+        </button>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ul>
+        <li *ngFor="let checkout of user.checkouts">
+            {{checkout['title']}} - {{checkout['author']}}
+        </li>
+    </ul>
+</ion-content>
+
