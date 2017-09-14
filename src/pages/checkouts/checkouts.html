@@ -47,7 +47,7 @@
 			<ion-row>
 				<ion-col>
 					<button ion-button float-right color="secondary" (click)='user.renew(checkout["checkout_id"], checkout["record_id"])'>Renew</button> 
-					<button ion-button float-right (click)='item.details()'>Details</button>	
+					<button ion-button float-right (click)='item.details(checkout["record_id"])'>Details</button>	
 				</ion-col>
 			</ion-row>
 		</ion-card-content>
