@@ -4,8 +4,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Globals } from '../app/globals';
 import { User } from '../app/user'
+import { Item } from '../app/item'
 import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
+import { ItemDetailsModal } from '../pages/item_details/item_details'
 
 
 @Component({

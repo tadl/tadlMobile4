@@ -1,6 +1,7 @@
 import { Component, Injectable, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { User } from '../../app/user'
+import { Item } from '../../app/item'
 
 /**
  * Generated class for the CheckoutsPage page.
@@ -22,6 +23,7 @@ export class CheckoutsPage {
   	public navCtrl: NavController, 
   	public navParams: NavParams,
   	public user: User,
+    public item: Item,
   	public events: Events,) {
   		events.subscribe('renew',() =>{
   			this.content.scrollToTop();
