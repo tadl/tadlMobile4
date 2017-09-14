@@ -67,8 +67,9 @@
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item *ngIf="user.holds_ready != 0">
-                Holds Ready for Pickup: {{user.holds_ready}}
+            <ion-item *ngIf="user.holds_ready != 0" (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">
+                Holds Ready for Pickup
+                <ion-badge item-end>{{user.holds_ready}}</ion-badge>
             </ion-item>
         </ion-row>
         <ion-row>
@@ -78,12 +79,12 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <button ion-button icon-left class="submit-btn" block><ion-icon name="card"></ion-icon>Show Library Card</button>
+                <button ion-button icon-left class="submit-btn" full><ion-icon name="card"></ion-icon>Show Library Card</button>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                <button ion-button class="submit-btn" color="danger" block (click)="user.logout()">Logout</button>
+                <button ion-button class="submit-btn" color="danger" full (click)="user.logout()">Logout</button>
             </ion-col>
         </ion-row>
     </ion-content>
