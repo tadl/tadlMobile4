@@ -55,13 +55,15 @@
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item>
-                <a (click)="this.nav.push(checkoutsPage,{},{animate:false});" menuToggle="right">Checkouts: {{user.checkout_count}}</a>
+            <ion-item (click)="this.nav.push(checkoutsPage,{},{animate: false});" menuToggle="right">
+                Checkouts
+                <ion-badge item-end>{{user.checkout_count}}</ion-badge>
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item>
-                <a (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">Holds: {{user.holds_count}}</a>
+            <ion-item (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">
+                Holds
+                <ion-badge item-end>{{user.holds_count}}</ion-badge>
             </ion-item>
         </ion-row>
         <ion-row>
