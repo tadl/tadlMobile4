@@ -61,7 +61,7 @@
         </ion-row>
         <ion-row>
             <ion-item>
-                Holds: {{user.holds}}
+                <a (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">Holds: {{user.holds}}</a>
             </ion-item>
         </ion-row>
         <ion-row>
