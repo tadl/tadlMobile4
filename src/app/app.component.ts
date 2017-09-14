@@ -27,7 +27,8 @@ export class MyApp {
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
     public globals: Globals,
-    public user: User) 
+    public user: User,
+    public item: Item) 
     {
       this.initializeApp();
       user.auto_login();

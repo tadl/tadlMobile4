@@ -20,24 +20,17 @@ export class Item {
 	){}
   	
 
-  username: string
-  password: string
-  logged_in : boolean
-  full_name: string
-  checkout_count: string
-  holds: string
-  holds_ready:string
-  fines:string
-  card:string
-  token:string
-  login_error:string
-  checkouts:Array<{any}> = []
-  checkout_mesages:string
-  checkout_errors:Array<{any}> = []
-
-  details(){
-    let item_details_modal = this.modalCtrl.create(ItemDetailsModal);
-    item_details_modal.present();
+  details(record_id){
+    let loading = this.loadingCtrl.create({content:'Loading Checkouts...'})
+    loading.present()
+    this.http.get('https://catalog.tadl.org/main/details.json?id=' + record_id).map(res => res.json()).subscribe(data=>{
+      loading.dismiss()
+      if(data.id){
+        let item_details_modal = this.modalCtrl.create(ItemDetailsModal, data);
+        item_details_modal.present();
+      }else{
+      }
+    });
   }
 
 }
