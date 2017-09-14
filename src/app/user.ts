@@ -16,9 +16,7 @@ export class User {
 		public loadingCtrl: LoadingController,
 		private storage: Storage,
 		public events: Events,
-	){ 
-
-	}
+	){}
   	
 
   	username: string
@@ -94,33 +92,37 @@ export class User {
   		});
   	}
 
+
   	/** Renew Items */
   	renew(checkout_ids:string, record_ids:string){
   		let loading = this.loadingCtrl.create({content:'Attempting renewal...'})
   		loading.present()
   		this.checkout_errors.length = 0
   		this.http.get('https://catalog.tadl.org/main/renew_checkouts.json?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids).map(res => res.json()).subscribe(data=>{
-			if(data.checkouts){
-				loading.dismiss()
-				if(data.errors.length > 0 && !data.message.startsWith("Failed") ){
-					var message:string = data.message + ' ' + 'One or more items failed to renew.'
-				}else{
-					var message:string = data.message
+				if(data.checkouts){
+					loading.dismiss()
+					if(data.errors.length > 0 && !data.message.startsWith("Failed") ){
+						var message:string = data.message + ' ' + 'One or more items failed to renew.'
+					}else{
+						var message:string = data.message
+					}
+					let alert = this.alertCtrl.create({
+						title: message,
+						buttons: [{
+							text: 'Ok',
+							handler: ()=>{
+								this.checkouts = data.checkouts
+								this.checkout_errors = data.errors
+								this.events.publish('renew')
+							},
+						}]
+					});
+					alert.present();
 				}
-				let alert = this.alertCtrl.create({
-					title: message,
-					buttons: [{
-						text: 'Ok',
-						handler: ()=>{
-							this.checkouts = data.checkouts
-							this.checkout_errors = data.errors
-							this.events.publish('renew')
-						},
-					}]
-				});
-				alert.present();
+      });
+    }
 
-    /* get holds */
+   /* get holds */
   	load_holds(){
   		this.http.get('https://catalog.tadl.org/holds.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
 			if(data.holds){
@@ -129,6 +131,7 @@ export class User {
 			}
   		});
   	}
+
 
   	/** Renew all items */
   	renew_all(){
@@ -146,4 +149,4 @@ export class User {
   		this.checkout_errors.length = 0
   	}
 
-
+}
