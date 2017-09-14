@@ -21,7 +21,7 @@ export class Item {
   	
 
   details(record_id){
-    let loading = this.loadingCtrl.create({content:'Loading Checkouts...'})
+    let loading = this.loadingCtrl.create({content:'Loading Details...'})
     loading.present()
     this.http.get('https://catalog.tadl.org/main/details.json?id=' + record_id).map(res => res.json()).subscribe(data=>{
       loading.dismiss()
