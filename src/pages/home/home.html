@@ -1,38 +1,53 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
-    <button ion-button left menuToggle menuToggle="left" >
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title mode="ios">{{ globals.app_title }}</ion-title>
-    <button ion-button right menuToggle menuToggle="right">
-      <ion-icon name="contact"></ion-icon>
-    </button>
-  </ion-navbar>
+    <ion-navbar hideBackButton="true">
+        <button ion-button left menuToggle menuToggle="left" >
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title mode="ios">{{ globals.app_title }}</ion-title>
+        <button ion-button right menuToggle menuToggle="right">
+            <ion-icon name="contact"></ion-icon>
+        </button>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button icon-left full>
-    <ion-icon name="search"></ion-icon>  
-    Search Catalog
-  </button>
-  <button ion-button icon-left full>
-    <ion-icon name="compass"></ion-icon>  
-    Hours & Location<span *ngIf="globals.multi_location == true">s</span>
-  </button>
-  <button ion-button icon-left full menuToggle="right">
-    <ion-icon name="contact"></ion-icon>  
-    Account
-  </button>
-  <button ion-button icon-left full>
-    <ion-icon name="md-calendar"></ion-icon>  
-    Upcoming Events
-  </button>
-  <button ion-button icon-left full>
-    <ion-icon name="flag"></ion-icon>  
-    Library News
-  </button>
-  <button ion-button icon-left full>
-    <ion-icon name="star"></ion-icon>  
-    Featured Items
-  </button>
+    <ion-grid>
+        <ion-row>
+            <div class="home-image" col-sm-12>
+                <img alt="TADL Logo" src="/assets/images/large_tadl_logo.png" />
+            </div>
+            <ion-item col-sm-12>
+                <ion-label floating>Search for Books, Movies, Music...</ion-label>
+                <ion-input type="text"></ion-input>
+            </ion-item>
+        </ion-row>
+    </ion-grid>
+    <ion-grid>
+        <ion-row>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+                <ion-icon name="search"></ion-icon>  
+                Advanced Search
+            </button>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+                <ion-icon name="compass"></ion-icon>  
+                Information
+            </button>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full menuToggle="right">
+                <ion-icon name="contact"></ion-icon>  
+                My Account
+            </button>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+                <ion-icon name="md-calendar"></ion-icon>  
+                Events
+            </button>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+                <ion-icon name="flag"></ion-icon>  
+                News
+            </button>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+                <ion-icon name="star"></ion-icon>  
+                New Items
+            </button>
+        </ion-row>
+    </ion-grid>
 </ion-content>
