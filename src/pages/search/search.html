@@ -19,4 +19,9 @@
 	<p *ngIf="query">
 		You searched for {{query}}
 	</p>
+	<ion-list>
+		<ion-item *ngFor="let result of this.results" (click)="item.details(result.id)">
+			{{result.title}}
+		</ion-item>
+	</ion-list>
 </ion-content>
