@@ -7,12 +7,40 @@
 <ion-header>
 	<ion-navbar>
 		<ion-title mode="ios">Item Details</ion-title>
-		<button ion-button clear right (click)="close_modal()">
-			<ion-icon name="md-close"> </ion-icon>
-	 	</button>
+		<ion-buttons end>
+			<button ion-button clear right (click)="close_modal()">
+				<ion-icon name="md-close"> </ion-icon>
+	 		</button>
+	 	</ion-buttons>
  	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-	{{title}} - {{author}}
+		<h4>{{title}}</h4>
+	<ion-row>
+		<ion-col>
+			<img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{id}}" class="list_cover_image" float-left padding>
+			<p *ngIf="all_copies_available > 0">
+				<b>Copies Available:</b>
+			</p>
+			<div *ngFor="let copies of availablity">
+				<b>	{{copies['library']}} </b>
+				<p *ngFor="let copy of copies['copies']">
+					{{copy['count']}} in {{copy['shelf_location']}} , <span *ngFor="let call_number of copy['call_numbers']">{{call_number}}, </span>
+				</p>
+			</div>
+			<p *ngIf="author">
+				<b>{{author}}</b>
+			</p>
+			<p *ngIf="abstract">
+				<b>Abstract: </b>{{abstract}}
+			</p>
+			<p *ngIf="content">
+				<b>Content: </b>{{abstract}}
+			</p>
+		</ion-col>
+	</ion-row>
+	<ion-row>
+
+	</ion-row>
 </ion-content>
