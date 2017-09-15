@@ -12,28 +12,29 @@ import { Item } from '../../app/item'
 
 @IonicPage()
 @Component({
-  selector: 'page-checkouts',
-  templateUrl: 'checkouts.html',
+    selector: 'page-checkouts',
+    templateUrl: 'checkouts.html',
 })
 
 @Injectable()
 export class CheckoutsPage {
 	@ViewChild(Content) content: Content;
-  constructor(
-  	public navCtrl: NavController, 
-  	public navParams: NavParams,
-  	public user: User,
-    public item: Item,
-  	public events: Events,) {
+    constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams,
+        public user: User,
+        public item: Item,
+        public events: Events,
+    ) {
   		events.subscribe('renew',() =>{
   			this.content.scrollToTop();
 		});
   	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CheckoutsPage');
-    this.user.load_checkouts();
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad CheckoutsPage');
+        this.user.load_checkouts();
+    }
 }
 
 
