@@ -9,7 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
 import { HoldsPage } from '../pages/holds/holds';
 import { ItemDetailsModal } from '../pages/item_details/item_details'
-
+import { SearchPage } from '../pages/search/search'
 
 @Component({
   templateUrl: 'app.html'
@@ -19,6 +19,7 @@ export class MyApp {
   checkoutsPage = CheckoutsPage
   homePage = HomePage
   holdsPage = HoldsPage
+  searchPage = SearchPage
   public rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
 

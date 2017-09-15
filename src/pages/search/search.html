@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <button ion-button left menuToggle menuToggle="left" >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title mode="ios">Search Catalog</ion-title>
+    <button ion-button right menuToggle menuToggle="right">
+      <ion-icon name="contact"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<p> I will be a search someday </p>
+	<p *ngIf="advanced">
+		I am advanced
+	</p>
+	<p *ngIf="query">
+		You searched for {{query}}
+	</p>
+</ion-content>

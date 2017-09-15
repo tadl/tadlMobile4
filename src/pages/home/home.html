@@ -16,15 +16,17 @@
             <div class="home-image" col-sm-12>
                 <img alt="TADL Logo" src="/assets/images/large_tadl_logo.png" />
             </div>
-            <ion-item col-sm-12>
-                <ion-label floating>Search for Books, Movies, Music...</ion-label>
-                <ion-input type="text"></ion-input>
-            </ion-item>
+            <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false})">
+                <ion-item col-sm-12>
+                    <ion-label floating>Search for Books, Movies, Music...</ion-label>
+                    <ion-input type="text" [(ngModel)]="this.query" name="query"></ion-input>
+                </ion-item>
+            </form>
         </ion-row>
     </ion-grid>
     <ion-grid>
         <ion-row>
-            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full (click)="this.nav.push(searchPage, {advanced: true}, {animate:false})">
                 <ion-icon name="search"></ion-icon>  
                 Advanced Search
             </button>
