@@ -2,9 +2,6 @@ import { Component, NgModule  } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams, IonicPageModule } from 'ionic-angular';
 import { User } from '../../app/user'
 
-
-
-
 @IonicPage()
 @Component({
   	selector: 'page-item_details',
