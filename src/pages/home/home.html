@@ -16,37 +16,39 @@
             <div class="home-image" col-sm-12>
                 <img alt="TADL Logo" src="/assets/images/large_tadl_logo.png" />
             </div>
-            <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false})">
-                <ion-item col-sm-12>
-                    <ion-label floating>Search for Books, Movies, Music...</ion-label>
-                    <ion-input type="text" [(ngModel)]="this.query" name="query"></ion-input>
-                </ion-item>
-            </form>
+            <ion-col col-sm-12>
+                <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false})" block>
+                    <ion-item col-sm-12>
+                        <ion-label floating>Search for Books, Movies, Music...</ion-label>
+                        <ion-input type="text" [(ngModel)]="this.query" name="query"></ion-input>
+                    </ion-item>
+                </form>
+            </ion-col>
         </ion-row>
     </ion-grid>
     <ion-grid>
         <ion-row>
-            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full (click)="this.nav.push(searchPage, {advanced: true}, {animate:false})">
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left block (click)="this.nav.push(searchPage, {advanced: true}, {animate:false})">
                 <ion-icon name="search"></ion-icon>  
                 Advanced Search
             </button>
-            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left block>
                 <ion-icon name="compass"></ion-icon>  
                 Information
             </button>
-            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full menuToggle="right">
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left block menuToggle="right">
                 <ion-icon name="contact"></ion-icon>  
                 My Account
             </button>
-            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left block>
                 <ion-icon name="md-calendar"></ion-icon>  
                 Events
             </button>
-            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left block>
                 <ion-icon name="flag"></ion-icon>  
                 News
             </button>
-            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left full>
+            <button col-lg-2 col-md-4 col-sm-4 ion-button icon-left block>
                 <ion-icon name="star"></ion-icon>  
                 New Items
             </button>
