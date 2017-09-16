@@ -20,8 +20,19 @@
 		You searched for {{query}}
 	</p>
 	<ion-list>
-		<ion-item *ngFor="let result of this.results" (click)="item.details(result.id)">
-			{{result.title}}
-		</ion-item>
+		<ion-item-sliding *ngFor="let result of this.results">
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img (click)="item.details(result.id)" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{result.id}}"/>
+                </ion-thumbnail>
+                <h2 *ngIf="result.title">{{result.title}}</h2>
+                <h4 *ngIf="result.author">{{result.author}}</h4>
+                <p>{{result.loc_copies_available}} available<span *ngIf="result.call_number"> • {{result.call_number}}</span></p>
+            </ion-item>
+            <ion-item-options>
+                <button ion-button (click)="item.details(result.id)">Details</button>
+                <button ion-button color="secondary">Place Hold</button>
+            </ion-item-options>
+		</ion-item-sliding>
 	</ion-list>
 </ion-content>

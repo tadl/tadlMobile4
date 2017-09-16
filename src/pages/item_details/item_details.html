@@ -26,7 +26,8 @@
 			<div *ngFor="let copies of availablity">
 				<b>	{{copies['library']}} </b>
 				<p *ngFor="let copy of copies['copies']">
-					{{copy['count']}} in {{copy['shelf_location']}} , <span *ngFor="let call_number of copy['call_numbers']">{{call_number}}, </span>
+					{{copy['count']}} in {{copy['shelf_location']}},
+                    <span *ngFor="let call_number of copy['call_numbers']">{{call_number}}, </span>
 				</p>
 			</div>
 			<p *ngIf="author">
