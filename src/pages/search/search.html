@@ -19,7 +19,7 @@
         </ion-item>
         <div *ngIf="advanced">
             <ion-item-divider>
-                Advanced Search Options
+                ADVANCED SEARCH OPTIONS
             </ion-item-divider>
             <ion-item>
                 <ion-label>Search Type</ion-label>
@@ -69,9 +69,9 @@
         </div>
     </form>
 
-	<ion-list-header *ngIf="query">
-		Searching for {{query}}
-	</ion-list-header>
+	<ion-item-divider *ngIf="query">
+		Results for <strong>{{query}}</strong>
+	</ion-item-divider>
 	<ion-list>
 		<ion-item-sliding *ngFor="let result of this.results">
             <ion-item>

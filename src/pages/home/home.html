@@ -3,7 +3,7 @@
         <button ion-button left menuToggle menuToggle="left" >
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title mode="ios">{{ globals.app_title }}</ion-title>
+        <ion-title mode="ios">{{globals.app_title}}</ion-title>
         <button ion-button right menuToggle menuToggle="right">
             <ion-icon name="contact"></ion-icon>
         </button>
@@ -17,7 +17,7 @@
                 <img alt="TADL Logo" src="/assets/images/large_tadl_logo.png" />
             </div>
             <ion-col col-sm-12>
-                <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false})" block>
+                <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false});this.advanced=0;" block>
                     <ion-item col-sm-12>
                         <ion-label floating>Search for Books, Movies, Music...</ion-label>
                         <ion-input type="text" [(ngModel)]="this.query" name="query"></ion-input>
