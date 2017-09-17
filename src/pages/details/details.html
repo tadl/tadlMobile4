@@ -18,15 +18,10 @@
 <ion-content padding>
     <h4>{{title}}</h4>
     <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{id}}" class="list_cover_image" float-left padding-right />
-
     <h5 *ngIf="author">{{author}}</h5>
-    <p *ngIf="abstract">
-        {{abstract}}
-    </p>
-    <p *ngIf="contents">
-        {{content}}
-    </p>
-
+    <p *ngIf="abstract">{{abstract}}</p>
+    <p *ngIf="contents">{{content}}</p>
+    <ion-item><button ion-button>Place Hold</button></ion-item>
     <div padding>
         <ion-segment [(ngModel)]="items">
             <ion-segment-button value="Available">
@@ -37,7 +32,6 @@
             </ion-segment-button>
         </ion-segment>
     </div>
-
     <div [ngSwitch]="items">
         <ion-list *ngSwitchCase="'Available'">
             <ion-item *ngIf="loc_copies_available > 0">
@@ -52,22 +46,19 @@
                 </ion-item>
             </div>
         </ion-list>
-
         <ion-list *ngSwitchCase="'All Copies'">
             <ion-item *ngIf="loc_copies_total != 0">
                 <ion-row>
                     <ion-col>Location</ion-col>
-                    <ion-col>Shelf</ion-col>
-                    <ion-col>Call Num</ion-col>
+                    <ion-col>Shelf/Call Num</ion-col>
                     <ion-col>Status</ion-col>
                 </ion-row>
             </ion-item>
             <ion-item *ngFor="let copy of holdings">
                 <ion-row>
                     <ion-col class="detail">{{copy['circ_lib']}}</ion-col>
-                    <ion-col class="detail">{{copy['location']}}</ion-col>
-                    <ion-col class="detail">{{copy['call_number']}}</ion-col>
-                    <ion-col class="detail">{{copy['status']}}</ion-col>
+                    <ion-col class="detail">{{copy['location']}}<br/>{{copy['call_number']}}</ion-col>
+                    <ion-col class="detail">{{copy['status']}}<span *ngIf="copy['due_date']"><br/>Due {{copy['due_date']}}</span></ion-col>
                 </ion-row>
             </ion-item>
         </ion-list>
