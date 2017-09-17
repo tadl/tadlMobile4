@@ -9,19 +9,6 @@
     </button>
   </ion-navbar>
 </ion-header>
-<!--
-    advanced: boolean = this.navParams.get('advanced') || false
-    query: string = this.navParams.get('query')
-    results:Array<{any}> = []
-    page: number = this.navParams.get('page') || 0
-    qtype: string = this.navParams.get('qtype') || 'keyword'
-    format: string = this.navParams.get('format') || 'all'
-    location: string = this.navParams.get('location') || 'all'
-    available: boolean = this.navParams.get('available') || false
-    physical: boolean = this.navParams.get('physical') || false
--->
-
-
 <ion-content padding>
     <form (ngSubmit)="get_results()" block>
     <!--<form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false})" block>-->
@@ -30,9 +17,56 @@
             <ion-input type="text" placeholder="Search" [(ngModel)]="this.query" name="query"></ion-input>
             <button ion-button item-end type="submit">Search</button>
         </ion-item>
-        <p *ngIf="advanced">
-            I am advanced
-        </p>
+        <div *ngIf="advanced">
+            <ion-item-divider>
+                Advanced Search Options
+            </ion-item-divider>
+            <ion-item>
+                <ion-label>Search Type</ion-label>
+                <ion-select [(ngModel)]="this.qtype" name="qtype" interface="popover">
+                    <ion-option value="keyword">Keyword</ion-option>
+                    <ion-option value="author">Author / Group / Actor</ion-option>
+                    <ion-option value="title">Title</ion-option>
+                    <ion-option value="subject">Subject</ion-option>
+                    <ion-option value="series">Series</ion-option>
+                    <ion-option value="single_genre">Genre</ion-option>
+                    <ion-option value="call_number">Call Number</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Format</ion-label>
+                <ion-select [(ngModel)]="this.format" name="format" interface="popover">
+                    <ion-option value="all">All Formats</ion-option>
+                    <ion-option value="a">Books</ion-option>
+                    <ion-option value="534">Large Print</ion-option>
+                    <ion-option value="515,518,546,571,572,582,584,590,597,680">Audiobooks</ion-option>
+                    <ion-option value="ebooks">eBooks</ion-option>
+                    <ion-option value="g">Movies / TV</ion-option>
+                    <ion-option value="j">Music</ion-option>
+                    <ion-option value="777">Video Games</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item *ngIf="globals.multi_location == true">
+                <ion-label>Location</ion-label>
+                <ion-select [(ngModel)]="this.location" name="location" interface="popover">
+                    <ion-option value="22">All Locations</ion-option>
+                    <ion-option value="23">Main Library</ion-option>
+                    <ion-option value="24">Interlochen</ion-option>
+                    <ion-option value="25">Kingsley</ion-option>
+                    <ion-option value="26">Peninsula</ion-option>
+                    <ion-option value="27">Fife Lake</ion-option>
+                    <ion-option value="28">East Bay</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Limit to available items</ion-label>
+                <ion-toggle [(ngModel)]="this.available" name="available"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label>Limit to physical items</ion-label>
+                <ion-toggle [(ngModel)]="this.physical" name="available"></ion-toggle>
+            </ion-item>
+        </div>
     </form>
 
 	<ion-list-header *ngIf="query">

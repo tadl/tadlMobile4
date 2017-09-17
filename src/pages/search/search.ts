@@ -18,7 +18,7 @@ export class SearchPage {
     page: number = this.navParams.get('page') || 0
     qtype: string = this.navParams.get('qtype') || 'keyword'
     format: string = this.navParams.get('format') || 'all'
-    location: string = this.navParams.get('location') || 'all'
+    location: string = this.navParams.get('location') || '22' /* FIXME can be a global config */
     available: boolean = this.navParams.get('available') || false
     physical: boolean = this.navParams.get('physical') || false
     results:Array<{any}> = []
