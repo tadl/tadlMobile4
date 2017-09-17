@@ -1,0 +1,72 @@
+<!--
+  Generated template for the ItemDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+	<ion-navbar>
+		<ion-title mode="ios">Item Details</ion-title>
+		<ion-buttons end>
+			<button ion-button clear right (click)="close_modal()">
+				<ion-icon name="md-close"> </ion-icon>
+	 		</button>
+	 	</ion-buttons>
+ 	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h4>{{title}}</h4>
+    <ion-row>
+        <ion-col>
+            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{id}}" class="list_cover_image" float-left padding-right />
+
+            <h5 *ngIf="author">{{author}}</h5>
+
+
+            <p *ngIf="abstract">
+                {{abstract}}
+            </p>
+
+            <p *ngIf="contents">
+                {{content}}
+            </p>
+            <div padding>
+                <ion-segment [(ngModel)]="items">
+                    <ion-segment-button value="Available">
+                        Available Copies
+                    </ion-segment-button>
+                    <ion-segment-button value="All Copies">
+                        All Copies
+                    </ion-segment-button>
+                </ion-segment>
+            </div>
+
+            <div [ngSwitch]="items">
+                <ion-list *ngSwitchCase="'Available'">
+                    <ion-item>
+                        <strong>Location</strong>
+                        <ion-badge item-end>Call Number</ion-badge>
+                    </ion-item>
+                    <div *ngFor="let copies of availability">
+                        <ion-item-divider>{{copies['library']}}</ion-item-divider>
+                        <ion-item *ngFor="let copy of copies['copies']">
+                            {{copy['count']}} in {{copy['shelf_location']}}
+                            <ion-badge item-end *ngFor="let call_number of copy['call_numbers']">{{call_number}}</ion-badge>
+                        </ion-item>
+                    </div>
+                    <ion-item>
+                    </ion-item>
+                </ion-list>
+
+                <ion-list *ngSwitchCase="'All Copies'">
+                    <ion-item>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+    </ion-row>
+</ion-content>

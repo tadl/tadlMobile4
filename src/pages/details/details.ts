@@ -1,11 +1,12 @@
 import { Component, NgModule  } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams, IonicPageModule } from 'ionic-angular';
+import { Globals } from '../../app/globals'
 import { User } from '../../app/user'
 
 @IonicPage()
 @Component({
-  	selector: 'page-item_details',
-  	templateUrl: 'item_details.html',
+  	selector: 'page-details',
+  	templateUrl: 'details.html',
 })
 
 export class ItemDetailsModal {
@@ -31,6 +32,7 @@ export class ItemDetailsModal {
   	physical_description: string = this.navParams.get('physical_description')
   	holds: number = this.navParams.get('holds')
   	holdings: Array<{any}> = this.navParams.get('holdings')
+  	availability: Array<{any}> = this.navParams.get('availability')
 
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad ItemDetailsPage');

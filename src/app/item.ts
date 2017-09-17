@@ -2,7 +2,7 @@ import { NgModule, Component, ViewChild, Injectable, Input} from '@angular/core'
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { AlertController, LoadingController, Content, Events, ModalController} from 'ionic-angular';
-import { ItemDetailsModal } from '../pages/item_details/item_details'
+import { ItemDetailsModal } from '../pages/details/details'
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -26,8 +26,8 @@ export class Item {
     this.http.get('https://catalog.tadl.org/main/details.json?id=' + record_id).map(res => res.json()).subscribe(data=>{
       loading.dismiss()
       if(data.id){
-        let item_details_modal = this.modalCtrl.create(ItemDetailsModal, data);
-        item_details_modal.present();
+        let details_modal = this.modalCtrl.create(ItemDetailsModal, data);
+        details_modal.present();
       }else{
       }
     });

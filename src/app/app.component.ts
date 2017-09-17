@@ -8,7 +8,7 @@ import { Item } from '../app/item'
 import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
 import { HoldsPage } from '../pages/holds/holds';
-import { ItemDetailsModal } from '../pages/item_details/item_details'
+import { ItemDetailsModal } from '../pages/details/details'
 import { SearchPage } from '../pages/search/search'
 
 @Component({
