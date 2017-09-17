@@ -44,7 +44,7 @@
 
             <div [ngSwitch]="items">
                 <ion-list *ngSwitchCase="'Available'">
-                    <ion-item>
+                    <ion-item *ngIf="loc_copies_available > 0">
                         <strong>Location</strong>
                         <ion-badge item-end>Call Number</ion-badge>
                     </ion-item>
