@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Globals } from '../../app/globals'
 import { User } from '../../app/user'
 import { Item } from '../../app/item'
 
@@ -23,6 +24,7 @@ export class HoldsPage {
 		public navParams: NavParams,
 		public user: User,
 		public item: Item,
+        public globals: Globals,
 	) {}
 
   ionViewDidLoad() {

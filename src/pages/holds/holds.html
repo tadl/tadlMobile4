@@ -21,8 +21,10 @@
                 <ion-col col-9>
                     <p><strong>{{hold['author']}}</strong></p>
                     <p>Position {{hold['queue_state'][0]}} in queue with {{hold['queue_state'][1]}} eligible cop<span *ngIf="hold.queue_state[1] > 1">ies</span><span *ngIf="hold.queue_state[1] == 1">y</span></p>
-                    <p>Pickup location: {{hold['pickup_location']}}</p>
-                    <p><button ion-button small color="light">Change pickup location</button></p>
+                    <div *ngIf="globals.multi_location==true">
+                        <p>Pickup location: {{hold['pickup_location']}}</p>
+                        <p><button ion-button small color="light">Change pickup location</button></p>
+                    </div>
                 </ion-col>
             </ion-row>
         </ion-grid>
