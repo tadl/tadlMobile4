@@ -38,6 +38,8 @@ export class ItemDetailsModal {
 
     items: string = this.loc_copies_available >= 1 ? 'Available' : 'All Copies'
 
+    logged_in: boolean = this.user.logged_in;
+
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad ItemDetailsPage');
   	}

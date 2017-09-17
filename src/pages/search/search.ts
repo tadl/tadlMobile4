@@ -4,6 +4,7 @@ import { Globals } from '../../app/globals';
 import { Http } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Item } from '../../app/item';
+import { User } from '../../app/user';
 import 'rxjs/add/operator/map';
 
 
@@ -13,6 +14,18 @@ import 'rxjs/add/operator/map';
     templateUrl: 'search.html',
 })
 export class SearchPage {
+    constructor(
+        /* we should use formbuilder for this https://ionicframework.com/docs/developer-resources/forms/ */
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public item: Item,
+        public nav: Nav,
+        public globals: Globals,
+        public loadingCtrl: LoadingController,
+        public user: User,
+        private http: Http,
+    ) {}
+
     advanced: boolean = this.navParams.get('advanced') || false
     query: string = this.navParams.get('query')
     page: number = this.navParams.get('page') || 0
@@ -21,18 +34,8 @@ export class SearchPage {
     location: string = this.navParams.get('location') || '22' /* FIXME can be a global config */
     available: boolean = this.navParams.get('available') || false
     physical: boolean = this.navParams.get('physical') || false
-    results:Array<{any}> = []
 
-    constructor(
-        /* we should use formbuilder for this https://ionicframework.com/docs/developer-resources/forms/ */
-        public navCtrl: NavController,
-        public navParams: NavParams,
-        private http: Http,
-        public item: Item,
-        public nav: Nav,
-        public globals: Globals,
-        public loadingCtrl: LoadingController,
-    ) {}
+    results: Array<{any}> = []
 
     get_results(){
         let loading = this.loadingCtrl.create({content:'Searching...'})

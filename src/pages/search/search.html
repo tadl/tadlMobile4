@@ -11,7 +11,6 @@
 </ion-header>
 <ion-content padding>
     <form (ngSubmit)="get_results()" block>
-    <!--<form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false})" block>-->
         <ion-item col-sm-12>
             <ion-toggle item-start [(ngModel)]="this.advanced" name="advanced"></ion-toggle>
             <ion-input type="text" placeholder="Search" [(ngModel)]="this.query" name="query"></ion-input>
@@ -84,7 +83,8 @@
             </ion-item>
             <ion-item-options>
                 <button ion-button (click)="item.details(result.id)">Details</button>
-                <button ion-button color="secondary">Place Hold</button>
+                <button ion-button color="secondary" *ngIf="this.user.logged_in">Place Hold</button>
+                <button ion-button color="secondary" *ngIf="!this.user.logged_in" menuToggle menuToggle="right">Log In</button>
             </ion-item-options>
 		</ion-item-sliding>
 	</ion-list>

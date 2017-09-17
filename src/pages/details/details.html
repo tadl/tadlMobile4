@@ -21,7 +21,8 @@
     <h5 *ngIf="author">{{author}}</h5>
     <p *ngIf="abstract">{{abstract}}</p>
     <p *ngIf="contents">{{content}}</p>
-    <ion-item><button ion-button>Place Hold</button></ion-item>
+    <button ion-button *ngIf="this.user.logged_in">Place Hold</button>
+    <button ion-button *ngIf="!this.user.logged_in" menuToggle menuToggle="right" (click)="close_modal()">Log In to Place Hold</button>
     <div padding>
         <ion-segment [(ngModel)]="items">
             <ion-segment-button value="Available">
