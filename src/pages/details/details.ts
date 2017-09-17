@@ -33,6 +33,9 @@ export class ItemDetailsModal {
   	holds: number = this.navParams.get('holds')
   	holdings: Array<{any}> = this.navParams.get('holdings')
   	availability: Array<{any}> = this.navParams.get('availability')
+    loc_copies_available: number = this.navParams.get('loc_copies_available')
+
+    items: string = this.loc_copies_available > 1 ? 'Available' : 'All Copies'
 
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad ItemDetailsPage');
