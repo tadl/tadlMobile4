@@ -48,7 +48,7 @@
                 <ion-item-divider>{{copies['library']}}</ion-item-divider>
                 <ion-item *ngFor="let copy of copies['copies']">
                     {{copy['count']}} in {{copy['shelf_location']}}
-                    <ion-badge item-end *ngFor="let call_number of copy['call_numbers']">{{call_number}}</ion-badge>
+                    <ion-badge item-end>{{copy['call_numbers'][copy['call_numbers'].length-1]}}</ion-badge>
                 </ion-item>
             </div>
         </ion-list>
