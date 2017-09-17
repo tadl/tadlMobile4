@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
+import { Globals } from '../../app/globals';
 import { Http } from '@angular/http';
-import { Item } from '../../app/item'
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Item } from '../../app/item';
 import 'rxjs/add/operator/map';
 
 
@@ -11,18 +13,26 @@ import 'rxjs/add/operator/map';
     templateUrl: 'search.html',
 })
 export class SearchPage {
+    advanced: boolean = this.navParams.get('advanced') || false
+    query: string = this.navParams.get('query')
+    page: number = this.navParams.get('page') || 0
+    qtype: string = this.navParams.get('qtype') || 'keyword'
+    format: string = this.navParams.get('format') || 'all'
+    location: string = this.navParams.get('location') || 'all'
+    available: boolean = this.navParams.get('available') || false
+    physical: boolean = this.navParams.get('physical') || false
+    results:Array<{any}> = []
+
     constructor(
+        /* we should use formbuilder for this https://ionicframework.com/docs/developer-resources/forms/ */
         public navCtrl: NavController,
         public navParams: NavParams,
         private http: Http,
         public item: Item,
+        public nav: Nav,
+        public globals: Globals,
         public loadingCtrl: LoadingController,
     ) {}
-
-    advanced: boolean = this.navParams.get('advanced') || false
-    query: string = this.navParams.get('query')
-    results:Array<{any}> = []
-    page: number = 0
 
     get_results(){
         let loading = this.loadingCtrl.create({content:'Searching...'})

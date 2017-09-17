@@ -9,16 +9,35 @@
     </button>
   </ion-navbar>
 </ion-header>
+<!--
+    advanced: boolean = this.navParams.get('advanced') || false
+    query: string = this.navParams.get('query')
+    results:Array<{any}> = []
+    page: number = this.navParams.get('page') || 0
+    qtype: string = this.navParams.get('qtype') || 'keyword'
+    format: string = this.navParams.get('format') || 'all'
+    location: string = this.navParams.get('location') || 'all'
+    available: boolean = this.navParams.get('available') || false
+    physical: boolean = this.navParams.get('physical') || false
+-->
 
 
 <ion-content padding>
-	<p> I will be a search someday </p>
-	<p *ngIf="advanced">
-		I am advanced
-	</p>
-	<p *ngIf="query">
-		You searched for {{query}}
-	</p>
+    <form (ngSubmit)="get_results()" block>
+    <!--<form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false})" block>-->
+        <ion-item col-sm-12>
+            <ion-toggle item-start [(ngModel)]="this.advanced" name="advanced"></ion-toggle>
+            <ion-input type="text" placeholder="Search" [(ngModel)]="this.query" name="query"></ion-input>
+            <button ion-button item-end type="submit">Search</button>
+        </ion-item>
+        <p *ngIf="advanced">
+            I am advanced
+        </p>
+    </form>
+
+	<ion-list-header *ngIf="query">
+		Searching for {{query}}
+	</ion-list-header>
 	<ion-list>
 		<ion-item-sliding *ngFor="let result of this.results">
             <ion-item>
