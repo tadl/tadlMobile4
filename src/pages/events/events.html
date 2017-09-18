@@ -15,7 +15,7 @@
 	<ion-list>
 		<ion-item *ngFor="let event of this.events">
             <ion-item>
-                <ion-thumbnail item-start>
+                <ion-thumbnail item-start *ngIf="event.image">
                     <img src="{{event.image.sizes.thumbnail.url}}"/>
                 </ion-thumbnail>
                 <h2>{{event.title}}</h2>
