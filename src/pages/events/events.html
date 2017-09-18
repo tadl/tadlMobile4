@@ -10,18 +10,17 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <ion-item col-sm-12>
-    </ion-item>
 	<ion-list>
 		<ion-item *ngFor="let event of this.events">
-            <ion-item>
-                <ion-thumbnail item-start *ngIf="event.image">
-                    <img src="{{event.image.sizes.thumbnail.url}}"/>
-                </ion-thumbnail>
-                <h2>{{event.title}}</h2>
-                <h4>{{event.start_date}}</h4>
-                <p>{{event.venue.venue}})</p>
-            </ion-item>
+            <ion-thumbnail item-start *ngIf="event.image">
+                <img src="{{event.image.sizes.thumbnail.url}}" />
+            </ion-thumbnail>
+            <h2>{{event.title}}</h2>
+            <h4>{{event.start_date | date: 'MMM dd, h:mm a'}}</h4>
+            <p *ngIf="event.venue">{{event.venue.venue}}</p>
 		</ion-item>
 	</ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
