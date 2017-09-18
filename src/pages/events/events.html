@@ -3,7 +3,7 @@
     <button ion-button left menuToggle menuToggle="left" >
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title mode="ios">Search Catalog</ion-title>
+    <ion-title mode="ios">TADL Events</ion-title>
     <button ion-button right menuToggle menuToggle="right">
       <ion-icon name="contact"></ion-icon>
     </button>
@@ -15,7 +15,7 @@
             <ion-thumbnail item-start *ngIf="event.image">
                 <img src="{{event.image.sizes.thumbnail.url}}" />
             </ion-thumbnail>
-            <h2>{{event.title}}</h2>
+            <h2 [innerHTML]="event.title"></h2>
             <h4>{{event.start_date | date: 'MMM dd, h:mm a'}}</h4>
             <p *ngIf="event.venue">{{event.venue.venue}}</p>
 		</ion-item>
