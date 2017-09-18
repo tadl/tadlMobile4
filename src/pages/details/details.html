@@ -21,47 +21,50 @@
     <h5 *ngIf="author">{{author}}</h5>
     <p *ngIf="abstract">{{abstract}}</p>
     <p *ngIf="contents">{{content}}</p>
-    <button ion-button *ngIf="this.user.logged_in">Place Hold</button>
-    <button ion-button *ngIf="!this.user.logged_in" menuToggle menuToggle="right" (click)="close_modal()">Log In to Place Hold</button>
-    <div padding>
-        <ion-segment [(ngModel)]="items">
-            <ion-segment-button value="Available">
-                Available Copies
-            </ion-segment-button>
-            <ion-segment-button value="All Copies">
-                All Copies
-            </ion-segment-button>
-        </ion-segment>
-    </div>
-    <div [ngSwitch]="items">
-        <ion-list *ngSwitchCase="'Available'">
-            <ion-item *ngIf="loc_copies_available > 0">
-                <strong>Location</strong>
-                <ion-badge item-end>Call Number</ion-badge>
-            </ion-item>
-            <div *ngFor="let copies of availability">
-                <ion-item-divider>{{copies['library']}}</ion-item-divider>
-                <ion-item *ngFor="let copy of copies['copies']">
-                    {{copy['count']}} in {{copy['shelf_location']}}
-                    <ion-badge item-end>{{copy['call_numbers'][copy['call_numbers'].length-1]}}</ion-badge>
+    <button ion-button *ngIf="electronic==true">View Resource</button>
+    <button ion-button *ngIf="this.user.logged_in && electronic != true">Place Hold</button>
+    <button ion-button *ngIf="!this.user.logged_in && electronic != true" menuToggle menuToggle="right" (click)="close_modal()">Log In to Place Hold</button>
+    <div *ngIf="electronic != true">
+        <div padding>
+            <ion-segment [(ngModel)]="items">
+                <ion-segment-button value="Available">
+                    Available Copies
+                </ion-segment-button>
+                <ion-segment-button value="All Copies">
+                    All Copies
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+        <div [ngSwitch]="items">
+            <ion-list *ngSwitchCase="'Available'">
+                <ion-item *ngIf="loc_copies_available > 0">
+                    <strong>Location</strong>
+                    <ion-badge item-end>Call Number</ion-badge>
                 </ion-item>
-            </div>
-        </ion-list>
-        <ion-list *ngSwitchCase="'All Copies'">
-            <ion-item *ngIf="loc_copies_total != 0">
-                <ion-row>
-                    <ion-col>Location</ion-col>
-                    <ion-col>Shelf/Call Num</ion-col>
-                    <ion-col>Status</ion-col>
-                </ion-row>
-            </ion-item>
-            <ion-item *ngFor="let copy of holdings">
-                <ion-row>
-                    <ion-col class="detail">{{copy['circ_lib']}}</ion-col>
-                    <ion-col class="detail">{{copy['location']}}<br/>{{copy['call_number']}}</ion-col>
-                    <ion-col class="detail">{{copy['status']}}<span *ngIf="copy['due_date']"><br/>Due {{copy['due_date']}}</span></ion-col>
-                </ion-row>
-            </ion-item>
-        </ion-list>
+                <div *ngFor="let copies of availability">
+                    <ion-item-divider>{{copies['library']}}</ion-item-divider>
+                    <ion-item *ngFor="let copy of copies['copies']">
+                        {{copy['count']}} in {{copy['shelf_location']}}
+                        <ion-badge item-end>{{copy['call_numbers'][copy['call_numbers'].length-1]}}</ion-badge>
+                    </ion-item>
+                </div>
+            </ion-list>
+            <ion-list *ngSwitchCase="'All Copies'">
+                <ion-item *ngIf="loc_copies_total != 0">
+                    <ion-row>
+                        <ion-col>Location</ion-col>
+                        <ion-col>Shelf/Call Num</ion-col>
+                        <ion-col>Status</ion-col>
+                    </ion-row>
+                </ion-item>
+                <ion-item *ngFor="let copy of holdings">
+                    <ion-row>
+                        <ion-col class="detail">{{copy['circ_lib']}}</ion-col>
+                        <ion-col class="detail">{{copy['location']}}<br/>{{copy['call_number']}}</ion-col>
+                        <ion-col class="detail">{{copy['status']}}<span *ngIf="copy['due_date']"><br/>Due {{copy['due_date']}}</span></ion-col>
+                    </ion-row>
+                </ion-item>
+            </ion-list>
+        </div>
     </div>
 </ion-content>

@@ -14,6 +14,7 @@ export class ItemDetailsModal {
   		public navCtrl: NavController, 
   		public navParams: NavParams,
   		public viewCtrl: ViewController,
+        public globals: Globals,
   		public user: User
   	){}
 
@@ -37,8 +38,6 @@ export class ItemDetailsModal {
     loc_copies_total: number = this.navParams.get('loc_copies_total')
 
     items: string = this.loc_copies_available >= 1 ? 'Available' : 'All Copies'
-
-    logged_in: boolean = this.user.logged_in;
 
 	ionViewDidLoad() {
     	console.log('ionViewDidLoad ItemDetailsPage');
