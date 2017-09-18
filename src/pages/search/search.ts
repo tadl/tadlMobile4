@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
-import { IonicPage, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Nav, LoadingController, Events} from 'ionic-angular';
 import { Globals } from '../../app/globals';
 import { Http, URLSearchParams } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -28,6 +28,7 @@ export class SearchPage {
         public user: User,
         private http: Http,
         private inAppBrowser: InAppBrowser,
+        public events: Events,
     ) {}
 
     advanced: boolean = this.navParams.get('advanced') || false
@@ -38,9 +39,10 @@ export class SearchPage {
     location: string = this.navParams.get('location') || '22' /* FIXME can be a global config */
     available: boolean = this.navParams.get('available') || false
     physical: boolean = this.navParams.get('physical') || false
+    current_params: string
+    more_results: boolean
 
     results: Array<{any}> = []
-
 
     get_results(){
         let loading = this.loadingCtrl.create({content:'Searching...'})
@@ -65,12 +67,47 @@ export class SearchPage {
         params.append('loc', this.location)
         params.append('availability', available_on)
         params.append('physical', physcial_on)
+        if(this.current_params != params.toString()){
+            this.page = 0
+            this.current_params = params.toString()
+        }
+        params.append('page', this.page.toString() )
         loading.present()
         this.http.get('https://catalog.tadl.org/search.json', {params} ).map(res => res.json()).subscribe(data=>{
             loading.dismiss()
             if(data.items){
-                this.results = data.items
+                this.more_results = data.more_results
+                if(this.page == 0){
+                    this.results = data.items
+                    if(this.more_results == true){
+                       this.events.publish('new_search') 
+                    }
+                }else{
+                    this.results.push.apply(this.results, data.items)
+                    this.events.publish('infinite_done')
+                }
             }else{
+            }
+        });
+    }
+
+    get_more_results(infiniteScroll){
+        if(this.results.length > 1 && this.more_results == true){
+            this.page = this.page + 1
+            this.get_results()
+        }else{
+            infiniteScroll.complete();
+            infiniteScroll.enable(false)
+        }
+        this.events.subscribe('infinite_done',() =>{
+            infiniteScroll.complete();
+            if(this.more_results == false){
+                infiniteScroll.enable(false)
+            }
+        });
+        this.events.subscribe('new_search',() =>{
+            if(this.more_results == true){
+                infiniteScroll.enable(true)
             }
         });
     }
