@@ -8,6 +8,7 @@ import { Item } from '../app/item'
 import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
 import { HoldsPage } from '../pages/holds/holds';
+import { EventsPage } from '../pages/events/events';
 import { ItemDetailsModal } from '../pages/details/details'
 import { SearchPage } from '../pages/search/search'
 
@@ -20,6 +21,7 @@ export class MyApp {
   homePage = HomePage
   holdsPage = HoldsPage
   searchPage = SearchPage
+  eventsPage = EventsPage
   public rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
 
@@ -37,6 +39,7 @@ export class MyApp {
       // used for an example of ngFor and navigation
       this.pages = [
         { title: 'Home', component: HomePage },
+        { title: 'Events', component: EventsPage },
         { title: 'Checkouts', component: CheckoutsPage }
       ];
   }

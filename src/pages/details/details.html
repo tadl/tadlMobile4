@@ -59,7 +59,7 @@
                 </ion-item>
                 <ion-item *ngFor="let copy of holdings">
                     <ion-row>
-                        <ion-col class="detail">{{copy['circ_lib']}}</ion-col>
+                        <ion-col class="detail">{{copy['circ_lib']}}<br/>{{copy['barcode']}}</ion-col>
                         <ion-col class="detail">{{copy['location']}}<br/>{{copy['call_number']}}</ion-col>
                         <ion-col class="detail">{{copy['status']}}<span *ngIf="copy['due_date']"><br/>Due {{copy['due_date']}}</span></ion-col>
                     </ion-row>

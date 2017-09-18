@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
+import { EventsPage } from '../pages/events/events';
 import { ItemDetailsModal } from '../pages/details/details'
 import { Globals } from './globals';
 import { User } from './user';
@@ -23,6 +24,7 @@ import { SearchPage } from '../pages/search/search'
     HoldsPage,
     SearchPage,
     CheckoutsPage,
+    EventsPage,
     ItemDetailsModal,
   ],
   imports: [
@@ -36,6 +38,7 @@ import { SearchPage } from '../pages/search/search'
     MyApp,
     HomePage,
     CheckoutsPage,
+    EventsPage,
     HoldsPage,
     SearchPage,
     ItemDetailsModal,

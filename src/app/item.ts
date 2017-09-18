@@ -1,7 +1,7 @@
 import { NgModule, Component, ViewChild, Injectable, Input} from '@angular/core';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { AlertController, LoadingController, Content, Events, ModalController} from 'ionic-angular';
+import { AlertController, LoadingController, Content, ModalController} from 'ionic-angular';
 import { ItemDetailsModal } from '../pages/details/details'
 import 'rxjs/add/operator/map';
 
@@ -15,7 +15,6 @@ export class Item {
 		private alertCtrl: AlertController,
 		private http: Http, 
 		public loadingCtrl: LoadingController,
-		public events: Events,
     public modalCtrl: ModalController,
 	){}
   	

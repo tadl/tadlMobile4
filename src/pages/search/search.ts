@@ -8,12 +8,12 @@ import { Item } from '../../app/item';
 import { User } from '../../app/user';
 import 'rxjs/add/operator/map';
 
-
 @IonicPage()
 @Component({
     selector: 'page-search',
     templateUrl: 'search.html',
 })
+
 export class SearchPage {
     url: string;
 
