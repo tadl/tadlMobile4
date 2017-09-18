@@ -40,12 +40,13 @@ export class SearchPage {
     available: boolean = this.navParams.get('available') || false
     physical: boolean = this.navParams.get('physical') || false
     current_params: string
+    last_page: number
     more_results: boolean
 
     results: Array<{any}> = []
 
     get_results(){
-        let loading = this.loadingCtrl.create({content:'Searching...'})
+        var loading = this.loadingCtrl.create({content:'Searching...'})
         /** Start ugly stuff we need to do to match current API */
         var available_on: string
         if(this.available == true){
@@ -67,14 +68,20 @@ export class SearchPage {
         params.append('loc', this.location)
         params.append('availability', available_on)
         params.append('physical', physcial_on)
+        /** If user changes any parameter it is a new search that starts on page 0 */
         if(this.current_params != params.toString()){
             this.page = 0
-            this.current_params = params.toString()
+            loading.present()
         }
+        /** If user clicks search again with no new parameters treat as brand new search  */
+        if((this.current_params == params.toString()) && (this.last_page == this.page)){
+            this.page = 0
+            loading.present()
+            this.results = []
+        }
+        this.current_params = params.toString()
         params.append('page', this.page.toString() )
-        loading.present()
         this.http.get('https://catalog.tadl.org/search.json', {params} ).map(res => res.json()).subscribe(data=>{
-            loading.dismiss()
             if(data.items){
                 this.more_results = data.more_results
                 if(this.page == 0){
@@ -82,10 +89,12 @@ export class SearchPage {
                     if(this.more_results == true){
                        this.events.publish('new_search') 
                     }
+                    loading.dismiss()
                 }else{
                     this.results.push.apply(this.results, data.items)
                     this.events.publish('infinite_done')
                 }
+                this.last_page = this.page
             }else{
             }
         });
