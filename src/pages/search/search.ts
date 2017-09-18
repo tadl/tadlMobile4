@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { IonicPage, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
 import { Globals } from '../../app/globals';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Item } from '../../app/item';
 import { User } from '../../app/user';
@@ -41,10 +41,32 @@ export class SearchPage {
 
     results: Array<{any}> = []
 
+
     get_results(){
         let loading = this.loadingCtrl.create({content:'Searching...'})
+        /** Start ugly stuff we need to do to match current API */
+        var available_on: string
+        if(this.available == true){
+            available_on = 'on'
+        }else{
+            available_on = 'off'
+        }
+        var physcial_on: string
+        if(this.physical == true){
+            physcial_on = 'on'
+        }else{
+            physcial_on = 'off'
+        }
+        /** End ugly stuff */
+        let params = new URLSearchParams()
+        params.append('query', this.query)
+        params.append('qtype', this.qtype)
+        params.append('fmt', this.format)
+        params.append('loc', this.location)
+        params.append('availability', available_on)
+        params.append('physical', physcial_on)
         loading.present()
-        this.http.get('https://catalog.tadl.org/search.json?query=' + this.query).map(res => res.json()).subscribe(data=>{
+        this.http.get('https://catalog.tadl.org/search.json', {params} ).map(res => res.json()).subscribe(data=>{
             loading.dismiss()
             if(data.items){
                 this.results = data.items
