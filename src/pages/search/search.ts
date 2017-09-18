@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { IonicPage, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
 import { Globals } from '../../app/globals';
 import { Http } from '@angular/http';
@@ -14,6 +15,8 @@ import 'rxjs/add/operator/map';
     templateUrl: 'search.html',
 })
 export class SearchPage {
+    url: string;
+
     constructor(
         /* we should use formbuilder for this https://ionicframework.com/docs/developer-resources/forms/ */
         public navCtrl: NavController,
@@ -24,6 +27,7 @@ export class SearchPage {
         public loadingCtrl: LoadingController,
         public user: User,
         private http: Http,
+        private inAppBrowser: InAppBrowser,
     ) {}
 
     advanced: boolean = this.navParams.get('advanced') || false
@@ -54,6 +58,13 @@ export class SearchPage {
         if(this.navParams.get('query')){
             this.get_results()
         }
+    }
+
+    openWebpage(url: string) {
+        const options: InAppBrowserOptions = {
+            zoom: 'no',
+        }
+        const browser = this.inAppBrowser.create(url, '_self', options);
     }
 
 }

@@ -79,12 +79,15 @@
                 </ion-thumbnail>
                 <h2 *ngIf="result.title">{{result.title}}</h2>
                 <h4 *ngIf="result.author">{{result.author}}</h4>
-                <p>{{result.loc_copies_available}} available<span *ngIf="result.call_number"> • {{result.call_number}}</span></p>
+                <p *ngIf="result.electronic != true">{{result.loc_copies_available}} available<span *ngIf="result.call_number"> • {{result.call_number}}</span></p>
+                <p *ngIf="result.electronic == true">Electronic resource from {{result.source}}</p>
+                <p>({{result.format_type}})</p>
             </ion-item>
             <ion-item-options>
                 <button ion-button (click)="item.details(result.id)">Details</button>
-                <button ion-button color="secondary" *ngIf="this.user.logged_in">Place Hold</button>
-                <button ion-button color="secondary" *ngIf="!this.user.logged_in" menuToggle menuToggle="right">Log In</button>
+                <button ion-button color="secondary" *ngIf="result.electronic == true" (click)="openWebpage(result.eresource)">View<br/>Resource</button>
+                <button ion-button color="secondary" *ngIf="this.user.logged_in && result.electronic != true">Place<br/>Hold</button>
+                <button ion-button color="secondary" *ngIf="!this.user.logged_in && result.electronic != true" menuToggle menuToggle="right">Log In</button>
             </ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
