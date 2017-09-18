@@ -22,7 +22,7 @@
             </ion-item-divider>
             <ion-item>
                 <ion-label>Search Type</ion-label>
-                <ion-select [(ngModel)]="this.qtype" name="qtype" interface="popover">
+                <ion-select [(ngModel)]="this.qtype" name="qtype" interface="popover" (ngModelChange)="get_results()">
                     <ion-option value="keyword">Keyword</ion-option>
                     <ion-option value="author">Author / Group / Actor</ion-option>
                     <ion-option value="title">Title</ion-option>
@@ -34,7 +34,7 @@
             </ion-item>
             <ion-item>
                 <ion-label>Format</ion-label>
-                <ion-select [(ngModel)]="this.format" name="format" interface="popover">
+                <ion-select [(ngModel)]="this.format" name="format" interface="popover" (ngModelChange)="get_results()">
                     <ion-option value="all">All Formats</ion-option>
                     <ion-option value="a">Books</ion-option>
                     <ion-option value="534">Large Print</ion-option>
@@ -47,7 +47,7 @@
             </ion-item>
             <ion-item *ngIf="globals.multi_location == true">
                 <ion-label>Location</ion-label>
-                <ion-select [(ngModel)]="this.location" name="location" interface="popover">
+                <ion-select [(ngModel)]="this.location" name="location" interface="popover" (ngModelChange)="get_results()">
                     <ion-option value="22">All Locations</ion-option>
                     <ion-option value="23">Main Library</ion-option>
                     <ion-option value="24">Interlochen</ion-option>
@@ -59,11 +59,11 @@
             </ion-item>
             <ion-item>
                 <ion-label>Limit to available items</ion-label>
-                <ion-toggle [(ngModel)]="this.available" name="available"></ion-toggle>
+                <ion-toggle [(ngModel)]="this.available" name="available" (ngModelChange)="get_results()"></ion-toggle>
             </ion-item>
             <ion-item>
                 <ion-label>Limit to physical items</ion-label>
-                <ion-toggle [(ngModel)]="this.physical" name="available"></ion-toggle>
+                <ion-toggle [(ngModel)]="this.physical" name="available" (ngModelChange)="get_results()"></ion-toggle>
             </ion-item>
         </div>
     </form>
