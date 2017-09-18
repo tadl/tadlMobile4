@@ -1,5 +1,6 @@
 import { Component, NgModule  } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams, IonicPageModule } from 'ionic-angular';
+import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser";
 import { Globals } from '../../app/globals'
 import { User } from '../../app/user'
 
@@ -10,12 +11,15 @@ import { User } from '../../app/user'
 })
 
 export class ItemDetailsModal {
+    url: string;
+
   	constructor(
   		public navCtrl: NavController, 
   		public navParams: NavParams,
   		public viewCtrl: ViewController,
         public globals: Globals,
-  		public user: User
+  		public user: User,
+        private inAppBrowser: InAppBrowser
   	){}
 
   	title: string = this.navParams.get('title')
@@ -46,5 +50,12 @@ export class ItemDetailsModal {
 	close_modal() {
 		this.viewCtrl.dismiss();
   	}
+
+    openWebpage(url: string) {
+        const options: InAppBrowserOptions = {
+            zoom: 'no',
+        }
+        const browser = this.inAppBrowser.create(url, '_self', options);
+    }
 
 }
