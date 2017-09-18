@@ -17,9 +17,9 @@ export class ItemDetailsModal {
   		public navCtrl: NavController, 
   		public navParams: NavParams,
   		public viewCtrl: ViewController,
-        public globals: Globals,
+      public globals: Globals,
   		public user: User,
-        private inAppBrowser: InAppBrowser
+      private inAppBrowser: InAppBrowser
   	){}
 
   	title: string = this.navParams.get('title')

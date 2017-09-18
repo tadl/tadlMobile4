@@ -137,6 +137,30 @@ export class User {
   		});
   	}
 
+    /** Place Hold */
+
+    place_hold(record_id){
+      let loading = this.loadingCtrl.create({content:'Placing Hold...'})
+      loading.present()
+      this.http.get('https://catalog.tadl.org/place_hold.json?token=' + this.token + '&record_id=' + record_id).map(res => res.json()).subscribe(data=>{
+        loading.dismiss()
+        if(data.hold_confirmation){
+          this.holds_count = data.user.holds
+          let alert = this.alertCtrl.create({
+            title: data.hold_confirmation[0].message,
+            buttons: [{
+              text: 'Ok',
+              handler: ()=>{
+                return
+              },
+            }]
+          });
+          alert.present();
+        }else{
+        }
+      });
+    }
+
 
 
   	/** Renew all items */
