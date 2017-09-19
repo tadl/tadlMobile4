@@ -161,6 +161,77 @@ export class User {
       });
     }
 
+    /** Cancel Hold */
+
+    cancel_hold(hold_id){
+      let loading = this.loadingCtrl.create({content:'Canceling Hold...'})
+      loading.present()
+      this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=cancel').map(res => res.json()).subscribe(data=>{
+         loading.dismiss()
+        if(data.target_holds){
+          this.holds = data.holds
+          this.holds_count = data.user.holds
+          this.holds_ready = data.user.holds_ready
+        }else{
+        }
+      });
+    }
+
+    /** Suspend Hold */
+    suspend_hold(hold_id){
+      let loading = this.loadingCtrl.create({content:'Suspending Hold...'})
+      loading.present()
+      this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend').map(res => res.json()).subscribe(data=>{
+         loading.dismiss()
+        if(data.target_holds){
+          this.holds = data.holds
+        }else{
+        }
+      });
+    }
+
+    /** Activate Hold */
+    activate_hold(hold_id){
+      let loading = this.loadingCtrl.create({content:'Activating Hold...'})
+      loading.present()
+      this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=activate').map(res => res.json()).subscribe(data=>{
+         loading.dismiss()
+        if(data.target_holds){
+          this.holds = data.holds
+        }else{
+        }
+      });
+    }
+
+    /** Prompt for New Pickup Location */
+    prompt_new_hold_pickup(hold_id, hold_title){
+      let alert = this.alertCtrl.create({
+        title: hold_title,
+        subTitle: "Select new pickup loaction",
+        buttons: [{
+          text: 'Ok',
+          handler: ()=>{
+            return
+          },
+        }]
+      });
+      alert.present();
+    }
+
+
+    /** Change Hold Pickup Loaction */
+    change_hold_pickup(hold_id){
+      let loading = this.loadingCtrl.create({content:'Activating Hold...'})
+      loading.present()
+      this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=activate').map(res => res.json()).subscribe(data=>{
+         loading.dismiss()
+        if(data.target_holds){
+          this.holds = data.holds
+        }else{
+        }
+      });
+    }
+
 
 
   	/** Renew all items */
