@@ -19,4 +19,7 @@
             <div [innerHTML]="post.excerpt.rendered"></div>
 		</ion-item>
 	</ion-list>
+    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

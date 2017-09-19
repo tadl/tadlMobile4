@@ -25,16 +25,39 @@ export class NewsPage {
 
     posts: Array<{any}> = [];
     url: string = "https://www.tadl.org/wp-json/wp/v2/posts?categories_exclude=93";
+    page: number = 1;
+    lastPageReached: boolean = false;
 
     get_news() {
         let loading = this.loadingCtrl.create({content:'Loading news...'});
         loading.present();
-        this.http.get(this.url).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.url + '&page=' + this.page).map(res => res.json()).subscribe(data=>{
             if (data) {
                 this.posts = data;
             }
             loading.dismiss();
         });
+    }
+
+    doInfinite(infiniteScroll) {
+        this.page++;
+        setTimeout(() => {
+            this.http.get(this.url + '&page=' + this.page).map(res => res.json()).subscribe(data=>{
+                if (data) {
+                    this.posts.push.apply(this.posts, data);
+                } else {
+                    this.lastPageReached = true;
+                }
+            }, (err) => {
+                this.lastPageReached = true;
+            });
+
+            infiniteScroll.complete();
+        }, 500);
+    }
+
+    isLastPageReached():boolean {
+        return this.lastPageReached;
     }
     
     ionViewDidLoad() {
