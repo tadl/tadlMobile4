@@ -73,9 +73,9 @@
 	</ion-item-divider>
 	<ion-list>
 		<ion-item-sliding *ngFor="let result of this.results">
-            <ion-item>
+            <ion-item (tap)="item.details(result.id)">
                 <ion-thumbnail item-start>
-                    <img (click)="item.details(result.id)" src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{result.id}}"/>
+                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{result.id}}"/>
                 </ion-thumbnail>
                 <h2 *ngIf="result.title">{{result.title}}</h2>
                 <h4 *ngIf="result.author">{{result.author}}</h4>
