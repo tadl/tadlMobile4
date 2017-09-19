@@ -8,6 +8,10 @@
         <ion-list>
             <button menuClose ion-item (click)="this.nav.push(homePage, {}, {animate:false});" menuToggle="left">Home</button>
             <button menuClose ion-item (click)="this.nav.push(searchPage, {}, {animate:false})">Search Catalog</button>
+            <button menuClose ion-item (click)="this.nav.push(infoPage, {}, {animate:false})" menuToggle="left">Information</button>
+            <button menuClose ion-item (click)="this.nav.push(eventsPage, {}, {animate:false})" menuToggle="left">Events</button>
+            <button menuClose ion-item (click)="this.nav.push(newsPage, {}, {animate:false})" menuToggle="left">News</button>
+            <button menuClose ion-item (click)="false" menuToggle="left">New Items</button>
             <button menuClose ion-item menuToggle="right">Account</button>
         </ion-list>
     </ion-content>
