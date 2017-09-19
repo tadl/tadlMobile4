@@ -4,6 +4,7 @@ import { Globals } from '../../app/globals';
 import { CheckoutsPage } from '../checkouts/checkouts';
 import { SearchPage } from '../search/search';
 import { EventsPage } from '../events/events';
+import { InfoPage } from '../info/info';
 
 @Component({
   selector: 'page-home',
@@ -14,6 +15,7 @@ export class HomePage {
     searchPage = SearchPage
     checkoutsPage = CheckoutsPage
     eventsPage = EventsPage
+    infoPage = InfoPage
 
     query: string
 

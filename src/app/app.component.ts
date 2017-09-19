@@ -11,6 +11,7 @@ import { HoldsPage } from '../pages/holds/holds';
 import { EventsPage } from '../pages/events/events';
 import { ItemDetailsModal } from '../pages/details/details'
 import { SearchPage } from '../pages/search/search'
+import { InfoPage } from '../pages/info/info'
 
 @Component({
   templateUrl: 'app.html'
@@ -22,6 +23,7 @@ export class MyApp {
   holdsPage = HoldsPage
   searchPage = SearchPage
   eventsPage = EventsPage
+  infoPage = InfoPage
   public rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
 
@@ -40,6 +42,7 @@ export class MyApp {
       this.pages = [
         { title: 'Home', component: HomePage },
         { title: 'Events', component: EventsPage },
+        { title: 'Information', component: InfoPage },
         { title: 'Checkouts', component: CheckoutsPage }
       ];
   }
