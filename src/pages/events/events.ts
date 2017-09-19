@@ -17,7 +17,9 @@ export class EventsPage {
         public nav: Nav,
         public loadingCtrl: LoadingController,
         private http: Http,
-    ) { }
+    ) { 
+        this.get_events();
+    }
 
     events: Array<{any}> = [];
     url: string = "https://www.tadl.org/wp-json/tribe/events/v1/events?start_date=now";
@@ -63,7 +65,6 @@ export class EventsPage {
     }
 
     ionViewDidLoad() {
-        this.get_events();
         console.log('ionViewDidLoad EventsPage');
     }
 

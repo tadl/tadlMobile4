@@ -17,7 +17,9 @@ export class InfoPage {
         public nav: Nav,
         public loadingCtrl: LoadingController,
         private http: Http,
-    ) { }
+    ) {
+        this.get_info();
+    }
 
     locations: Array<{any}> = [];
     url: string = "https://www.tadl.org/wp-content/uploads/json/parsed-hours.json";
@@ -34,7 +36,6 @@ export class InfoPage {
     }
 
     ionViewDidLoad() {
-        this.get_info();
         console.log('ionViewDidLoad InfoPage');
     }
 
