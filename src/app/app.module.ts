@@ -17,6 +17,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HoldsPage } from '../pages/holds/holds';
 import { SearchPage } from '../pages/search/search'
 import { InfoPage } from '../pages/info/info'
+import { NewsPage } from '../pages/news/news'
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { InfoPage } from '../pages/info/info'
     EventsPage,
     ItemDetailsModal,
     InfoPage,
+    NewsPage,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { InfoPage } from '../pages/info/info'
     SearchPage,
     ItemDetailsModal,
     InfoPage,
+    NewsPage,
   ],
   providers: [
     StatusBar,

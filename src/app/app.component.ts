@@ -12,6 +12,7 @@ import { EventsPage } from '../pages/events/events';
 import { ItemDetailsModal } from '../pages/details/details'
 import { SearchPage } from '../pages/search/search'
 import { InfoPage } from '../pages/info/info'
+import { NewsPage } from '../pages/news/news'
 
 @Component({
   templateUrl: 'app.html'
@@ -24,6 +25,7 @@ export class MyApp {
   searchPage = SearchPage
   eventsPage = EventsPage
   infoPage = InfoPage
+  newsPage = NewsPage
   public rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
 
@@ -43,6 +45,7 @@ export class MyApp {
         { title: 'Home', component: HomePage },
         { title: 'Events', component: EventsPage },
         { title: 'Information', component: InfoPage },
+        { title: 'News', component: NewsPage },
         { title: 'Checkouts', component: CheckoutsPage }
       ];
   }
