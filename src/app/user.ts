@@ -1,7 +1,8 @@
 import { NgModule, Component, ViewChild, Injectable, Input} from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { AlertController, LoadingController, Content, Events} from 'ionic-angular';
+import { AlertController, LoadingController, Content, Events, ModalController} from 'ionic-angular';
+import { Globals } from './globals'
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -16,6 +17,8 @@ export class User {
 		public loadingCtrl: LoadingController,
 		private storage: Storage,
 		public events: Events,
+    public globals: Globals,
+    public modalCtrl: ModalController,
 	){}
   	
 
@@ -29,6 +32,7 @@ export class User {
   	fines:string
   	card:string
   	token:string
+    default_pickup:string
   	login_error:string
   	holds:Array<{any}> = []
   	checkouts:Array<{any}> = []
@@ -63,6 +67,7 @@ export class User {
 				this.holds_ready = data.holds_ready
 				this.card = data.card
 				this.token = data.token
+        this.default_pickup = this.pickup_code_to_name(data.pickup_library)
 				this.storage.set('username', this.username)
 				this.storage.set('password', this.password)
 			}else{
@@ -148,6 +153,7 @@ export class User {
           this.holds_count = data.user.holds
           let alert = this.alertCtrl.create({
             title: data.hold_confirmation[0].message,
+            subTitle: 'Pickup loaction: ' + this.default_pickup,
             buttons: [{
               text: 'Ok',
               handler: ()=>{
@@ -203,36 +209,31 @@ export class User {
       });
     }
 
-    /** Prompt for New Pickup Location */
-    prompt_new_hold_pickup(hold_id, hold_title){
-      let alert = this.alertCtrl.create({
-        title: hold_title,
-        subTitle: "Select new pickup loaction",
-        buttons: [{
-          text: 'Ok',
-          handler: ()=>{
-            return
-          },
-        }]
-      });
-      alert.present();
-    }
-
-
     /** Change Hold Pickup Loaction */
-    change_hold_pickup(hold_id){
-      let loading = this.loadingCtrl.create({content:'Activating Hold...'})
+    change_hold_pickup(hold_id, event){
+      let loading = this.loadingCtrl.create({content:'Changing Pickup Location...'})
       loading.present()
-      this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=activate').map(res => res.json()).subscribe(data=>{
-         loading.dismiss()
-        if(data.target_holds){
-          this.holds = data.holds
-        }else{
+      let params = new URLSearchParams()
+      params.append('token', this.token)
+      params.append('hold_id', hold_id)
+      params.append('new_pickup', event)
+      params.append('hold_state', 'f')
+      this.http.get('https://catalog.tadl.org/main/update_hold_pickup.json', {params} ).map(res => res.json()).subscribe(data=>{
+        loading.dismiss()
+        if(data.message){
+          let alert = this.alertCtrl.create({
+            title: 'Pickup location succesfully changed to ' + data.message.pickup_location,
+            buttons: [{
+              text: 'Ok',
+              handler: ()=>{
+                this.load_holds()
+              },
+            }]
+          });
+          alert.present();
         }
       });
     }
-
-
 
   	/** Renew all items */
   	renew_all(){
@@ -250,4 +251,18 @@ export class User {
   		this.checkout_errors.length = 0
   	}
 
+    /** Get 'pretty' string for user's default pickup location */
+
+    pickup_code_to_name(location_code){
+      var location = this.pickup_code_search(location_code, this.globals.pickup_locations)
+      return location.name
+    }
+
+    pickup_code_search(nameKey, myArray){
+      for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].code === nameKey) {
+            return myArray[i];
+        }
+      }
+    }
 }
