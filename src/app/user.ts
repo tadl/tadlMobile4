@@ -3,6 +3,8 @@ import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { AlertController, LoadingController, Content, Events, ModalController} from 'ionic-angular';
 import { Globals } from './globals'
+import { ItemDetailsModal } from '../pages/details/details'
+import { PasswordModal } from '../pages/password/password'
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -264,5 +266,12 @@ export class User {
             return myArray[i];
         }
       }
+    }
+
+    /** Reset Password */
+
+    reset_password(){
+      let password_reset_modal = this.modalCtrl.create(PasswordModal, {});
+      password_reset_modal.present();
     }
 }

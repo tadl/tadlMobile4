@@ -11,6 +11,7 @@ import { HoldsPage } from '../pages/holds/holds';
 import { EventsPage } from '../pages/events/events';
 import { FeaturedPage } from '../pages/featured/featured';
 import { ItemDetailsModal } from '../pages/details/details'
+import { PasswordModal } from '../pages/password/password'
 import { SearchPage } from '../pages/search/search'
 import { InfoPage } from '../pages/info/info'
 import { NewsPage } from '../pages/news/news'

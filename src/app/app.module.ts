@@ -10,6 +10,7 @@ import { CheckoutsPage } from '../pages/checkouts/checkouts';
 import { EventsPage } from '../pages/events/events';
 import { FeaturedPage } from '../pages/featured/featured';
 import { ItemDetailsModal } from '../pages/details/details'
+import { PasswordModal } from '../pages/password/password'
 import { Globals } from './globals';
 import { User } from './user';
 import { Item } from './item';
@@ -32,6 +33,7 @@ import { PostDetailPage } from '../pages/post-detail/post-detail'
     EventsPage,
     FeaturedPage,
     ItemDetailsModal,
+    PasswordModal,
     PostDetailPage,
     EventDetailPage,
     InfoPage,
@@ -53,6 +55,7 @@ import { PostDetailPage } from '../pages/post-detail/post-detail'
     HoldsPage,
     SearchPage,
     ItemDetailsModal,
+    PasswordModal,
     PostDetailPage,
     EventDetailPage,
     InfoPage,
