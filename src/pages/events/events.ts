@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { EventDetailPage } from '../event-detail/event-detail';
 import { IonicPage, Content, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { Globals } from '../../app/globals';
 import 'rxjs/add/operator/map';
 
 @IonicPage()

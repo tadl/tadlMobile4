@@ -1,11 +1,12 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{selectedItem.title.rendered}}</ion-title>
+        <ion-title></ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <div *ngIf="selectedItem" class="selection">
+        <img src="{{selectedItem.featured_image_urls.owl_function}}"/>
         <h2 [innerHTML]="selectedItem.title.rendered"></h2>
         <div [innerHTML]="selectedItem.content.rendered"></div>
     </div>

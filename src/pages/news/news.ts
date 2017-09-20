@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { PostDetailPage } from '../post-detail/post-detail';
+import { IonicPage, Content, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Globals } from '../../app/globals';
 import 'rxjs/add/operator/map';
@@ -11,6 +12,7 @@ import 'rxjs/add/operator/map';
 })
 
 export class NewsPage {
+    @ViewChild(Content) content: Content;
 
     constructor(
         public navCtrl: NavController,
@@ -59,7 +61,13 @@ export class NewsPage {
     isLastPageReached():boolean {
         return this.lastPageReached;
     }
-    
+
+    itemTapped(event, item) {
+        this.nav.push(PostDetailPage, {
+            item: item
+        });
+    }
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad NewsPage');
     }

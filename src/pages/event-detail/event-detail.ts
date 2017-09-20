@@ -11,7 +11,6 @@ export class EventDetailPage {
 
     constructor(private nav: NavController, navParams: NavParams) {
         this.selectedItem = navParams.get('item');
-        console.log(this.selectedItem);
     }
 
     ionViewDidLoad() {
