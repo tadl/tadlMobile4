@@ -8,10 +8,11 @@ import 'rxjs/add/operator/map';
 @IonicPage()
 @Component({
     selector: 'page-news',
-    templateUrl: 'news.html',
+    templateUrl: 'news.html'
 })
 
 export class NewsPage {
+
     @ViewChild(Content) content: Content;
 
     constructor(
@@ -20,7 +21,7 @@ export class NewsPage {
         public nav: Nav,
         public globals: Globals,
         public loadingCtrl: LoadingController,
-        private http: Http,
+        private http: Http
     ) {
         this.get_news();
     }

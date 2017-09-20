@@ -1,24 +1,24 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
-    <button ion-button left menuToggle menuToggle="left" >
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title mode="ios">TADL News</ion-title>
-    <button ion-button right menuToggle menuToggle="right">
-      <ion-icon name="contact"></ion-icon>
-    </button>
-  </ion-navbar>
+    <ion-navbar hideBackButton="true">
+        <button ion-button left menuToggle menuToggle="left" >
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title mode="ios">TADL News</ion-title>
+        <button ion-button right menuToggle menuToggle="right">
+            <ion-icon name="contact"></ion-icon>
+        </button>
+    </ion-navbar>
 </ion-header>
 <ion-content padding>
-	<ion-list>
-		<ion-item *ngFor="let post of this.posts" (click)="itemTapped($event, post)">
+    <ion-list>
+        <ion-item *ngFor="let post of this.posts" (click)="itemTapped($event, post)">
             <ion-thumbnail item-start *ngIf="post.featured_image_urls.thumbnail">
                 <img src="{{post.featured_image_urls.thumbnail}}" />
             </ion-thumbnail>
             <h2 [innerHTML]="post.title.rendered"></h2>
             <div [innerHTML]="post.excerpt.rendered"></div>
-		</ion-item>
-	</ion-list>
+        </ion-item>
+    </ion-list>
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
