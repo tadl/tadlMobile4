@@ -16,7 +16,7 @@ export class InfoPage {
         public navParams: NavParams,
         public nav: Nav,
         public loadingCtrl: LoadingController,
-        private http: Http,
+        private http: Http
     ) {
         this.get_info();
     }
