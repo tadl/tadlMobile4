@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angu
 import { User } from '../../app/user'
 import { Item } from '../../app/item'
 
-/**
- * Generated class for the CheckoutsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
     selector: 'page-checkouts',
@@ -18,7 +11,7 @@ import { Item } from '../../app/item'
 
 @Injectable()
 export class CheckoutsPage {
-	@ViewChild(Content) content: Content;
+    @ViewChild(Content) content: Content;
     constructor(
         public navCtrl: NavController, 
         public navParams: NavParams,
@@ -26,15 +19,14 @@ export class CheckoutsPage {
         public item: Item,
         public events: Events,
     ) {
-  		events.subscribe('renew',() =>{
-  			this.content.scrollToTop();
-		});
-  	}
+        events.subscribe('renew',() =>{
+            this.content.scrollToTop();
+        });
+    }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad CheckoutsPage');
         this.user.load_checkouts();
     }
+
 }
-
-
