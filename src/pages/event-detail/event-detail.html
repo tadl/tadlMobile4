@@ -11,7 +11,7 @@
         <ion-row>
             <ion-col>
                 <img src="{{selectedItem.image.url}}" style="max-height: 200px;max-width: 35%;float:left;margin:0 5px 5px 0;"/>
-                <h2>{{selectedItem.title}}</h2>
+                <h2 [innerHTML]="selectedItem.title"></h2>
                 <p [innerHTML]="selectedItem.description"></p>
             </ion-col>
         </ion-row>
