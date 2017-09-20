@@ -4,6 +4,7 @@ import { Globals } from '../../app/globals';
 import { CheckoutsPage } from '../checkouts/checkouts';
 import { SearchPage } from '../search/search';
 import { EventsPage } from '../events/events';
+import { FeaturedPage } from '../featured/featured';
 import { InfoPage } from '../info/info';
 import { NewsPage } from '../news/news';
 
@@ -18,6 +19,7 @@ export class HomePage {
     eventsPage = EventsPage
     infoPage = InfoPage
     newsPage = NewsPage
+    featuredPage = FeaturedPage
 
     query: string
 

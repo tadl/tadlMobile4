@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
 import { HoldsPage } from '../pages/holds/holds';
 import { EventsPage } from '../pages/events/events';
+import { FeaturedPage } from '../pages/featured/featured';
 import { ItemDetailsModal } from '../pages/details/details'
 import { SearchPage } from '../pages/search/search'
 import { InfoPage } from '../pages/info/info'
@@ -24,6 +25,7 @@ export class MyApp {
   holdsPage = HoldsPage
   searchPage = SearchPage
   eventsPage = EventsPage
+  featuredPage = FeaturedPage
   infoPage = InfoPage
   newsPage = NewsPage
   public rootPage: any = HomePage;

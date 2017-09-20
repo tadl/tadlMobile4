@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
 import { EventsPage } from '../pages/events/events';
+import { FeaturedPage } from '../pages/featured/featured';
 import { ItemDetailsModal } from '../pages/details/details'
 import { Globals } from './globals';
 import { User } from './user';
@@ -29,6 +30,7 @@ import { PostDetailPage } from '../pages/post-detail/post-detail'
     SearchPage,
     CheckoutsPage,
     EventsPage,
+    FeaturedPage,
     ItemDetailsModal,
     PostDetailPage,
     EventDetailPage,
@@ -47,6 +49,7 @@ import { PostDetailPage } from '../pages/post-detail/post-detail'
     HomePage,
     CheckoutsPage,
     EventsPage,
+    FeaturedPage,
     HoldsPage,
     SearchPage,
     ItemDetailsModal,
