@@ -6,8 +6,8 @@ import { User } from '../../app/user'
 
 @IonicPage()
 @Component({
-  	selector: 'page-details',
-  	templateUrl: 'details.html'
+    selector: 'page-details',
+    templateUrl: 'details.html'
 })
 
 export class ItemDetailsModal {
