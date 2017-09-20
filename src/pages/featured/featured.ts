@@ -25,13 +25,13 @@ export class FeaturedPage {
         public globals: Globals,
         public item: Item,
         public user: User,
-        private http: Http,
+        private http: Http
     ) {
         this.get_feeds();
     }
 
     get_feeds() {
-        var loading = this.loadingCtrl.create({content:'Loading items...'})
+        var loading = this.loadingCtrl.create({content:'Loading items...'});
         loading.present();
         this.http.get(this.url).map(res => res.json()).subscribe(data=>{
             if (data.featured_items) {
