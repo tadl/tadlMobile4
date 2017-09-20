@@ -3,10 +3,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-post-detail',
-  templateUrl: 'post-detail.html',
+    selector: 'page-post-detail',
+    templateUrl: 'post-detail.html',
 })
 export class PostDetailPage {
+
     selectedItem: any;
 
     constructor(private nav: NavController, navParams: NavParams) {
