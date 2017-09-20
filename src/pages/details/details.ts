@@ -44,10 +44,6 @@ export class ItemDetailsModal {
 
     items: string = this.loc_copies_available >= 1 ? 'Available' : 'All Copies';
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad ItemDetailsPage');
-    }
-
     close_modal() {
         this.viewCtrl.dismiss();
     }
@@ -57,6 +53,10 @@ export class ItemDetailsModal {
             zoom: 'no'
         }
         const browser = this.inAppBrowser.create(url, '_self', options);
+    }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad ItemDetailsPage');
     }
 
 }
