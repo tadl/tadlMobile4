@@ -1,14 +1,15 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
-    <button ion-button left menuToggle menuToggle="left" >
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title mode="ios">Search Catalog</ion-title>
-    <button ion-button right menuToggle menuToggle="right">
-      <ion-icon name="contact"></ion-icon>
-    </button>
-  </ion-navbar>
+    <ion-navbar hideBackButton="true">
+        <button ion-button left menuToggle menuToggle="left" >
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title mode="ios">Search Catalog</ion-title>
+        <button ion-button right menuToggle menuToggle="right">
+            <ion-icon name="contact"></ion-icon>
+        </button>
+    </ion-navbar>
 </ion-header>
+
 <ion-content padding>
     <form (ngSubmit)="get_results()" block>
         <ion-item col-sm-12>
@@ -68,11 +69,11 @@
         </div>
     </form>
 
-	<ion-item-divider *ngIf="query">
-		Results for <strong>{{query}}</strong>
-	</ion-item-divider>
-	<ion-list>
-		<ion-item-sliding *ngFor="let result of this.results">
+    <ion-item-divider *ngIf="query">
+        Results for <strong>{{query}}</strong>
+    </ion-item-divider>
+    <ion-list>
+        <ion-item-sliding *ngFor="let result of this.results">
             <ion-item (tap)="item.details(result.id)">
                 <ion-thumbnail item-start>
                     <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{result.id}}"/>
@@ -89,9 +90,11 @@
                 <button ion-button color="secondary" *ngIf="this.user.logged_in && result.electronic != true" (click)="user.place_hold(result.id)">Place<br/>Hold</button>
                 <button ion-button color="secondary" *ngIf="!this.user.logged_in && result.electronic != true" menuToggle menuToggle="right">Log In</button>
             </ion-item-options>
-		</ion-item-sliding>
-	</ion-list>
+        </ion-item-sliding>
+    </ion-list>
+
     <ion-infinite-scroll (ionInfinite)="this.get_more_results($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
 </ion-content>
