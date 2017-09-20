@@ -1,25 +1,27 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
-    <button ion-button left menuToggle menuToggle="left" >
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title mode="ios">TADL Events</ion-title>
-    <button ion-button right menuToggle menuToggle="right">
-      <ion-icon name="contact"></ion-icon>
-    </button>
-  </ion-navbar>
+    <ion-navbar hideBackButton="true">
+        <button ion-button left menuToggle menuToggle="left" >
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title mode="ios">TADL Events</ion-title>
+        <button ion-button right menuToggle menuToggle="right">
+            <ion-icon name="contact"></ion-icon>
+        </button>
+    </ion-navbar>
 </ion-header>
 <ion-content padding>
-	<ion-list>
-		<ion-item *ngFor="let event of this.events" (click)="itemTapped($event, event)">
+
+    <ion-list>
+        <ion-item *ngFor="let event of this.events" (click)="itemTapped($event, event)">
             <ion-thumbnail item-start *ngIf="event.image">
                 <img src="{{event.image.sizes.thumbnail.url}}" />
             </ion-thumbnail>
             <h2 [innerHTML]="event.title"></h2>
             <h4 [innerHTML]="event.start_date | date: 'MMM dd, h:mm a'"></h4>
             <p *ngIf="event.venue">{{event.venue.venue}}</p>
-		</ion-item>
-	</ion-list>
+        </ion-item>
+    </ion-list>
+
     <ion-fab right bottom>
         <button ion-fab color="light" (click)="scrollToTop()"><ion-icon name="arrow-up"></ion-icon></button>
     </ion-fab>
@@ -27,4 +29,5 @@
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
 </ion-content>
