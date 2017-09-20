@@ -25,7 +25,7 @@
                         <p>Pickup location: {{hold['pickup_location']}}</p>
                     </div>
                     <ion-item *ngIf="globals.multi_location==true && !hold.queue_status.startsWith('Ready')">
-                        <ion-select class="full_width_select" interface="popover" placeholder="Change Pickup Location" (ionChange)="user.change_hold_pickup(hold.hold_id, $event)">
+                        <ion-select class="full_width_select" interface="popover" placeholder="Change Pickup" (ionChange)="user.change_hold_pickup(hold.hold_id, $event)">
                             <ion-option *ngFor="let loc of globals.pickup_locations" [value]="loc.code">
                                 {{loc.name}}
                             </ion-option>
