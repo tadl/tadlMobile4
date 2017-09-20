@@ -153,7 +153,7 @@ export class User {
           this.holds_count = data.user.holds
           let alert = this.alertCtrl.create({
             title: data.hold_confirmation[0].message,
-            subTitle: 'Pickup loaction: ' + this.default_pickup,
+            subTitle: 'Pickup location: ' + this.default_pickup,
             buttons: [{
               text: 'Ok',
               handler: ()=>{
