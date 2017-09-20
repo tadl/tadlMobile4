@@ -3,8 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-event-detail',
-  templateUrl: 'event-detail.html',
+    selector: 'page-event-detail',
+    templateUrl: 'event-detail.html',
 })
 export class EventDetailPage {
     selectedItem: any;
