@@ -20,7 +20,11 @@
             <p *ngIf="event.venue">{{event.venue.venue}}</p>
 		</ion-item>
 	</ion-list>
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-fab right bottom>
+        <button ion-fab color="light" (click)="scrollToTop()"><ion-icon name="arrow-up"></ion-icon></button>
+    </ion-fab>
+
+    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
