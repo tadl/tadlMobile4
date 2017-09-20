@@ -9,8 +9,8 @@ import { InfoPage } from '../info/info';
 import { NewsPage } from '../news/news';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 
 export class HomePage {
@@ -28,6 +28,6 @@ export class HomePage {
         public globals: Globals,
         public nav: Nav,
     ) {
-
     }
+
 }
