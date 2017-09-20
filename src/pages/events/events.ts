@@ -47,7 +47,6 @@ export class EventsPage {
     }
 
     doInfinite(infiniteScroll) {
-        console.log('begin async operation');
         setTimeout(() => {
             this.url = this.next_url;
             this.http.get(this.url).map(res => res.json()).subscribe(data=>{
@@ -62,7 +61,6 @@ export class EventsPage {
                 }
             });
         
-            console.log('async operation has ended');
             infiniteScroll.complete();
         }, 500);
     }
