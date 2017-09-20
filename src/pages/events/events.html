@@ -11,7 +11,7 @@
 </ion-header>
 <ion-content padding>
 	<ion-list>
-		<ion-item *ngFor="let event of this.events">
+		<ion-item *ngFor="let event of this.events" (click)="itemTapped($event, event)">
             <ion-thumbnail item-start *ngIf="event.image">
                 <img src="{{event.image.sizes.thumbnail.url}}" />
             </ion-thumbnail>

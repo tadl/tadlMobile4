@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { EventDetailPage } from '../event-detail/event-detail';
 import { IonicPage, Content, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -71,6 +72,12 @@ export class EventsPage {
 
     scrollToTop() {
         this.content.scrollToTop();
+    }
+
+    itemTapped(event, item) {
+        this.nav.push(EventDetailPage, {
+            item: item
+        });
     }
 
     ionViewDidLoad() {

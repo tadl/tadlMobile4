@@ -18,6 +18,8 @@ import { HoldsPage } from '../pages/holds/holds';
 import { SearchPage } from '../pages/search/search'
 import { InfoPage } from '../pages/info/info'
 import { NewsPage } from '../pages/news/news'
+import { EventDetailPage } from '../pages/event-detail/event-detail'
+import { PostDetailPage } from '../pages/post-detail/post-detail'
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { NewsPage } from '../pages/news/news'
     CheckoutsPage,
     EventsPage,
     ItemDetailsModal,
+    PostDetailPage,
+    EventDetailPage,
     InfoPage,
     NewsPage,
   ],
@@ -46,6 +50,8 @@ import { NewsPage } from '../pages/news/news'
     HoldsPage,
     SearchPage,
     ItemDetailsModal,
+    PostDetailPage,
+    EventDetailPage,
     InfoPage,
     NewsPage,
   ],
