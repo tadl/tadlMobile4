@@ -25,12 +25,15 @@ export class EventsPage {
         public nav: Nav,
         public loadingCtrl: LoadingController,
         private http: Http,
-    ) { 
+    ) {
         this.page = '1';
+        let loading = this.loadingCtrl.create({content:'Loading events...'});
+        loading.present();
         this.loadEvents(this.page).then(data => {
             console.log('Posts loaded', data);
             if (!data['next_rest_url']) { this.lastPageReached = true; }
             this.events = data['events'];
+            loading.dismiss();
         });
     }
 
