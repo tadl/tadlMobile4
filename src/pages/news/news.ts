@@ -27,7 +27,7 @@ export class NewsPage {
     }
 
     posts: Array<{any}> = [];
-    url: string = "https://www.tadl.org/wp-json/wp/v2/posts?categories_exclude=93";
+    url: string = "https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&categories_exclude=93";
     page: number = 1;
     lastPageReached: boolean = false;
 

@@ -25,7 +25,7 @@ export class EventsPage {
     }
 
     events: Array<{any}> = [];
-    url: string = "https://www.tadl.org/wp-json/tribe/events/v1/events?start_date=now";
+    url: string = "https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now";
     next_url: string;
     prev_url: string;
     lastPageReached: boolean = false;
@@ -60,7 +60,6 @@ export class EventsPage {
                     this.events.push.apply(this.events, data.events);
                 }
             });
-        
             infiniteScroll.complete();
         }, 500);
     }
