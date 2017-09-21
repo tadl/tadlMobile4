@@ -1,14 +1,15 @@
-import { NgModule, Component, ViewChild, Injectable, Input} from '@angular/core';
+import { NgModule, Component, ViewChild, Injectable, Input } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { AlertController, LoadingController, Content, Events, ModalController} from 'ionic-angular';
-import { Globals } from './globals'
-import { ItemDetailsModal } from '../pages/details/details'
-import { PasswordModal } from '../pages/password/password'
+import { AlertController, LoadingController, Content, Events, ModalController } from 'ionic-angular';
+import { Md5 } from 'ts-md5/dist/md5';
+import { Globals } from './globals';
+import { ItemDetailsModal } from '../pages/details/details';
+import { PasswordModal } from '../pages/password/password';
 import 'rxjs/add/operator/map';
 
 @Component({
-    providers: [Http],
+    providers: [Http]
 })
 
 export class User {
