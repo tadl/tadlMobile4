@@ -9,7 +9,7 @@
         </button>
     </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
     <ion-list>
         <ion-item *ngFor="let post of this.posts" (click)="itemTapped($event, post)">
             <ion-thumbnail item-start *ngIf="post.featured_image_urls.thumbnail">

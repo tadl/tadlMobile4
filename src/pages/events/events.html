@@ -9,7 +9,7 @@
         </button>
     </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
 
     <ion-list>
         <ion-item *ngFor="let event of this.events" (click)="itemTapped($event, event)">
@@ -26,8 +26,11 @@
         <button ion-fab color="light" (click)="scrollToTop()"><ion-icon name="arrow-up"></ion-icon></button>
     </ion-fab>
 
-    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)" threshold="0px">
+        <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more events...">
+        </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
 </ion-content>

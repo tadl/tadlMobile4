@@ -10,7 +10,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-list class="accordion-list">
         <ion-list-header *ngFor="let section of items; let i = index" no-lines no-padding>
             <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': section.open, 'section': !section.open}">

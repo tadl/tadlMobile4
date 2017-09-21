@@ -9,7 +9,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <h4>{{title}}</h4>
     <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{id}}" class="list_cover_image" float-left padding-right />
     <h5 *ngIf="author">{{author}}</h5>
@@ -19,7 +19,7 @@
     <button ion-button *ngIf="this.user.logged_in && electronic != true" (click)="user.place_hold(id)">Place Hold</button>
     <button ion-button *ngIf="!this.user.logged_in && electronic != true" menuToggle menuToggle="right" (click)="close_modal()">Log In to Place Hold</button>
     <div *ngIf="electronic != true">
-        <div padding>
+        <div>
             <ion-segment [(ngModel)]="items">
                 <ion-segment-button value="Available">
                     Available Copies
