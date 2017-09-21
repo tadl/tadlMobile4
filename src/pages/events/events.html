@@ -26,7 +26,7 @@
         <button ion-fab color="light" (click)="scrollToTop()"><ion-icon name="arrow-up"></ion-icon></button>
     </ion-fab>
 
-    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)" threshold="0px">
+    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="0px">
         <ion-infinite-scroll-content
             loadingSpinner="bubbles"
             loadingText="Loading more events...">

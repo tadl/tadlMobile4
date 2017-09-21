@@ -14,6 +14,11 @@ import 'rxjs/add/operator/map';
 export class EventsPage {
     @ViewChild(Content) content: Content;
 
+    url: string = "https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now";
+    lastPageReached: boolean = false;
+    events: any;
+    page: any;
+
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -21,47 +26,39 @@ export class EventsPage {
         public loadingCtrl: LoadingController,
         private http: Http,
     ) { 
-        this.get_events();
-    }
-
-    events: Array<{any}> = [];
-    url: string = "https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now";
-    next_url: string;
-    prev_url: string;
-    lastPageReached: boolean = false;
-
-    get_events() {
-        let loading = this.loadingCtrl.create({content:'Loading events...'});
-        loading.present();
-        this.http.get(this.url).map(res => res.json()).subscribe(data=>{
-            if (data.next_rest_url) {
-                this.next_url = data.next_rest_url;
-            } else {
-                this.lastPageReached = true;
-            }
-            if (data.events) {
-                this.events = data.events;
-            }
-            loading.dismiss();
+        this.page = '1';
+        this.loadEvents(this.page).then(data => {
+            console.log('Posts loaded', data);
+            if (!data['next_rest_url']) { this.lastPageReached = true; }
+            this.events = data['events'];
         });
     }
 
-    doInfinite(infiniteScroll) {
-        setTimeout(() => {
-            this.url = this.next_url;
-            this.http.get(this.url).map(res => res.json()).subscribe(data=>{
-                if (data.next_rest_url) {
-                    this.next_url = data.next_rest_url;
-                } else {
-                    this.next_url = ""
-                    this.lastPageReached = true;
-                }
-                if (data.events) {
-                    this.events.push.apply(this.events, data.events);
-                }
+    loadEvents(page) {
+        if (!page) {
+            let page = 1;
+        }
+        return new Promise(resolve => {
+            this.http.get( this.url + '&page=' + page ).map(res => res.json()).subscribe(data => {
+                resolve(data);
+            }, (err) => {
+                this.lastPageReached = true;
             });
+        });
+    }
+
+    loadMore(infiniteScroll) {
+        this.page++;
+        this.loadEvents(this.page).then(data => {
+            let length = data['length'];
+            if (length === 0) {
+                infiniteScroll.complete();
+                infiniteScroll.enable(false);
+                return;
+            }
+            this.events.push.apply(this.events, data['events']);
             infiniteScroll.complete();
-        }, 500);
+        });
     }
 
     isLastPageReached():boolean {
