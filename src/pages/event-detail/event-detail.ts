@@ -4,9 +4,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
     selector: 'page-event-detail',
-    templateUrl: 'event-detail.html',
+    templateUrl: 'event-detail.html'
 })
 export class EventDetailPage {
+
     selectedItem: any;
 
     constructor(private nav: NavController, navParams: NavParams) {

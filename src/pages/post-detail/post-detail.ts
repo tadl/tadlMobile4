@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 @IonicPage()
 @Component({
     selector: 'page-post-detail',
-    templateUrl: 'post-detail.html',
+    templateUrl: 'post-detail.html'
 })
 export class PostDetailPage {
 
