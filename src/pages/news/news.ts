@@ -32,7 +32,6 @@ export class NewsPage {
         let loading = this.loadingCtrl.create({content:'Loading news...'});
         loading.present();
         this.loadPosts(this.page).then(data => {
-            console.log('Posts loaded', data);
             this.posts = data;
             loading.dismiss();
         });

@@ -13,6 +13,7 @@ export class BarcodePage {
     cardnumber: string = this.navParams.get('cardnumber') || '32202';
 
     constructor(
+        private nav: NavController,
         public navParams: NavParams,
     ) {
     }
