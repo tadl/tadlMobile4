@@ -1,56 +1,48 @@
 <ion-header>
-  <ion-navbar hideBackButton="true">
-    <button ion-button left menuToggle menuToggle="left" >
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title mode="ios">Items Checked Out</ion-title>
-    <button ion-button right menuToggle menuToggle="right">
-      <ion-icon name="contact"></ion-icon>
-    </button>
-  </ion-navbar>
+    <ion-navbar hideBackButton="true">
+        <button ion-button left menuToggle menuToggle="left" >
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title mode="ios">Items Checked Out</ion-title>
+        <button ion-button right menuToggle menuToggle="right">
+            <ion-icon name="contact"></ion-icon>
+        </button>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-	<button *ngIf="user.checkouts.length > 0" ion-button block (click)="user.renew_all()" >Renew All</button>
-	<ion-card *ngIf="user.checkout_errors.length > 0">
-		<ion-card-content class="warning">
-			<ion-row *ngFor='let error of user.checkout_errors'>
-				Unable to renew {{error.title}}. {{error.message}}
-			</ion-row>
-		</ion-card-content>
-		<button ion-button full clear (click)="user.clear_checkout_errors()">Clear Errors</button>
-	</ion-card>
-	<ion-card *ngFor="let checkout of user.checkouts">
-		<ion-card-header> 
-			{{checkout['title']}}
-		</ion-card-header>
-		<ion-card-content>
-			<ion-row>
-				<ion-col>
-					<img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{checkout['record_id']}}" class="list_cover_image">
-				</ion-col>
-				<ion-col>
-					<ion-row>
-						{{checkout['author']}}
-					</ion-row>
-					<ion-row>
-						Due on: {{checkout['due_date']}}
-					</ion-row>
-					<ion-row>
-						Renewal Attempts: {{checkout['renew_attempts']}}
-					</ion-row>
-					<ion-row>
-						Barcode: {{checkout['barcode']}}
-					</ion-row>
-				</ion-col>
-			</ion-row>
-			<ion-row>
-				<ion-col>
-					<button ion-button float-right color="secondary" (click)='user.renew(checkout["checkout_id"], checkout["record_id"])'>Renew</button> 
-					<button ion-button float-right (click)='item.details(checkout["record_id"])'>Details</button>	
-				</ion-col>
-			</ion-row>
-		</ion-card-content>
-	</ion-card>
+    <button *ngIf="user.checkouts.length > 0" ion-button block (click)="user.renew_all()">Renew All</button>
+    <ion-card *ngIf="user.checkout_errors.length > 0">
+        <ion-card-content class="warning">
+            <ion-row *ngFor='let error of user.checkout_errors'>
+                <ion-col>Unable to renew {{error.title}}. {{error.message}}</ion-col>
+            </ion-row>
+        </ion-card-content>
+        <button ion-button full clear (click)="user.clear_checkout_errors()">Clear Messages</button>
+    </ion-card>
+    <ion-card *ngFor="let checkout of user.checkouts">
+        <ion-card-header><strong>{{checkout['title']}}</strong></ion-card-header>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3>
+                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{checkout['record_id']}}"/>
+                </ion-col>
+                <ion-col col-9>
+                    <p><strong>{{checkout['author']}}</strong></p>
+                    <p>Due {{checkout['due_date']}}</p>
+                    <p>{{checkout['renew_attempts']}} Renewals remaining</p>
+                    <p>Barcode: {{checkout.barcode}}</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-6>
+                    <button ion-button block (click)='item.details(checkout["record_id"])'>Details</button>	
+                </ion-col>
+                <ion-col col-6>
+                    <button ion-button block color="secondary" (click)='user.renew(checkout["checkout_id"], checkout["record_id"])'>Renew</button> 
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
 </ion-content>
 
