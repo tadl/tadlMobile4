@@ -3,11 +3,11 @@ import { IonicPageModule } from 'ionic-angular';
 import { PasswordModal } from './password';
 
 @NgModule({
-  declarations: [
-    PasswordModal,
-  ],
-  imports: [
-    IonicPageModule.forChild(PasswordModal),
-  ],
+    declarations: [
+        PasswordModal
+    ],
+    imports: [
+        IonicPageModule.forChild(PasswordModal)
+    ],
 })
 export class PasswordPageModule {}

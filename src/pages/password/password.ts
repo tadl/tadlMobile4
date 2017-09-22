@@ -6,40 +6,41 @@ import 'rxjs/add/operator/map';
 
 @IonicPage()
 @Component({
-  	selector: 'page-password',
-  	templateUrl: 'password.html',
+    selector: 'page-password',
+    templateUrl: 'password.html'
 })
 
 export class PasswordModal {
 
-  	constructor(
-  		private http: Http, 
-  		public navCtrl: NavController, 
-  		public navParams: NavParams,
-  		public viewCtrl: ViewController,
-    	public globals: Globals,
-  	) {}
+    constructor(
+        private http: Http,
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public viewCtrl: ViewController,
+        public globals: Globals
+    ) {
+    }
 
-  	username: string
-  	reset_sent: boolean = false
+    username: string;
+    reset_sent: boolean = false;
 
-  	ionViewDidLoad() {
-    	console.log('ionViewDidLoad PasswordModal');
-    	this.reset_sent = false
-  	}
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad PasswordModal');
+        this.reset_sent = false;
+    }
 
-  	reset_password(){
-  		this.reset_sent = true
-  		this.http.get('https://apiv2.catalog.tadl.org/account/password_reset?username=' + this.username).map(res => res.json()).subscribe(data=>{
-			if(data.message){
-				this.reset_sent = true
-			}else{
-			}
-  		});  		
-  	}
+    reset_password() {
+        this.reset_sent = true;
+        this.http.get('https://apiv2.catalog.tadl.org/account/password_reset?username=' + this.username).map(res => res.json()).subscribe(data=>{
+            if (data.message) {
+                this.reset_sent = true;
+            } else {
+            }
+        });
+    }
 
-	close_modal() {
-    	this.viewCtrl.dismiss();
+    close_modal() {
+        this.viewCtrl.dismiss();
     }
 
 }
