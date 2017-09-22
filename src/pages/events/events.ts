@@ -8,10 +8,11 @@ import 'rxjs/add/operator/map';
 @IonicPage()
 @Component({
     selector: 'page-events',
-    templateUrl: 'events.html',
+    templateUrl: 'events.html'
 })
 
 export class EventsPage {
+
     @ViewChild(Content) content: Content;
 
     url: string = "https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now";

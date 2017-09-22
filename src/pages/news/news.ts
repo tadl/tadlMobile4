@@ -15,6 +15,11 @@ export class NewsPage {
 
     @ViewChild(Content) content: Content;
 
+    url: string = "https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&categories_exclude=93";
+    lastPageReached: boolean = false;
+    posts: any;
+    page: any;
+
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -25,11 +30,6 @@ export class NewsPage {
     ) {
         this.get_news();
     }
-
-    posts: Array<{any}> = [];
-    url: string = "https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&categories_exclude=93";
-    page: number = 1;
-    lastPageReached: boolean = false;
 
     get_news() {
         let loading = this.loadingCtrl.create({content:'Loading news...'});
