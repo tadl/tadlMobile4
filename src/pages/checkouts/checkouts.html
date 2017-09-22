@@ -10,7 +10,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 	<button *ngIf="user.checkouts.length > 0" ion-button block (click)="user.renew_all()" >Renew All</button>
 	<ion-card *ngIf="user.checkout_errors.length > 0">
 		<ion-card-content class="warning">
