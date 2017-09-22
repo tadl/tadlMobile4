@@ -20,7 +20,7 @@
                 <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false});this.advanced=0;" block>
                     <ion-item col-sm-12>
                         <ion-label floating>Search for Books, Movies, Music...</ion-label>
-                        <ion-input type="text" [(ngModel)]="this.query" name="query"></ion-input>
+                        <ion-input autocapitalize="off" autocorrect="off" type="text" [(ngModel)]="this.query" name="query"></ion-input>
                     </ion-item>
                 </form>
             </ion-col>
