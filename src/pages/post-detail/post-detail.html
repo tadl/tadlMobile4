@@ -1,6 +1,11 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar hideBackButton="true">
         <ion-title></ion-title>
+        <ion-buttons end>
+            <button ion-button clear right (click)="nav.pop()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 

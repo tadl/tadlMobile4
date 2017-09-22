@@ -1,7 +1,13 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>{{selectedItem.start_date | date: 'MMMM dd, h:mm a'}} | {{selectedItem.venue.venue}}</ion-title>
+    <ion-navbar hideBackButton="true">
+        <ion-title mode="ios">{{selectedItem.start_date | date: 'MMMM dd, h:mm a'}} | {{selectedItem.venue.venue}}</ion-title>
+        <ion-buttons end>
+            <button ion-button clear right (click)="nav.pop()">
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
+
 </ion-header>
 
 <ion-content padding>
