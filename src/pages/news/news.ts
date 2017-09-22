@@ -28,35 +28,41 @@ export class NewsPage {
         public loadingCtrl: LoadingController,
         private http: Http
     ) {
-        this.get_news();
-    }
-
-    get_news() {
+        this.page = '1';
         let loading = this.loadingCtrl.create({content:'Loading news...'});
         loading.present();
-        this.http.get(this.url + '&page=' + this.page).map(res => res.json()).subscribe(data=>{
-            if (data) {
-                this.posts = data;
-            }
+        this.loadPosts(this.page).then(data => {
+            console.log('Posts loaded', data);
+            this.posts = data;
             loading.dismiss();
         });
     }
 
-    doInfinite(infiniteScroll) {
-        this.page++;
-        setTimeout(() => {
-            this.http.get(this.url + '&page=' + this.page).map(res => res.json()).subscribe(data=>{
-                if (data) {
-                    this.posts.push.apply(this.posts, data);
-                } else {
-                    this.lastPageReached = true;
-                }
+    loadPosts(page) {
+        if (!page) {
+            let page = 1;
+        }
+        return new Promise(resolve => {
+            this.http.get( this.url + '&page=' + page ).map(res => res.json()).subscribe(data => {
+                resolve(data);
             }, (err) => {
                 this.lastPageReached = true;
             });
+        });
+    }
 
+    loadMore(infiniteScroll) {
+        this.page++;
+        this.loadPosts(this.page).then(data => {
+            let length = data['length'];
+            if (length === 0) {
+                infiniteScroll.complete();
+                infiniteScroll.enable(false);
+                return;
+            }
+            this.posts.push.apply(this.posts , data);
             infiniteScroll.complete();
-        }, 500);
+        });
     }
 
     isLastPageReached():boolean {

@@ -19,7 +19,8 @@
             <div [innerHTML]="post.excerpt.rendered"></div>
         </ion-item>
     </ion-list>
-    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="doInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content loadingText="Loading more news...">
+        </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

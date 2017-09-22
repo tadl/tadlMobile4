@@ -24,6 +24,7 @@ export class EventsPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public nav: Nav,
+        public globals: Globals,
         public loadingCtrl: LoadingController,
         private http: Http,
     ) {
