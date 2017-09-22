@@ -22,6 +22,7 @@ import { InfoPage } from '../pages/info/info'
 import { NewsPage } from '../pages/news/news'
 import { EventDetailPage } from '../pages/event-detail/event-detail'
 import { PostDetailPage } from '../pages/post-detail/post-detail'
+import { BarcodePage } from '../pages/barcode/barcode'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PostDetailPage } from '../pages/post-detail/post-detail'
     EventDetailPage,
     InfoPage,
     NewsPage,
+    BarcodePage,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,7 @@ import { PostDetailPage } from '../pages/post-detail/post-detail'
     EventDetailPage,
     InfoPage,
     NewsPage,
+    BarcodePage,
   ],
   providers: [
     StatusBar,

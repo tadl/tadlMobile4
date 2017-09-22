@@ -15,6 +15,7 @@ import { PasswordModal } from '../pages/password/password'
 import { SearchPage } from '../pages/search/search'
 import { InfoPage } from '../pages/info/info'
 import { NewsPage } from '../pages/news/news'
+import { BarcodePage } from '../pages/barcode/barcode'
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +30,7 @@ export class MyApp {
   featuredPage = FeaturedPage
   infoPage = InfoPage
   newsPage = NewsPage
+  barcodePage = BarcodePage
   public rootPage: any = HomePage;
   pages: Array<{title: string, component: any}>;
 

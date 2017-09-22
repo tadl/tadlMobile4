@@ -23,7 +23,7 @@
             <ion-title>Account</ion-title>
         </ion-toolbar>
     </ion-header>
-    <ion-content *ngIf="user.logged_in != true">
+    <ion-content *ngIf="user.logged_in != true" padding>
         <div class="login-box">
             <form>
                 <ion-row>
@@ -52,7 +52,7 @@
             </form>
         </div>
     </ion-content>
-    <ion-content *ngIf="user.logged_in == true">
+    <ion-content *ngIf="user.logged_in == true" padding>
         <ion-row>
             <ion-item>
                 {{user.full_name}}
@@ -83,7 +83,10 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <button ion-button icon-left class="submit-btn" full><ion-icon name="card"></ion-icon>Show Library Card</button>
+                <button ion-button icon-left full (click)="this.nav.push(barcodePage, {cardnumber: user.card}, {animate: false});" menuToggle="right">
+                    <ion-icon name="card"></ion-icon>
+                    Show Library Card
+                </button>
             </ion-col>
         </ion-row>
         <ion-row>
