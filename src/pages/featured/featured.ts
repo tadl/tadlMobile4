@@ -35,7 +35,6 @@ export class FeaturedPage {
         loading.present();
         this.http.get(this.url).map(res => res.json()).subscribe(data=>{
             if (data.featured_items) {
-                console.log(data.last_updated);
                 this.items = data.featured_items;
             }
             loading.dismiss();
