@@ -16,9 +16,9 @@
         <h5 *ngIf="author">{{author}}</h5>
         <p *ngIf="abstract">{{abstract}}</p>
         <p *ngIf="contents">{{content}}</p>
-        <button ion-button *ngIf="electronic==true" (click)="openWebpage(eresource)">View Resource</button>
-        <button ion-button *ngIf="this.user.logged_in && electronic != true" (click)="user.place_hold(id)">Place Hold</button>
-        <button ion-button *ngIf="!this.user.logged_in && electronic != true" menuToggle menuToggle="right" (click)="close_modal()">Log In to Place Hold</button>
+        <button ion-button *ngIf="electronic==true" (click)="openWebpage(eresource)" float-right>View Resource</button>
+        <button ion-button *ngIf="this.user.logged_in && electronic != true" (click)="user.place_hold(id)" float-right>Place Hold</button>
+        <button ion-button *ngIf="!this.user.logged_in && electronic != true" menuToggle menuToggle="right" (click)="close_modal()" float-right>Log In to Place Hold</button>
     </div>
     <div *ngIf="electronic != true" class="copy-details">
         <div>
