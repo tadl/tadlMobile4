@@ -22,14 +22,14 @@
         </ion-row>
         <ion-card>
             <ion-row>
-                <ion-col col-3>Where?</ion-col>
+                <ion-col col-3 text-nowrap>Where?</ion-col>
                 <ion-col col-9>{{selectedItem.venue.venue}}<br/>
                         {{selectedItem.venue.address}}<br/>
                         {{selectedItem.venue.city}}<br/>
                         {{selectedItem.venue.phone}}</ion-col>
             </ion-row>
             <ion-row>
-                <ion-col col-3>When?</ion-col>
+                <ion-col col-3 text-nowrap>When?</ion-col>
                 <ion-col col-9>{{selectedItem.start_date | date: 'MMMM dd, h:mm a'}}</ion-col>
             </ion-row>
         </ion-card>
