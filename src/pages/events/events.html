@@ -28,7 +28,6 @@
 
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="0px">
         <ion-infinite-scroll-content
-            loadingSpinner="bubbles"
             loadingText="Loading more events...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
