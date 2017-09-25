@@ -19,7 +19,7 @@ export class BarcodePage {
     }
 
     ionViewDidLoad() {
-        JsBarcode(this.barcode.nativeElement, this.cardnumber);
+        JsBarcode(this.barcode.nativeElement, this.cardnumber, { fontSize: 16, textMargin: 0});
     }
 
 }
