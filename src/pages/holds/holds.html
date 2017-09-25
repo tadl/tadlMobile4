@@ -42,8 +42,7 @@
                     <button ion-button block (click)='item.details(hold["record_id"])'>Details</button>
                 </ion-col>
                 <ion-col col-4>
-                    <button *ngIf="confirmation != hold.hold_id" ion-button block (click)="confirmation = hold.hold_id;">Cancel</button>
-                    <button *ngIf="confirmation == hold.hold_id" ion-button block color="danger" (click)="user.cancel_hold(hold.hold_id)">Confirm</button>
+                    <button ion-button block (click)="this.cancelHold(hold.hold_id, hold.title)">Cancel</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
