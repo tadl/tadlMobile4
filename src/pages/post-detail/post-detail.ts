@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Globals } from '../../app/globals';
 
 @IonicPage()
 @Component({
@@ -10,7 +11,11 @@ export class PostDetailPage {
 
     selectedItem: any;
 
-    constructor(private nav: NavController, navParams: NavParams) {
+    constructor(
+        private nav: NavController,
+        private navParams: NavParams,
+        public globals: Globals
+    ) {
         this.selectedItem = navParams.get('item');
     }
 

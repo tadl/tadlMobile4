@@ -25,53 +25,54 @@ import { PostDetailPage } from '../pages/post-detail/post-detail'
 import { BarcodePage } from '../pages/barcode/barcode'
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-    HoldsPage,
-    SearchPage,
-    CheckoutsPage,
-    EventsPage,
-    FeaturedPage,
-    ItemDetailsModal,
-    PasswordModal,
-    PostDetailPage,
-    EventDetailPage,
-    InfoPage,
-    NewsPage,
-    BarcodePage,
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    HttpModule,
-    IonicStorageModule.forRoot()
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-    CheckoutsPage,
-    EventsPage,
-    FeaturedPage,
-    HoldsPage,
-    SearchPage,
-    ItemDetailsModal,
-    PasswordModal,
-    PostDetailPage,
-    EventDetailPage,
-    InfoPage,
-    NewsPage,
-    BarcodePage,
-  ],
-  providers: [
-    StatusBar,
-    InAppBrowser,
-    SplashScreen,
-    Globals,
-    User,
-    Item,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    declarations: [
+        MyApp,
+        HomePage,
+        HoldsPage,
+        SearchPage,
+        CheckoutsPage,
+        EventsPage,
+        FeaturedPage,
+        ItemDetailsModal,
+        PasswordModal,
+        PostDetailPage,
+        EventDetailPage,
+        InfoPage,
+        NewsPage,
+        BarcodePage
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp),
+        HttpModule,
+        IonicStorageModule.forRoot()
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        HomePage,
+        CheckoutsPage,
+        EventsPage,
+        FeaturedPage,
+        HoldsPage,
+        SearchPage,
+        ItemDetailsModal,
+        PasswordModal,
+        PostDetailPage,
+        EventDetailPage,
+        InfoPage,
+        NewsPage,
+        BarcodePage
+    ],
+    providers: [
+        StatusBar,
+        InAppBrowser,
+        SplashScreen,
+        Globals,
+        User,
+        Item,
+        {provide: ErrorHandler, useClass: IonicErrorHandler}
+    ]
 })
+
 export class AppModule {}

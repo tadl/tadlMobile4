@@ -22,7 +22,7 @@ export class User {
         public events: Events,
         public globals: Globals,
         public modalCtrl: ModalController,
-    ){
+    ) {
     }
 
 
@@ -49,7 +49,7 @@ export class User {
         this.storage.get('username').then(data => {
             if (data) {
                 this.storage.get('username').then((val) => {
-                    this.username = val
+                    this.username = val;
                 })
             }
         });
@@ -67,7 +67,7 @@ export class User {
     login() {
         this.login_error = '';
         this.http.get('https://catalog.tadl.org/login.json?username=' + this.username + '&password=' + this.password).map(res => res.json()).subscribe(data=>{
-            if (data.token){
+            if (data.token) {
                 this.logged_in = true;
                 this.full_name = data.full_name;
                 this.checkout_count = data.checkouts;
@@ -106,7 +106,6 @@ export class User {
             }
         });
     }
-
 
     /** Renew Items */
     renew(checkout_ids:string, record_ids:string) {
@@ -246,10 +245,10 @@ export class User {
     renew_all() {
         var record_ids:string = '';
         var checkout_ids: string = '';
-        for(let checkout of this.checkouts) {
+        for (let checkout of this.checkouts) {
             record_ids = record_ids + checkout['record_id'] + ',';
             checkout_ids = checkout_ids + checkout['checkout_id'] + ',';
-        } /* there was a semicolon here, noting it just in case. */
+        }
         this.renew(checkout_ids, record_ids);
     }
 

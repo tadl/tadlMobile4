@@ -32,7 +32,6 @@ export class EventsPage {
         let loading = this.loadingCtrl.create({content:'Loading events...'});
         loading.present();
         this.loadEvents(this.page).then(data => {
-            console.log('Posts loaded', data);
             if (!data['next_rest_url']) { this.lastPageReached = true; }
             this.events = data['events'];
             loading.dismiss();
