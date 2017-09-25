@@ -24,7 +24,7 @@ export class InfoPage {
     }
 
     locations: Array<{any}> = [];
-    url: string = "https://www.tadl.org/wp-content/uploads/json/parsed-hours.json";
+    url: string = this.globals.hoursURL;
 
     get_info() {
         let loading = this.loadingCtrl.create({content:'Loading...'});

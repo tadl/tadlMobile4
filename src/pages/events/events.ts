@@ -15,7 +15,7 @@ export class EventsPage {
 
     @ViewChild(Content) content: Content;
 
-    url: string = "https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now";
+    url: string = this.globals.eventsURL;
     lastPageReached: boolean = false;
     events: any;
     page: any;

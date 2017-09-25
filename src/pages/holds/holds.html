@@ -16,7 +16,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col col-3>
-                    <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{hold['record_id']}}"/>
+                    <img src="{{globals.coverURLPrefix}}{{hold['record_id']}}"/>
                 </ion-col>
                 <ion-col col-9>
                     <p><strong>{{hold['author']}}</strong></p>

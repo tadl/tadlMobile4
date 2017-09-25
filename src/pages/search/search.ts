@@ -88,7 +88,7 @@ export class SearchPage {
 
         this.current_params = params.toString()
         params.append('page', this.page.toString() )
-        this.http.get('https://catalog.tadl.org/search.json', {params} ).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.searchURL, {params} ).map(res => res.json()).subscribe(data=>{
             if (data.items) {
                 this.more_results = data.more_results;
                 if (this.page == 0) {

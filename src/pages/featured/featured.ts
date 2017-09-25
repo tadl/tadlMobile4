@@ -13,7 +13,7 @@ import { Item } from '../../app/item';
 })
 
 export class FeaturedPage {
-    url: string = 'https://catalog.tadl.org/main/index.json';
+    url: string = this.globals.featuredURL;
     items: any[];
 
     constructor(

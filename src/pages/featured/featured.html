@@ -23,7 +23,7 @@
                 <ion-item-sliding *ngFor="let subitem of section.items">
                     <ion-item (tap)="item.details(subitem.id)">
                         <ion-thumbnail item-start>
-                            <img src="https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/{{subitem.id}}"/>
+                            <img src="{{globals.coverURLPrefix}}{{subitem.id}}"/>
                         </ion-thumbnail>
                         <h2 *ngIf="subitem.title" [innerHTML]="subitem.title"></h2>
                         <h4 *ngIf="subitem.author" [innerHTML]="subitem.author"></h4>

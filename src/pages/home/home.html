@@ -3,7 +3,7 @@
         <button ion-button left menuToggle menuToggle="left" >
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title mode="ios">{{globals.app_title}}</ion-title>
+        <ion-title mode="ios">{{globals.appName}}</ion-title>
         <button ion-button right menuToggle menuToggle="right">
             <ion-icon name="contact"></ion-icon>
         </button>
@@ -14,7 +14,7 @@
     <ion-grid>
         <ion-row>
             <div class="home-image" col-sm-12>
-                <img alt="TADL Logo" src="https://www.tadl.org/logo.png" />
+                <img alt="Logo" [src]="globals.logoURL" />
             </div>
             <ion-col col-sm-12>
                 <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false});this.advanced=0;" block>

@@ -15,7 +15,7 @@ export class NewsPage {
 
     @ViewChild(Content) content: Content;
 
-    url: string = "https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&categories_exclude=93";
+    url: string = this.globals.newsURL;
     lastPageReached: boolean = false;
     posts: any;
     page: any;
