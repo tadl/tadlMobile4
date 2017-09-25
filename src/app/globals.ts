@@ -13,7 +13,7 @@ export class Globals {
         { name: 'Peninsula', code: '26' },
         { name: 'Fife Lake', code: '27' },
         { name: 'East Bay', code: '28' }
-	];
+    ];
 
     public friendly_location_name: Array<{code: string, name: string}> = [
         { code: 'TADL-EBB', name: 'East Bay Branch Library' },
@@ -24,8 +24,8 @@ export class Globals {
         { code: 'TADL-WOOD', name: 'TADL Main Library' }
     ];
 
-    public newsURL: string = 'https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&categories_exclude=93';
-    public eventsURL: string = 'https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
+    public newsURL: string = 'https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&amp;categories_exclude=93';
+    public eventsURL: string = 'https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&amp;start_date=now';
     public logoURL: string = 'https://www.tadl.org/logo.png';
     public hoursURL: string = 'https://www.tadl.org/wp-content/uploads/json/parsed-hours.json';
 

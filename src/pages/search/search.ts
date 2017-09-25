@@ -96,6 +96,7 @@ export class SearchPage {
                     if (this.more_results == true) {
                        this.events.publish('new_search');
                     }
+                    console.log(this.item.itemType.get('text'));
                     loading.dismiss();
                 } else {
                     this.results.push.apply(this.results, data.items);

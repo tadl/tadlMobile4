@@ -19,18 +19,19 @@ body {
     cursor: url('https://ionicframework.com/img/finger.png'), auto;
 }
 
-.warning{
-	color: red;}
+.warning {
+    color: red;
+}
 
 ion-navbar[hidebackbutton] button[menutoggle] {
-  display: block !important;
+    display: block !important;
 }
 
-.list_cover_image{
-	width:  150px;
-	height: auto;
+.list_cover_image {
+    width: 150px;
+    height: auto;
 }
 
-.full_width_select{
-  max-width: 100% !important;
+.full_width_select {
+    max-width: 100% !important;
 }
