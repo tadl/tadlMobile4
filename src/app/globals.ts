@@ -33,6 +33,15 @@ export class Globals {
     public featuredURL: string = 'https://catalog.tadl.org/main/index.json';
     public searchURL: string = 'https://catalog.tadl.org/search.json';
 
+    public loginURL: string = 'https://catalog.tadl.org/login.json';
+    public checkoutsURL: string = 'https://catalog.tadl.org/checkouts.json';
+    public checkoutRenewURL: string = 'https://catalog.tadl.org/main/renew_checkouts.json';
+    public holdsURL: string = 'https://catalog.tadl.org/holds.json';
+    public holdPlaceURL: string = 'https://catalog.tadl.org/place_hold.json';
+    public holdManageURL: string = 'https://catalog.tadl.org/main/manage_hold.json';
+    public holdPickupUpdateURL: string = 'https://catalog.tadl.org/main/update_hold_pickup.json';
+    public itemDetailsURL: string = 'https://catalog.tadl.org/main/details.json';
+
     public passwordResetURLPrefix: string = 'https://apiv2.catalog.tadl.org/account/password_reset'; /* really? */
 
     /* helper functions */

@@ -66,7 +66,7 @@ export class User {
     /** Login User */
     login() {
         this.login_error = '';
-        this.http.get('https://catalog.tadl.org/login.json?username=' + this.username + '&password=' + this.password).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.loginURL + '?username=' + this.username + '&password=' + this.password).map(res => res.json()).subscribe(data=>{
             if (data.token) {
                 this.logged_in = true;
                 this.full_name = data.full_name;
@@ -98,7 +98,7 @@ export class User {
         let loading = this.loadingCtrl.create({content:'Loading Checkouts...'});
         loading.present();
         this.checkout_errors.length = 0;
-        this.http.get('https://catalog.tadl.org/checkouts.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.checkoutsURL + '?token=' + this.token).map(res => res.json()).subscribe(data=>{
             loading.dismiss();
             if (data.checkouts) {
                 this.checkouts = data.checkouts;
@@ -112,7 +112,7 @@ export class User {
         let loading = this.loadingCtrl.create({content:'Attempting renewal...'});
         loading.present();
         this.checkout_errors.length = 0;
-        this.http.get('https://catalog.tadl.org/main/renew_checkouts.json?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.checkoutRenewURL + '?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids).map(res => res.json()).subscribe(data=>{
             if (data.checkouts) {
                 loading.dismiss();
                 if (data.errors.length > 0 && !data.message.startsWith("Failed")) {
@@ -124,7 +124,7 @@ export class User {
                     title: message,
                     buttons: [{
                         text: 'Ok',
-                        handler: ()=>{
+                        handler: () => {
                             this.checkouts = data.checkouts
                             this.checkout_errors = data.errors
                             this.events.publish('renew')
@@ -141,7 +141,7 @@ export class User {
     load_holds() {
         let loading = this.loadingCtrl.create({content:'Loading Holds...'});
         loading.present();
-        this.http.get('https://catalog.tadl.org/holds.json?token=' + this.token).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.holdsURL + '?token=' + this.token).map(res => res.json()).subscribe(data=>{
             if (data.holds) {
                 this.holds = data.holds;
             } else {
@@ -154,7 +154,7 @@ export class User {
     place_hold(record_id) {
         let loading = this.loadingCtrl.create({content:'Placing Hold...'});
         loading.present();
-        this.http.get('https://catalog.tadl.org/place_hold.json?token=' + this.token + '&record_id=' + record_id).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.holdPlaceURL + '?token=' + this.token + '&record_id=' + record_id).map(res => res.json()).subscribe(data=>{
             if (data.hold_confirmation) {
                 this.holds_count = data.user.holds;
                 let alert = this.alertCtrl.create({
@@ -162,7 +162,7 @@ export class User {
                     subTitle: 'Pickup location: ' + this.default_pickup,
                     buttons: [{
                         text: 'Ok',
-                        handler: ()=>{
+                        handler: () => {
                             return
                         },
                     }]
@@ -178,7 +178,7 @@ export class User {
     cancel_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Canceling Hold...'});
         loading.present();
-        this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=cancel').map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=cancel').map(res => res.json()).subscribe(data=>{
             if (data.target_holds) {
                 this.holds = data.holds;
                 this.holds_count = data.user.holds;
@@ -193,7 +193,7 @@ export class User {
     suspend_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Suspending Hold...'});
         loading.present();
-        this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend').map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend').map(res => res.json()).subscribe(data=>{
             loading.dismiss();
             if (data.target_holds) {
                 this.holds = data.holds;
@@ -206,7 +206,7 @@ export class User {
     activate_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Activating Hold...'});
         loading.present();
-        this.http.get('https://catalog.tadl.org/main/manage_hold.json?token=' + this.token + '&hold_id=' + hold_id + '&task=activate').map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=activate').map(res => res.json()).subscribe(data=>{
             loading.dismiss();
             if (data.target_holds) {
                 this.holds = data.holds;
@@ -223,15 +223,14 @@ export class User {
         params.append('token', this.token);
         params.append('hold_id', hold_id);
         params.append('new_pickup', event);
-        params.append('hold_state', 'f');
-        this.http.get('https://catalog.tadl.org/main/update_hold_pickup.json', {params} ).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.holdPickupUpdateURL, {params} ).map(res => res.json()).subscribe(data=>{
             loading.dismiss();
             if (data.message) {
                 let alert = this.alertCtrl.create({
-                    title: 'Pickup location succesfully changed to ' + data.message.pickup_location,
+                    title: 'Pickup location changed to ' + data.message.pickup_location,
                     buttons: [{
                         text: 'Ok',
-                        handler: ()=>{
+                        handler: () => {
                             this.load_holds();
                         },
                     }]
