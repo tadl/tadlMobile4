@@ -10,7 +10,10 @@ export class EventDetailPage {
 
     selectedItem: any;
 
-    constructor(private nav: NavController, navParams: NavParams) {
+    constructor(
+        private nav: NavController,
+        navParams: NavParams
+    ) {
         this.selectedItem = navParams.get('item');
     }
 

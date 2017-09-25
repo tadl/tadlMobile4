@@ -26,7 +26,7 @@ export class EventsPage {
         public nav: Nav,
         public globals: Globals,
         public loadingCtrl: LoadingController,
-        private http: Http,
+        private http: Http
     ) {
         this.page = '1';
         let loading = this.loadingCtrl.create({content:'Loading events...'});

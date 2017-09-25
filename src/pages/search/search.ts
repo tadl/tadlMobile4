@@ -24,9 +24,9 @@ export class SearchPage {
         public globals: Globals,
         public loadingCtrl: LoadingController,
         public user: User,
+        public events: Events,
         private http: Http,
-        private inAppBrowser: InAppBrowser,
-        public events: Events
+        private inAppBrowser: InAppBrowser
     ) {
         if (this.navParams.get('query')) {
             this.get_results();
@@ -65,25 +65,25 @@ export class SearchPage {
         }
         /* End ugly stuff */
 
-        let params = new URLSearchParams()
-        params.append('query', this.query)
-        params.append('qtype', this.qtype)
-        params.append('fmt', this.format)
-        params.append('loc', this.location)
-        params.append('availability', available_on)
-        params.append('physical', physcial_on)
+        let params = new URLSearchParams();
+        params.append('query', this.query);
+        params.append('qtype', this.qtype);
+        params.append('fmt', this.format);
+        params.append('loc', this.location);
+        params.append('availability', available_on);
+        params.append('physical', physcial_on);
 
         /** If user changes any parameter it is a new search that starts on page 0 */
         if(this.current_params != params.toString()){
-            this.page = 0
-            loading.present()
+            this.page = 0;
+            loading.present();
         }
 
         /** If user clicks search again with no new parameters treat as brand new search  */
         if((this.current_params == params.toString()) && (this.last_page == this.page)){
-            this.page = 0
-            loading.present()
-            this.results = []
+            this.page = 0;
+            loading.present();
+            this.results = [];
         }
 
         this.current_params = params.toString()
@@ -110,7 +110,7 @@ export class SearchPage {
     get_more_results(infiniteScroll){
         if (this.results.length > 1 && this.more_results == true) {
             this.page++;
-            this.get_results()
+            this.get_results();
         } else {
             infiniteScroll.complete();
             infiniteScroll.enable(false);

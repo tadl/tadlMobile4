@@ -9,7 +9,7 @@ import { Item } from '../../app/item';
 @IonicPage()
 @Component({
     selector: 'page-featured',
-    templateUrl: 'featured.html',
+    templateUrl: 'featured.html'
 })
 
 export class FeaturedPage {

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { Globals } from '../../app/globals';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -16,6 +17,7 @@ export class InfoPage {
         public navParams: NavParams,
         public nav: Nav,
         public loadingCtrl: LoadingController,
+        public globals: Globals,
         private http: Http
     ) {
         this.get_info();

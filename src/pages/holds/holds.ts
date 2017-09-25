@@ -10,6 +10,7 @@ import { Item } from '../../app/item';
     templateUrl: 'holds.html'
 })
 export class HoldsPage {
+
     confirmation: string = "0";
 
     constructor(

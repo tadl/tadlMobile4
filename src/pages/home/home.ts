@@ -14,19 +14,19 @@ import { NewsPage } from '../news/news';
 })
 
 export class HomePage {
-    searchPage = SearchPage
-    checkoutsPage = CheckoutsPage
-    eventsPage = EventsPage
-    infoPage = InfoPage
-    newsPage = NewsPage
-    featuredPage = FeaturedPage
+    searchPage = SearchPage;
+    checkoutsPage = CheckoutsPage;
+    eventsPage = EventsPage;
+    infoPage = InfoPage;
+    newsPage = NewsPage;
+    featuredPage = FeaturedPage;
 
-    query: string
+    query: string;
 
     constructor(
         public navCtrl: NavController,
         public globals: Globals,
-        public nav: Nav,
+        public nav: Nav
     ) {
     }
 
