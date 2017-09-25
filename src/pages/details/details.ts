@@ -1,8 +1,8 @@
 import { Component, NgModule  } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams, IonicPageModule } from 'ionic-angular';
 import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser";
-import { Globals } from '../../app/globals'
-import { User } from '../../app/user'
+import { Globals } from '../../app/globals';
+import { User } from '../../app/user';
 
 @IonicPage()
 @Component({

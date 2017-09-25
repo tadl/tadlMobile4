@@ -11,7 +11,7 @@
 
 <ion-content padding>
     <div>
-        <h4>{{title}}</h4>
+        <h4><ion-icon [name]="this.globals.itemType.get(format_type)"></ion-icon> {{title}}</h4>
         <img src="{{globals.coverURLPrefix}}{{id}}" class="list_cover_image" float-left padding-right />
         <h5 *ngIf="author">{{author}}</h5>
         <p *ngIf="abstract">{{abstract}}</p>

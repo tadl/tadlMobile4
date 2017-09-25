@@ -6,6 +6,38 @@ export class Globals {
     public appName: string = this.systemShortName + ' Mobile';
     public multi_location: boolean = true;
 
+    pickupLocations = new Map<string, string>([
+        ['23', 'Woodmere'],
+        ['24', 'Interlochen'],
+        ['25', 'Kingsley'],
+        ['26', 'Peninsula'],
+        ['27', 'Fife Lake'],
+        ['28', 'East Bay']
+    ]);
+
+    locationName = new Map<string, string>([
+        ['TADL-EBB', 'East Bay Branch Library'],
+        ['TADL-KBL', 'Kingsley Branch Library'],
+        ['TADL-PCL', 'Peninsula Community Library'],
+        ['TADL-IPL', 'Interlochen Public Library'],
+        ['TADL-FLPL', 'Fife Lake Public Library'],
+        ['TADL-WOOD', 'TADL Main Library']
+    ]);
+
+    itemType = new Map<string, string>([
+        ['text', 'book'],
+        ['notated music', 'musical-notes'],
+        ['cartographic', 'map'],
+        ['moving image', 'film'],
+        ['sound recording-nonmusical', 'disc'],
+        ['sound recording-musical', 'disc'],
+        ['still image', 'image'],
+        ['software, multimedia', 'document'],
+        ['kit', 'briefcase'],
+        ['mixed-material', 'briefcase'],
+        ['three dimensional object', 'archive']
+    ]);
+
     public pickup_locations: Array<{name: string, code: string}> = [
         { name: 'Woodmere', code: '23' },
         { name: 'Interlochen', code: '24' },
@@ -13,7 +45,7 @@ export class Globals {
         { name: 'Peninsula', code: '26' },
         { name: 'Fife Lake', code: '27' },
         { name: 'East Bay', code: '28' }
-	];
+    ];
 
     public friendly_location_name: Array<{code: string, name: string}> = [
         { code: 'TADL-EBB', name: 'East Bay Branch Library' },
@@ -24,8 +56,8 @@ export class Globals {
         { code: 'TADL-WOOD', name: 'TADL Main Library' }
     ];
 
-    public newsURL: string = 'https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&categories_exclude=93';
-    public eventsURL: string = 'https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
+    public newsURL: string = 'https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&amp;categories_exclude=93';
+    public eventsURL: string = 'https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&amp;start_date=now';
     public logoURL: string = 'https://www.tadl.org/logo.png';
     public hoursURL: string = 'https://www.tadl.org/wp-content/uploads/json/parsed-hours.json';
 
