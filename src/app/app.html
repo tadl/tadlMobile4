@@ -71,7 +71,7 @@
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item *ngIf="user.holds_ready != 0" (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">
+            <ion-item *ngIf="user.holds_ready != 0" (click)="this.nav.push(holdsPage,{ready_only: true},{animate:false});" menuToggle="right">
                 Holds Ready for Pickup
                 <ion-badge item-end>{{user.holds_ready}}</ion-badge>
             </ion-item>

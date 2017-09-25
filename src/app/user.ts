@@ -144,6 +144,7 @@ export class User {
         this.http.get(this.globals.holdsURL + '?token=' + this.token).map(res => res.json()).subscribe(data=>{
             if (data.holds) {
                 this.holds = data.holds;
+                this.events.publish('got_holds')
             } else {
             }
             loading.dismiss()

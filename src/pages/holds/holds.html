@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card *ngFor="let hold of user.holds">
+    <ion-card *ngFor="let hold of this.processed_holds">
         <ion-card-header><strong>{{hold['title']}}</strong></ion-card-header>
         <ion-grid>
             <ion-row>
