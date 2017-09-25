@@ -24,6 +24,20 @@ export class Globals {
         ['TADL-WOOD', 'TADL Main Library']
     ]);
 
+    itemType = new Map<string, string>([
+        ['text', 'book'],
+        ['notated music', 'musical-notes'],
+        ['cartographic', 'map'],
+        ['moving image', 'film'],
+        ['sound recording-nonmusical', 'disc'],
+        ['sound recording-musical', 'disc'],
+        ['still image', 'image'],
+        ['software, multimedia', 'document'],
+        ['kit', 'briefcase'],
+        ['mixed-material', 'briefcase'],
+        ['three dimensional object', 'archive']
+    ]);
+
     public pickup_locations: Array<{name: string, code: string}> = [
         { name: 'Woodmere', code: '23' },
         { name: 'Interlochen', code: '24' },

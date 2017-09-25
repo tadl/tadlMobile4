@@ -80,8 +80,8 @@
                 </ion-thumbnail>
                 <h2 *ngIf="result.title">{{result.title}}</h2>
                 <h4 *ngIf="result.author">{{result.author}}</h4>
-                <p *ngIf="result.electronic != true"><ion-icon [name]="this.item.itemType.get(result['format_type'])"></ion-icon> &bull; {{result.loc_copies_available}} available<span *ngIf="result.call_number"> &bull; {{result.call_number}}</span></p>
-                <p *ngIf="result.electronic == true"><ion-icon [name]="this.item.itemType.get(result['format_type'])"></ion-icon> &bull; Electronic resource from {{result.source}}</p>
+                <p *ngIf="result.electronic != true"><ion-icon [name]="this.globals.itemType.get(result['format_type'])"></ion-icon> &bull; {{result.loc_copies_available}} available<span *ngIf="result.call_number"> &bull; {{result.call_number}}</span></p>
+                <p *ngIf="result.electronic == true"><ion-icon [name]="this.globals.itemType.get(result['format_type'])"></ion-icon> &bull; Electronic resource from {{result.source}}</p>
             </ion-item>
             <ion-item-options>
                 <button ion-button (click)="item.details(result.id)">Details</button>
