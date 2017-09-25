@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { AlertController, LoadingController, Content, ModalController} from 'ionic-angular';
 import { ItemDetailsModal } from '../pages/details/details';
-import { Globals } from 'globals';
+import { Globals } from './globals';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -15,6 +15,7 @@ export class Item {
     constructor(
         private alertCtrl: AlertController,
         private http: Http, 
+        public globals: Globals,
         public loadingCtrl: LoadingController,
         public modalCtrl: ModalController
     ) {
@@ -23,12 +24,12 @@ export class Item {
     details(record_id) {
         let loading = this.loadingCtrl.create({content:'Loading Details...'});
         loading.present();
-        this.http.get('https://catalog.tadl.org/main/details.json?id=' + record_id).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.itemDetailsURL + '?id=' + record_id).map(res => res.json()).subscribe(data=>{
             loading.dismiss();
             if (data.id) {
                 let details_modal = this.modalCtrl.create(ItemDetailsModal, data);
                 details_modal.present();
-            }else{
+            } else {
             }
         });
     }
