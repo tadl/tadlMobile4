@@ -6,6 +6,24 @@ export class Globals {
     public appName: string = this.systemShortName + ' Mobile';
     public multi_location: boolean = true;
 
+    pickupLocations = new Map<string, string>([
+        ['23', 'Woodmere'],
+        ['24', 'Interlochen'],
+        ['25', 'Kingsley'],
+        ['26', 'Peninsula'],
+        ['27', 'Fife Lake'],
+        ['28', 'East Bay']
+    ]);
+
+    locationName = new Map<string, string>([
+        ['TADL-EBB', 'East Bay Branch Library'],
+        ['TADL-KBL', 'Kingsley Branch Library'],
+        ['TADL-PCL', 'Peninsula Community Library'],
+        ['TADL-IPL', 'Interlochen Public Library'],
+        ['TADL-FLPL', 'Fife Lake Public Library'],
+        ['TADL-WOOD', 'TADL Main Library']
+    ]);
+
     public pickup_locations: Array<{name: string, code: string}> = [
         { name: 'Woodmere', code: '23' },
         { name: 'Interlochen', code: '24' },
