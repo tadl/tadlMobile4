@@ -16,7 +16,6 @@ import { SearchPage } from '../pages/search/search';
 import { InfoPage } from '../pages/info/info';
 import { NewsPage } from '../pages/news/news';
 import { BarcodePage } from '../pages/barcode/barcode';
-import { LoginPage } from '../pages/login/login';
 
 @Component({
     templateUrl: 'app.html'
@@ -33,7 +32,6 @@ export class MyApp {
     infoPage = InfoPage;
     newsPage = NewsPage;
     barcodePage = BarcodePage;
-    loginPage = LoginPage;
     public rootPage: any = HomePage;
     pages: Array<{title: string, component: any}>;
 

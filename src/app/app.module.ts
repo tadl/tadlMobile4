@@ -23,7 +23,6 @@ import { NewsPage } from '../pages/news/news';
 import { EventDetailPage } from '../pages/event-detail/event-detail';
 import { PostDetailPage } from '../pages/post-detail/post-detail';
 import { BarcodePage } from '../pages/barcode/barcode';
-import { LoginPage } from '../pages/login/login';
 
 @NgModule({
     declarations: [
@@ -40,7 +39,6 @@ import { LoginPage } from '../pages/login/login';
         EventDetailPage,
         InfoPage,
         NewsPage,
-        LoginPage,
         BarcodePage
     ],
     imports: [
@@ -64,7 +62,6 @@ import { LoginPage } from '../pages/login/login';
         EventDetailPage,
         InfoPage,
         NewsPage,
-        LoginPage,
         BarcodePage
     ],
     providers: [
