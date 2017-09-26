@@ -18,6 +18,7 @@ export class EventsPage {
     url: string = this.globals.eventsURL;
     lastPageReached: boolean = false;
     events: any;
+    location: any = '';
     page: any;
 
     constructor(
@@ -31,19 +32,22 @@ export class EventsPage {
         this.page = '1';
         let loading = this.loadingCtrl.create({content:'Loading events...'});
         loading.present();
-        this.loadEvents(this.page).then(data => {
+        this.loadEvents(this.page, '').then(data => {
             if (!data['next_rest_url']) { this.lastPageReached = true; }
             this.events = data['events'];
             loading.dismiss();
         });
     }
 
-    loadEvents(page) {
-        if (!page) {
-            let page = 1;
+    loadEvents(page, loc?) {
+        let urlAppend:string = '';
+        if (loc) {
+            this.location = loc;
+            urlAppend = '&venue=' + loc;
+            console.log("loc  " + loc);
         }
         return new Promise(resolve => {
-            this.http.get( this.url + '&page=' + page ).map(res => res.json()).subscribe(data => {
+            this.http.get(this.url + '&page=' + page + urlAppend).map(res => res.json()).subscribe(data => {
                 resolve(data);
             }, (err) => {
                 this.lastPageReached = true;
@@ -53,7 +57,7 @@ export class EventsPage {
 
     loadMore(infiniteScroll) {
         this.page++;
-        this.loadEvents(this.page).then(data => {
+        this.loadEvents(this.page, this.location).then(data => {
             let length = data['length'];
             if (length === 0) {
                 infiniteScroll.complete();
@@ -64,6 +68,19 @@ export class EventsPage {
             infiniteScroll.complete();
         });
     }
+
+    venueEvents(loc?) {
+        let loading = this.loadingCtrl.create({content:'Loading events...'});
+        loading.present();
+        this.page = 1;
+        this.lastPageReached = false;
+        this.loadEvents(this.page, loc).then(data => {
+            if (!data['next_rest_url']) { this.lastPageReached = true; }
+            this.events = data['events'];
+            loading.dismiss();
+        });
+    }
+
 
     isLastPageReached():boolean {
         return this.lastPageReached;

@@ -9,9 +9,17 @@
         </button>
     </ion-navbar>
 </ion-header>
+
 <ion-content>
 
     <ion-list>
+        <ion-item>
+            <ion-label>Location</ion-label>
+            <ion-select [(ngModel)]="location" interface="popover" (ionChange)="venueEvents(location)">
+                <ion-option value="">All Locations</ion-option>
+                <ion-option *ngFor="let venue of globals.eventVenues" [value]="venue.venue">{{venue.name}}</ion-option>
+            </ion-select>
+        </ion-item>
         <ion-item *ngFor="let event of this.events" (click)="itemTapped($event, event)">
             <ion-thumbnail item-start *ngIf="event.image">
                 <img src="{{event.image.sizes.thumbnail.url}}" />
