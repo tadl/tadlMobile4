@@ -9,20 +9,21 @@ import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
 import { EventsPage } from '../pages/events/events';
 import { FeaturedPage } from '../pages/featured/featured';
-import { ItemDetailsModal } from '../pages/details/details'
-import { PasswordModal } from '../pages/password/password'
+import { ItemDetailsModal } from '../pages/details/details';
+import { PasswordModal } from '../pages/password/password';
 import { Globals } from './globals';
 import { User } from './user';
 import { Item } from './item';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HoldsPage } from '../pages/holds/holds';
-import { SearchPage } from '../pages/search/search'
-import { InfoPage } from '../pages/info/info'
-import { NewsPage } from '../pages/news/news'
-import { EventDetailPage } from '../pages/event-detail/event-detail'
-import { PostDetailPage } from '../pages/post-detail/post-detail'
-import { BarcodePage } from '../pages/barcode/barcode'
+import { SearchPage } from '../pages/search/search';
+import { InfoPage } from '../pages/info/info';
+import { NewsPage } from '../pages/news/news';
+import { EventDetailPage } from '../pages/event-detail/event-detail';
+import { PostDetailPage } from '../pages/post-detail/post-detail';
+import { BarcodePage } from '../pages/barcode/barcode';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { BarcodePage } from '../pages/barcode/barcode'
         EventDetailPage,
         InfoPage,
         NewsPage,
+        LoginPage,
         BarcodePage
     ],
     imports: [
@@ -62,6 +64,7 @@ import { BarcodePage } from '../pages/barcode/barcode'
         EventDetailPage,
         InfoPage,
         NewsPage,
+        LoginPage,
         BarcodePage
     ],
     providers: [
