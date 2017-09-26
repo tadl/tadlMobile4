@@ -145,10 +145,10 @@ export class User {
         this.http.get(this.globals.holdsURL + '?token=' + this.token).map(res => res.json()).subscribe(data=>{
             if (data.holds) {
                 this.holds = data.holds;
-                this.events.publish('got_holds')
+                this.events.publish('got_holds');
             } else {
             }
-            loading.dismiss()
+            loading.dismiss();
         });
     }
 
@@ -183,6 +183,7 @@ export class User {
         this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=cancel').map(res => res.json()).subscribe(data=>{
             if (data.target_holds) {
                 this.holds = data.holds;
+                this.events.publish('got_holds');
                 this.holds_count = data.user.holds;
                 this.holds_ready = data.user.holds_ready;
             } else {
@@ -199,6 +200,7 @@ export class User {
             loading.dismiss();
             if (data.target_holds) {
                 this.holds = data.holds;
+                this.events.publish('got_holds');
             } else {
             }
         });
@@ -212,6 +214,7 @@ export class User {
             loading.dismiss();
             if (data.target_holds) {
                 this.holds = data.holds;
+                this.events.publish('got_holds');
             } else {
             }
         });

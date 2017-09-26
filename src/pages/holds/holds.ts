@@ -11,7 +11,7 @@ import { Item } from '../../app/item';
 })
 export class HoldsPage {
 
-    confirmation: string = "0";
+    confirmation: string = "0"; /* ????? */
     ready_only: boolean = this.navParams.get('ready_only') || false;
     processed_holds: Array<{any}> = [];
 
@@ -25,8 +25,8 @@ export class HoldsPage {
         public globals: Globals
     ) {
         this.user.load_holds();
-        events.subscribe('got_holds',() =>{
-            this.process_holds()
+        events.subscribe('got_holds', () => {
+            this.process_holds();
         });
     }
 
@@ -51,13 +51,13 @@ export class HoldsPage {
         actionSheet.present();
     }
 
-    process_holds(){
-        if(this.ready_only == true){
+    process_holds() {
+        if (this.ready_only == true) {
             this.processed_holds = this.user.holds.filter(
                 hold => hold['queue_status'].startsWith('Ready')
-            )
-        }else{
-            this.processed_holds = this.user.holds
+            );
+        } else {
+            this.processed_holds = this.user.holds;
         }
     }
 
