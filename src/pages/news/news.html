@@ -16,7 +16,8 @@
                 <img src="{{post.featured_image_urls.thumbnail}}" />
             </ion-thumbnail>
             <h2 [innerHTML]="post.title.rendered"></h2>
-            <div [innerHTML]="post.excerpt.rendered"></div>
+            <p [innerHTML]="post.excerpt.rendered"></p>
+            <p>Posted {{post.date | date: 'MMMM dd, yyyy, h:mm a'}}</p>
         </ion-item>
     </ion-list>
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)">
