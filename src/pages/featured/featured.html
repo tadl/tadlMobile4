@@ -27,8 +27,7 @@
                         </ion-thumbnail>
                         <h2 *ngIf="subitem.title" [innerHTML]="subitem.title"></h2>
                         <h4 *ngIf="subitem.author" [innerHTML]="subitem.author"></h4>
-                        <p *ngIf="subitem.electronic != true">{{subitem.loc_copies_available}} available<span *ngIf="subitem.call_number"> • {{subitem.call_number}}</span></p>
-                        <p>({{subitem.format_type}})</p>
+                        <p *ngIf="subitem.electronic != true"><ion-icon [name]="this.globals.itemType.get(subitem['format_type'])"></ion-icon> &bull; {{subitem.loc_copies_available}} available<span *ngIf="subitem.call_number"> &bull; {{subitem.call_number}}</span></p>
                     </ion-item>
                     <ion-item-options>
                         <button ion-button (click)="item.details(subitem.id)">Details</button>
