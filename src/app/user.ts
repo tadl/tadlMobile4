@@ -50,7 +50,7 @@ export class User {
             if (data) {
                 this.storage.get('username').then((val) => {
                     this.username = val;
-                })
+                });
             }
         });
         this.storage.get('password').then(data => {
@@ -58,7 +58,7 @@ export class User {
                 this.storage.get('password').then((val) => {
                     this.password = val;
                     this.login();
-                })
+                });
             }
         })
     }

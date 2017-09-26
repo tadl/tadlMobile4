@@ -87,7 +87,7 @@
                 <button ion-button (click)="item.details(result.id)">Details</button>
                 <button ion-button color="secondary" *ngIf="result.electronic == true" (click)="openWebpage(result.eresource)">View<br/>Resource</button>
                 <button ion-button color="secondary" *ngIf="this.user.logged_in && result.electronic != true" (click)="user.place_hold(result.id)">Place<br/>Hold</button>
-                <button ion-button color="secondary" *ngIf="!this.user.logged_in && result.electronic != true" menuToggle menuToggle="right">Log In</button>
+                <button ion-button color="secondary" *ngIf="!this.user.logged_in && result.electronic != true" menuToggle menuToggle="right">Login<br/>to Hold</button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
