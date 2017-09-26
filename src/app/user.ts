@@ -115,10 +115,11 @@ export class User {
         this.http.get(this.globals.checkoutRenewURL + '?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids).map(res => res.json()).subscribe(data=>{
             if (data.checkouts) {
                 loading.dismiss();
+                var message = '';
                 if (data.errors.length > 0 && !data.message.startsWith("Failed")) {
-                    var message:string = data.message + ' ' + 'One or more items failed to renew.';
+                    message = data.message + ' ' + 'One or more items failed to renew.';
                 } else {
-                    var message:string = data.message;
+                    message = data.message;
                 }
                 let alert = this.alertCtrl.create({
                     title: message,
