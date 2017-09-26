@@ -57,14 +57,23 @@ export class User {
             if (data) {
                 this.storage.get('password').then((val) => {
                     this.password = val;
-                    this.login();
+                    this.login(true);
                 });
             }
-        })
+        });
     }
 
     /** Login User */
-    login() {
+    login(auto: boolean = false) {
+        console.log(auto);
+        let passHash:any = '';
+        if (auto != true) {
+            passHash = Md5.hashStr(this.password);
+            console.log(passHash);
+        } else {
+            passHash = this.password;
+            console.log(passHash);
+        }
         this.login_error = '';
         this.http.get(this.globals.loginURL + '?username=' + this.username + '&password=' + this.password).map(res => res.json()).subscribe(data=>{
             if (data.token) {
