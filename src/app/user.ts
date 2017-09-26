@@ -153,11 +153,36 @@ export class User {
     }
 
     /** Place Hold */
-    place_hold(record_id) {
+    place_hold(record_id, force) {
         let loading = this.loadingCtrl.create({content:'Placing Hold...'});
         loading.present();
-        this.http.get(this.globals.holdPlaceURL + '?token=' + this.token + '&record_id=' + record_id).map(res => res.json()).subscribe(data=>{
-            if (data.hold_confirmation) {
+        var path = this.globals.holdPlaceURL + '?token=' + this.token + '&record_id=' + record_id
+        if(force == true){
+            path = path + "&force=true"
+        }
+        this.http.get(path).map(res => res.json()).subscribe(data=>{
+            if(data.hold_confirmation[0].need_to_force == true){
+                let alert = this.alertCtrl.create({
+                    title: data.hold_confirmation[0].message,
+                    subTitle: 'Pickup location: ' + this.default_pickup,
+                    buttons: [
+                        {
+                            text: 'Cancel',
+                            handler: () => {
+                                return
+                            },
+                        },
+                        {
+                            text: 'Place Hold Anyway',
+                            handler: () =>{
+                                this.place_hold(record_id, true);
+                            },
+                        }
+                    ]
+                });
+                alert.present();
+            }
+            else if (data.hold_confirmation) {
                 this.holds_count = data.user.holds;
                 let alert = this.alertCtrl.create({
                     title: data.hold_confirmation[0].message,
