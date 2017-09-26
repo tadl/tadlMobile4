@@ -24,9 +24,8 @@
                 <ion-col col-9>
                     <p><strong>{{hold['author']}}</strong></p>
                     <p>Position {{hold['queue_state'][0]}} in queue with {{hold['queue_state'][1]}} eligible cop<span *ngIf="hold.queue_state[1] > 1">ies</span><span *ngIf="hold.queue_state[1] == 1">y</span></p>
-                    <div *ngIf="globals.multi_location==true">
-                        <p>Pickup location: {{hold['pickup_location']}}</p>
-                    </div>
+                    <p *ngIf="globals.multi_location==true">Pickup location: {{hold['pickup_location']}}</p>
+                    <p *ngIf="hold.queue_status != ''"><strong>{{hold.queue_status}}</strong></p>
                     <ion-item *ngIf="globals.multi_location==true && !hold.queue_status.startsWith('Ready')">
                         <ion-select class="full_width_select" interface="popover" placeholder="Change Pickup" (ionChange)="user.change_hold_pickup(hold.hold_id, $event)">
                             <ion-option *ngFor="let loc of globals.pickup_locations" [value]="loc.code">
