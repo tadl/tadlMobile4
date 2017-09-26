@@ -3,7 +3,10 @@
         <button ion-button left menuToggle menuToggle="left" >
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title mode="ios">Holds</ion-title>
+        <ion-title mode="ios">
+            <span *ngIf="ready_only == false">Holds</span>
+             <span *ngIf="ready_only == true">Holds Ready for Pickup</span>
+        </ion-title>
         <button ion-button right menuToggle menuToggle="right">
             <ion-icon name="contact"></ion-icon>
         </button>
