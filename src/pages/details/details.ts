@@ -1,5 +1,5 @@
 import { Component, NgModule  } from '@angular/core';
-import { IonicPage, ViewController, NavController, NavParams, IonicPageModule } from 'ionic-angular';
+import { IonicPage, ViewController, NavController, NavParams, IonicPageModule, Events } from 'ionic-angular';
 import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser";
 import { Globals } from '../../app/globals';
 import { User } from '../../app/user';
@@ -19,8 +19,12 @@ export class ItemDetailsModal {
         public viewCtrl: ViewController,
         public globals: Globals,
         public user: User,
+        public events: Events,
         private inAppBrowser: InAppBrowser
     ){
+        events.subscribe('manage_holds', () => {
+            this.viewCtrl.dismiss();
+        });
     }
 
     title: string = this.navParams.get('title');

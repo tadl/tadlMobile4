@@ -162,12 +162,20 @@ export class User {
                 let alert = this.alertCtrl.create({
                     title: data.hold_confirmation[0].message,
                     subTitle: 'Pickup location: ' + this.default_pickup,
-                    buttons: [{
-                        text: 'Ok',
-                        handler: () => {
-                            return
+                    buttons: [
+                        {
+                            text: 'Ok',
+                            handler: () => {
+                                return
+                            },
                         },
-                    }]
+                        {
+                            text: 'Manage Holds',
+                            handler: () =>{
+                                this.events.publish('manage_holds');
+                            },
+                        }
+                    ]
                 });
                 alert.present();
             } else {
