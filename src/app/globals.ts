@@ -66,7 +66,7 @@ export class Globals {
     public coverURLPrefix: string = 'https://' + this.catalogHost + '/opac/extras/ac/jacket/medium/r/';
     public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json';
     public searchURL: string = 'https://' + this.catalogHost + '/search.json';
-    public loginURL: string = 'https://' + this.catalogHost + '/login.json';
+    public loginURL: string = 'https://' + this.catalogHost + '/main/login_hash.json';
     public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json';
     public checkoutRenewURL: string = 'https://' + this.catalogHost + '/main/renew_checkouts.json';
     public holdsURL: string = 'https://' + this.catalogHost + '/holds.json';

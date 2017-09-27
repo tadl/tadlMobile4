@@ -27,8 +27,7 @@ export class User {
 
 
     username: string;
-    password: string;
-    password_hash: string;
+    password: any = ''
     logged_in : boolean;
     full_name: string;
     checkout_count: string;
@@ -67,16 +66,11 @@ export class User {
     login(auto: boolean = false) {
         let loading = this.loadingCtrl.create({content: 'Logging in...'});
         loading.present();
-        let passHash:any = '';
         if (auto != true) {
-            passHash = Md5.hashStr(this.password);
-            console.log(passHash);
-        } else {
-            passHash = this.password;
-            console.log(passHash);
+            this.password = Md5.hashStr(this.password);
         }
         this.login_error = '';
-        this.http.get(this.globals.loginURL + '?username=' + this.username + '&password=' + this.password).map(res => res.json()).subscribe(data => {
+        this.http.get(this.globals.loginURL + '?username=' + this.username + '&hashed_password=' + this.password).map(res => res.json()).subscribe(data => {
             if (data.token) {
                 this.logged_in = true;
                 this.full_name = data.full_name;
