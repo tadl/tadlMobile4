@@ -51,10 +51,6 @@ export class Globals {
         { venue: 102, name: 'Peninsula' }
     ];
 
-    /* URLs for ilscatcher2 things */
-    /* we should fix this to use catalog.tadl.org */
-    public passwordResetURLPrefix: string = 'https://apiv2.catalog.tadl.org/account/password_reset';
-
     /* NO NEED TO EDIT BELOW THIS LINE */
 
     public appName: string = this.systemShortName + ' Mobile';
@@ -66,6 +62,7 @@ export class Globals {
     public hoursURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/json/parsed-hours.json';
 
     /* URLs for catalog things */
+    public passwordResetURLPrefix: string = 'https://' + this.catalogHost + '/main/reset_password_request.json';
     public coverURLPrefix: string = 'https://' + this.catalogHost + '/opac/extras/ac/jacket/medium/r/';
     public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json';
     public searchURL: string = 'https://' + this.catalogHost + '/search.json';
