@@ -4,9 +4,14 @@ import * as moment from 'moment';
 @Injectable()
 export class Globals {
     public systemShortName: string = 'TADL';
-    public appName: string = this.systemShortName + ' Mobile';
+    public catalogHost: string = 'catalog.tadl.org';
+    public websiteHost: string = 'www.tadl.org';
+    public logoFileName: string = 'logo.png';
+
     public multi_location: boolean = true;
 
+    /* This might need to remain as an array, because it's iterated for
+       the change pickup code                                            */
     public pickup_locations: Array<{name: string, code: string}> = [
         { name: 'Woodmere', code: '23' },
         { name: 'Interlochen', code: '24' },
@@ -16,6 +21,7 @@ export class Globals {
         { name: 'East Bay', code: '28' }
     ];
 
+    /* this will be replaced by the locationName map */
     public friendly_location_name: Array<{code: string, name: string}> = [
         { code: 'TADL-EBB', name: 'East Bay Branch Library' },
         { code: 'TADL-KBL', name: 'Kingsley Branch Library' },
@@ -25,6 +31,7 @@ export class Globals {
         { code: 'TADL-WOOD', name: 'TADL Main Library' }
     ];
 
+    /* This might not be used ever. we'll see */
     pickupLocations = new Map<string, string>([
         ['23', 'Woodmere'],
         ['24', 'Interlochen'],
@@ -34,6 +41,8 @@ export class Globals {
         ['28', 'East Bay']
     ]);
 
+    /* this will replace the friendly_location_name array 
+       because it's just a lookup table, not iterated anywhere */
     locationName = new Map<string, string>([
         ['TADL-EBB', 'East Bay Branch Library'],
         ['TADL-KBL', 'Kingsley Branch Library'],
@@ -43,6 +52,7 @@ export class Globals {
         ['TADL-WOOD', 'TADL Main Library']
     ]);
 
+    /* this is in use by featured, search and details */
     itemType = new Map<string, string>([
         ['text', 'book'],
         ['notated music', 'musical-notes'],
@@ -57,6 +67,7 @@ export class Globals {
         ['three dimensional object', 'archive']
     ]);
 
+    /* this is in use by events, to filter by location */
     public eventVenues: Array<{venue: number, name: string}> = [
         { venue: 97, name: 'Woodmere (Main)' },
         { venue: 98, name: 'East Bay' },
@@ -66,32 +77,41 @@ export class Globals {
         { venue: 102, name: 'Peninsula' }
     ];
 
-    public newsURL: string = 'https://www.tadl.org/wp-json/wp/v2/posts?per_page=20&categories_exclude=93';
-    public eventsURL: string = 'https://www.tadl.org/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
-    public logoURL: string = 'https://www.tadl.org/logo.png';
-    public hoursURL: string = 'https://www.tadl.org/wp-content/uploads/json/parsed-hours.json';
+    /* NO NEED TO EDIT BELOW THIS LINE */
 
-    public coverURLPrefix: string = 'https://catalog.tadl.org/opac/extras/ac/jacket/medium/r/';
-    public featuredURL: string = 'https://catalog.tadl.org/main/index.json';
-    public searchURL: string = 'https://catalog.tadl.org/search.json';
+    public appName: string = this.systemShortName + ' Mobile';
 
-    public loginURL: string = 'https://catalog.tadl.org/login.json';
-    public checkoutsURL: string = 'https://catalog.tadl.org/checkouts.json';
-    public checkoutRenewURL: string = 'https://catalog.tadl.org/main/renew_checkouts.json';
-    public holdsURL: string = 'https://catalog.tadl.org/holds.json';
-    public holdPlaceURL: string = 'https://catalog.tadl.org/place_hold.json';
-    public holdManageURL: string = 'https://catalog.tadl.org/main/manage_hold.json';
-    public holdPickupUpdateURL: string = 'https://catalog.tadl.org/main/update_hold_pickup.json';
-    public itemDetailsURL: string = 'https://catalog.tadl.org/main/details.json';
+    /* URLs for website things */
+    public newsURL: string = 'https://' + this.websiteHost + '/wp-json/wp/v2/posts?per_page=20&categories_exclude=93';
+    public eventsURL: string = 'https://' + this.websiteHost + '/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
+    public logoURL: string = 'https://' + this.websiteHost + '/' + this.logoFileName;
+    public hoursURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/json/parsed-hours.json';
 
+    /* URLs for catalog things */
+    public coverURLPrefix: string = 'https://' + this.catalogHost + '/opac/extras/ac/jacket/medium/r/';
+    public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json';
+    public searchURL: string = 'https://' + this.catalogHost + '/search.json';
+    public loginURL: string = 'https://' + this.catalogHost + '/login.json';
+    public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json';
+    public checkoutRenewURL: string = 'https://' + this.catalogHost + '/main/renew_checkouts.json';
+    public holdsURL: string = 'https://' + this.catalogHost + '/holds.json';
+    public holdPlaceURL: string = 'https://' + this.catalogHost + '/place_hold.json';
+    public holdManageURL: string = 'https://' + this.catalogHost + '/main/manage_hold.json';
+    public holdPickupUpdateURL: string = 'https://' + this.catalogHost + '/main/update_hold_pickup.json';
+    public itemDetailsURL: string = 'https://' + this.catalogHost + '/main/details.json';
+
+    /* URLs for ilscatcher2 things */
     public passwordResetURLPrefix: string = 'https://apiv2.catalog.tadl.org/account/password_reset'; /* really? */
 
-    /* helper functions */
+
+    /* HELPER FUNCTIONS */
+
+    /* this won't be necessary once it's converted to a map */
     shortname_to_friendlyname (shortname) {
         var location = this.array_search(shortname, this.friendly_location_name);
         return location.name;
     }
-
+    /* same */
     array_search(key, array) {
         for (var i=0; i < array.length; i++) {
             if (array[i].code === key) {
@@ -100,6 +120,7 @@ export class Globals {
         }
     }
 
+    /* three date formats used for (1)news feed, (null)events feed and (2)event detail */
     fixDate(str, fmt?) {
         if (fmt == 2) {
             return moment(str).format("dddd") + "<br/>" + moment(str).format("MMMM Do") + "<br/>" + moment(str).format("h:mm a");
