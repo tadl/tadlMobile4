@@ -7,6 +7,7 @@ export class Globals {
     public catalogHost: string = 'catalog.tadl.org';
     public websiteHost: string = 'www.tadl.org';
     public logoFileName: string = 'logo.png';
+    public newsCategoryExclude: string = '93'; /* 93=Announcement */
 
     public multi_location: boolean = true;
 
@@ -31,8 +32,7 @@ export class Globals {
         ['28', 'East Bay']
     ]);
 
-    /* this will replace the friendly_location_name array 
-       because it's just a lookup table, not iterated anywhere */
+    /* Used for displaying location name on item details */
     locationName = new Map<string, string>([
         ['TADL-EBB', 'East Bay Branch Library'],
         ['TADL-KBL', 'Kingsley Branch Library'],
@@ -40,21 +40,6 @@ export class Globals {
         ['TADL-IPL', 'Interlochen Public Library'],
         ['TADL-FLPL', 'Fife Lake Public Library'],
         ['TADL-WOOD', 'TADL Main Library']
-    ]);
-
-    /* this is in use by featured, search and details */
-    itemType = new Map<string, string>([
-        ['text', 'book'],
-        ['notated music', 'musical-notes'],
-        ['cartographic', 'map'],
-        ['moving image', 'film'],
-        ['sound recording-nonmusical', 'disc'],
-        ['sound recording-musical', 'disc'],
-        ['still image', 'image'],
-        ['software, multimedia', 'document'],
-        ['kit', 'briefcase'],
-        ['mixed-material', 'briefcase'],
-        ['three dimensional object', 'archive']
     ]);
 
     /* this is in use by events, to filter by location */
@@ -72,7 +57,7 @@ export class Globals {
     public appName: string = this.systemShortName + ' Mobile';
 
     /* URLs for website things */
-    public newsURL: string = 'https://' + this.websiteHost + '/wp-json/wp/v2/posts?per_page=20&categories_exclude=93';
+    public newsURL: string = 'https://' + this.websiteHost + '/wp-json/wp/v2/posts?per_page=20&categories_exclude=' + this.newsCategoryExclude;
     public eventsURL: string = 'https://' + this.websiteHost + '/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
     public logoURL: string = 'https://' + this.websiteHost + '/' + this.logoFileName;
     public hoursURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/json/parsed-hours.json';
@@ -93,6 +78,20 @@ export class Globals {
     /* URLs for ilscatcher2 things */
     public passwordResetURLPrefix: string = 'https://apiv2.catalog.tadl.org/account/password_reset'; /* really? */
 
+    /* this is in use by featured, search and details */
+    itemType = new Map<string, string>([
+        ['text', 'book'],
+        ['notated music', 'musical-notes'],
+        ['cartographic', 'map'],
+        ['moving image', 'film'],
+        ['sound recording-nonmusical', 'disc'],
+        ['sound recording-musical', 'disc'],
+        ['still image', 'image'],
+        ['software, multimedia', 'document'],
+        ['kit', 'briefcase'],
+        ['mixed-material', 'briefcase'],
+        ['three dimensional object', 'archive']
+    ]);
 
     /* HELPER FUNCTIONS */
 
@@ -106,6 +105,5 @@ export class Globals {
             return moment(str).format("ddd MMMM Do, h:mm a");
         }
     }
-
 
 }

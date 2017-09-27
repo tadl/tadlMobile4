@@ -86,7 +86,7 @@ export class User {
                 this.holds_ready = data.holds_ready;
                 this.card = data.card;
                 this.token = data.token;
-                this.default_pickup = this.pickup_code_to_name(data.pickup_library);
+                this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
                 this.storage.set('username', this.username);
                 this.storage.set('password', this.password);
             } else {
