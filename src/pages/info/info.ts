@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @IonicPage()
 @Component({
     selector: 'page-info',
-    templateUrl: 'info.html',
+    templateUrl: 'info.html'
 })
 
 export class InfoPage {
@@ -29,7 +29,7 @@ export class InfoPage {
     get_info() {
         let loading = this.loadingCtrl.create({content:'Loading...'});
         loading.present();
-        this.http.get(this.url).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.url).map(res => res.json()).subscribe(data => {
             loading.dismiss();
             if (data.locations) {
                 this.locations = data.locations;

@@ -73,22 +73,22 @@ export class SearchPage {
         params.append('availability', available_on);
         params.append('physical', physcial_on);
 
-        /** If user changes any parameter it is a new search that starts on page 0 */
+        /* If user changes any parameter it is a new search that starts on page 0 */
         if(this.current_params != params.toString()){
             this.page = 0;
             loading.present();
         }
 
-        /** If user clicks search again with no new parameters treat as brand new search  */
-        if((this.current_params == params.toString()) && (this.last_page == this.page)){
+        /* If user clicks search again with no new parameters treat as brand new search  */
+        if ((this.current_params == params.toString()) && (this.last_page == this.page)) {
             this.page = 0;
             loading.present();
             this.results = [];
         }
 
-        this.current_params = params.toString()
-        params.append('page', this.page.toString() )
-        this.http.get(this.globals.searchURL, {params} ).map(res => res.json()).subscribe(data=>{
+        this.current_params = params.toString();
+        params.append('page', this.page.toString());
+        this.http.get(this.globals.searchURL, {params}).map(res => res.json()).subscribe(data => {
             if (data.items) {
                 this.more_results = data.more_results;
                 if (this.page == 0) {

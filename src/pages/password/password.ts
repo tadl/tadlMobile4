@@ -31,7 +31,7 @@ export class PasswordModal {
 
     reset_password() {
         this.reset_sent = true;
-        this.http.get(this.globals.passwordResetURLPrefix + '?username=' + this.username).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.passwordResetURLPrefix + '?username=' + this.username).map(res => res.json()).subscribe(data => {
             if (data.message) {
                 this.reset_sent = true;
             } else {

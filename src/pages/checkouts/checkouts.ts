@@ -23,7 +23,7 @@ export class CheckoutsPage {
         public events: Events,
         public globals: Globals
     ) {
-        events.subscribe('renew',() =>{
+        events.subscribe('renew', () => {
             this.content.scrollToTop();
         });
     }
