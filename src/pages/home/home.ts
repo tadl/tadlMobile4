@@ -34,6 +34,10 @@ export class HomePage {
         events.subscribe('manage_holds', () => {
             this.nav.push(this.holdsPage,{},{animate:false});
         });
+
+        events.subscribe('logged_out', () => {
+            this.nav.goToRoot({});
+        });
     }
 
 }

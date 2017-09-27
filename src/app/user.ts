@@ -94,7 +94,9 @@ export class User {
         this.logged_in = false;
         this.username = '';
         this.password = '';
+        this.token = '';
         this.storage.clear();
+        this.events.publish('logged_out')
     }
 
     /* Get Checkouts */
