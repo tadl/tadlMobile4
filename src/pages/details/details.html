@@ -44,7 +44,7 @@
                     <ion-badge item-end>Call Number</ion-badge>
                 </ion-item>
                 <div *ngFor="let copies of availability">
-                    <ion-item-divider>{{globals.shortname_to_friendlyname(copies['library'])}}</ion-item-divider>
+                    <ion-item-divider>{{globals.locationName.get(copies['library'])}}</ion-item-divider>
                     <ion-item *ngFor="let copy of copies['copies']" text-wrap>
                         {{copy['count']}} in {{copy['shelf_location']}}
                         <ion-badge item-end>{{copy['call_numbers'][copy['call_numbers'].length-1]}}</ion-badge>
@@ -61,7 +61,7 @@
                 </ion-item>
                 <ion-item *ngFor="let copy of holdings">
                     <ion-row>
-                        <ion-col class="detail" text-wrap col-4>{{globals.shortname_to_friendlyname(copy['circ_lib'])}}</ion-col>
+                        <ion-col class="detail" text-wrap col-4>{{globals.locationName.get(copy['circ_lib'])}}</ion-col>
                         <ion-col class="detail" text-wrap col-4>{{copy['location']}} / {{copy['call_number']}}</ion-col>
                         <ion-col class="detail" text-wrap col-4>{{copy['status']}}<span *ngIf="copy['due_date']"><br/>Due {{copy['due_date']}}</span></ion-col>
                     </ion-row>

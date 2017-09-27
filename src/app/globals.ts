@@ -21,16 +21,6 @@ export class Globals {
         { name: 'East Bay', code: '28' }
     ];
 
-    /* this will be replaced by the locationName map */
-    public friendly_location_name: Array<{code: string, name: string}> = [
-        { code: 'TADL-EBB', name: 'East Bay Branch Library' },
-        { code: 'TADL-KBL', name: 'Kingsley Branch Library' },
-        { code: 'TADL-PCL', name: 'Peninsula Community Library' },
-        { code: 'TADL-IPL', name: 'Interlochen Public Library' },
-        { code: 'TADL-FLPL', name: 'Fife Lake Public Library' },
-        { code: 'TADL-WOOD', name: 'TADL Main Library' }
-    ];
-
     /* This might not be used ever. we'll see */
     pickupLocations = new Map<string, string>([
         ['23', 'Woodmere'],
@@ -105,20 +95,6 @@ export class Globals {
 
 
     /* HELPER FUNCTIONS */
-
-    /* this won't be necessary once it's converted to a map */
-    shortname_to_friendlyname (shortname) {
-        var location = this.array_search(shortname, this.friendly_location_name);
-        return location.name;
-    }
-    /* same */
-    array_search(key, array) {
-        for (var i=0; i < array.length; i++) {
-            if (array[i].code === key) {
-                return array[i];
-            }
-        }
-    }
 
     /* three date formats used for (1)news feed, (null)events feed and (2)event detail */
     fixDate(str, fmt?) {
