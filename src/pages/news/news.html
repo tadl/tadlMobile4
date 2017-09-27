@@ -17,7 +17,7 @@
             </ion-thumbnail>
             <h2 [innerHTML]="post.title.rendered"></h2>
             <p [innerHTML]="post.excerpt.rendered"></p>
-            <p>Posted {{post.date | date: 'MMMM dd, yyyy, h:mm a'}}</p>
+            <p>Posted {{globals.fixDate(post.date, 1)}}</p>
         </ion-item>
     </ion-list>
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)">

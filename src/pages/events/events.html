@@ -25,7 +25,7 @@
                 <img src="{{event.image.sizes.thumbnail.url}}" />
             </ion-thumbnail>
             <h2 [innerHTML]="event.title"></h2>
-            <h4 [innerHTML]="event.start_date | date: 'MMM dd, h:mm a'"></h4>
+            <h4 [innerHTML]="globals.fixDate(event.start_date)"></h4>
             <p *ngIf="event.venue">{{event.venue.venue}}</p>
         </ion-item>
     </ion-list>

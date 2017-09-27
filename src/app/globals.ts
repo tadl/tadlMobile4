@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as moment from 'moment';
 
 @Injectable()
 export class Globals {
@@ -96,6 +97,16 @@ export class Globals {
             if (array[i].code === key) {
                 return array[i];
             }
+        }
+    }
+
+    fixDate(str, fmt?) {
+        if (fmt == 2) {
+            return moment(str).format("dddd") + "<br/>" + moment(str).format("MMMM Do") + "<br/>" + moment(str).format("h:mm a");
+        } else if (fmt == 1) {
+            return moment(str).format("MMMM Do, h:mm a");
+        } else {
+            return moment(str).format("ddd MMMM Do, h:mm a");
         }
     }
 

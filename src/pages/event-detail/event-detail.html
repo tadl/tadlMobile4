@@ -30,7 +30,7 @@
             </ion-row>
             <ion-row>
                 <ion-col col-3 text-nowrap>When?</ion-col>
-                <ion-col col-9>{{selectedItem.start_date | date: 'MMMM dd, h:mm a'}}</ion-col>
+                <ion-col col-9 [innerHTML]="globals.fixDate(selectedItem.start_date, 2)"></ion-col>
             </ion-row>
         </ion-card>
     </ion-grid>
