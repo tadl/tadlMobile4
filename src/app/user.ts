@@ -65,7 +65,8 @@ export class User {
 
     /** Login User */
     login(auto: boolean = false) {
-        console.log(auto);
+        let loading = this.loadingCtrl.create({content: 'Logging in...'});
+        loading.present();
         let passHash:any = '';
         if (auto != true) {
             passHash = Md5.hashStr(this.password);
@@ -91,6 +92,7 @@ export class User {
             } else {
                 this.login_error = "Unable to login with this username and password. Please try again or request a password reset."
             }
+            loading.dismiss();
         });
     }
 
@@ -108,11 +110,11 @@ export class User {
         loading.present();
         this.checkout_errors.length = 0;
         this.http.get(this.globals.checkoutsURL + '?token=' + this.token).map(res => res.json()).subscribe(data=>{
-            loading.dismiss();
             if (data.checkouts) {
                 this.checkouts = data.checkouts;
             } else {
             }
+            loading.dismiss();
         });
     }
 
@@ -123,13 +125,13 @@ export class User {
         this.checkout_errors.length = 0;
         this.http.get(this.globals.checkoutRenewURL + '?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids).map(res => res.json()).subscribe(data=>{
             if (data.checkouts) {
-                loading.dismiss();
                 var message = '';
                 if (data.errors.length > 0 && !data.message.startsWith("Failed")) {
                     message = data.message + ' ' + 'One or more items failed to renew.';
                 } else {
                     message = data.message;
                 }
+                loading.dismiss();
                 let alert = this.alertCtrl.create({
                     title: message,
                     buttons: [{
@@ -239,12 +241,12 @@ export class User {
         let loading = this.loadingCtrl.create({content:'Suspending Hold...'});
         loading.present();
         this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend').map(res => res.json()).subscribe(data=>{
-            loading.dismiss();
             if (data.target_holds) {
                 this.holds = data.holds;
                 this.events.publish('got_holds');
             } else {
             }
+            loading.dismiss();
         });
     }
 
@@ -253,12 +255,12 @@ export class User {
         let loading = this.loadingCtrl.create({content:'Activating Hold...'});
         loading.present();
         this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=activate').map(res => res.json()).subscribe(data=>{
-            loading.dismiss();
             if (data.target_holds) {
                 this.holds = data.holds;
                 this.events.publish('got_holds');
             } else {
             }
+            loading.dismiss();
         });
     }
 
