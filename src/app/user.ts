@@ -265,13 +265,17 @@ export class User {
     }
 
     /** Change Hold Pickup Loaction */
-    change_hold_pickup(hold_id, event) {
+    change_hold_pickup(hold_id, state, event) {
         let loading = this.loadingCtrl.create({content:'Changing Pickup Location...'});
         loading.present();
+        let holdState = '';
         let params = new URLSearchParams();
         params.append('token', this.token);
         params.append('hold_id', hold_id);
         params.append('new_pickup', event);
+        if (state == 'Active') { holdState = 'f'; }
+        else { holdState = 't'; }
+        params.append('hold_state', holdState);
         this.http.get(this.globals.holdPickupUpdateURL, {params} ).map(res => res.json()).subscribe(data=>{
             loading.dismiss();
             if (data.message) {
