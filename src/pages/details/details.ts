@@ -34,6 +34,7 @@ export class ItemDetailsModal {
     id: number = this.navParams.get('id');
     electronic: boolean = this.navParams.get('electronic');
     eresource: string = this.navParams.get('eresource');
+    source: string = this.navParams.get('source');
     call_number: string = this.navParams.get('call_number');
     format_type: string = this.navParams.get('format_type');
     record_year: string = this.navParams.get('record_year');
