@@ -1,10 +1,9 @@
-import { NgModule, Component, ViewChild, Injectable, Input } from '@angular/core';
+import { Component, ViewChild, Injectable, Input } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { AlertController, LoadingController, Content, Events, ModalController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Globals } from './globals';
-import { ItemDetailsModal } from '../pages/details/details';
 import { PasswordModal } from '../pages/password/password';
 import 'rxjs/add/operator/map';
 
@@ -301,20 +300,6 @@ export class User {
     /* Remove all checkout error messages */
     clear_checkout_errors() {
         this.checkout_errors.length = 0;
-    }
-
-    /* Get 'pretty' string for user's default pickup location */
-    pickup_code_to_name (location_code) {
-        var location = this.pickup_code_search(location_code, this.globals.pickup_locations);
-        return location.name;
-    }
-
-    pickup_code_search(nameKey, myArray) {
-        for (var i=0; i < myArray.length; i++) {
-            if (myArray[i].code === nameKey) {
-                return myArray[i];
-            }
-        }
     }
 
     /* Reset Password */

@@ -11,8 +11,7 @@ export class Globals {
 
     public multi_location: boolean = true;
 
-    /* This might need to remain as an array, because it's iterated for
-       the change pickup code                                            */
+    /* this array is iterated to generate the change pickup select options */
     public pickup_locations: Array<{name: string, code: string}> = [
         { name: 'Woodmere', code: '23' },
         { name: 'Interlochen', code: '24' },
@@ -22,7 +21,7 @@ export class Globals {
         { name: 'East Bay', code: '28' }
     ];
 
-    /* This might not be used ever. we'll see */
+    /* this map is used to convert location code to location name */
     pickupLocations = new Map<string, string>([
         ['23', 'Woodmere'],
         ['24', 'Interlochen'],
@@ -52,6 +51,10 @@ export class Globals {
         { venue: 102, name: 'Peninsula' }
     ];
 
+    /* URLs for ilscatcher2 things */
+    /* we should fix this to use catalog.tadl.org */
+    public passwordResetURLPrefix: string = 'https://apiv2.catalog.tadl.org/account/password_reset';
+
     /* NO NEED TO EDIT BELOW THIS LINE */
 
     public appName: string = this.systemShortName + ' Mobile';
@@ -74,9 +77,6 @@ export class Globals {
     public holdManageURL: string = 'https://' + this.catalogHost + '/main/manage_hold.json';
     public holdPickupUpdateURL: string = 'https://' + this.catalogHost + '/main/update_hold_pickup.json';
     public itemDetailsURL: string = 'https://' + this.catalogHost + '/main/details.json';
-
-    /* URLs for ilscatcher2 things */
-    public passwordResetURLPrefix: string = 'https://apiv2.catalog.tadl.org/account/password_reset'; /* really? */
 
     /* this is in use by featured, search and details */
     itemType = new Map<string, string>([
