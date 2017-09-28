@@ -28,7 +28,7 @@
                     <p *ngIf="hold.queue_status != ''"><strong ion-text color="primary">{{hold.queue_status}}</strong></p>
                     <p *ngIf="hold.hold_status != ''">Hold status: 
                         <span *ngIf="hold.hold_status == 'Suspended'"><strong ion-text color="danger">{{hold.hold_status}}</strong></span>
-                        <span *ngIf="hold.hold_status == 'Active'"><strong ion-text color="secondary">{{hold.hold_status}}</strong></span>
+                        <span *ngIf="hold.hold_status == 'Active'"><strong ion-text color="green">{{hold.hold_status}}</strong></span>
                     </p>
                     <ion-item *ngIf="globals.multi_location==true && !hold.queue_status.startsWith('Ready')">
                         <ion-select class="full_width_select" interface="popover" placeholder="Change Pickup" (ionChange)="user.change_hold_pickup(hold.hold_id, hold.hold_status, $event)">
