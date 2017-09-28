@@ -1,5 +1,5 @@
 import { Component, Injectable, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Content, ActionSheetController } from 'ionic-angular';
 import { User } from '../../app/user';
 import { Globals } from '../../app/globals';
 import { Item } from '../../app/item';
@@ -17,8 +17,9 @@ export class CheckoutsPage {
     @ViewChild(Content) content: Content;
 
     constructor(
-        public navCtrl: NavController, 
+        public navCtrl: NavController,
         public navParams: NavParams,
+        public actionSheetCtrl: ActionSheetController,
         public user: User,
         public item: Item,
         public events: Events,
@@ -27,6 +28,26 @@ export class CheckoutsPage {
         events.subscribe('renew', () => {
             this.content.scrollToTop();
         });
+    }
+
+    renewAll() {
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Renew all items?',
+            buttons: [
+                {
+                    text: 'Renew All',
+                    handler: () => {
+                        this.user.renew_all();
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
     }
 
     ionViewDidLoad() {
