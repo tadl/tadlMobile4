@@ -1,8 +1,8 @@
 {
-  "name": "tadlMobile3",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "tadlMobile4",
+  "version": "4.0.01",
+  "author": "Traverse Area District Library",
+  "homepage": "https://www.tadl.org/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -25,7 +25,7 @@
     "@ionic-native/splash-screen": "3.12.1",
     "@ionic-native/status-bar": "3.12.1",
     "@ionic/storage": "^2.0.1",
-    "cordova-android": "^6.2.2",
+    "cordova-android": "^6.2.3",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-console": "1.0.5",
     "cordova-plugin-device": "1.1.4",
