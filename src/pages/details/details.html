@@ -15,9 +15,27 @@
         <img [src]="globals.coverURLPrefix + id" class="list_cover_image" float-left padding-right />
         <h5 *ngIf="author">{{author}}</h5>
         <h6 *ngIf="abstract">Description</h6>
-        <p *ngIf="abstract" [innerHTML]="abstract" padding-bottom class="item-description"></p>
+        <p *ngIf="abstract" padding-bottom class="item-description" [id]="id + '_abstract'">
+            {{abstract | truncate : 250}}
+            <br>
+            <a *ngIf="abstract.length > 250" (click)='globals.show_more(id, "abstract")' class="show_link">Show More</a>
+        </p>
+        <p *ngIf="abstract" padding-bottom class="item-description" [id]="id + '_abstract_full'" style="display: none">
+            {{abstract}}
+            <br>
+            <a (click)='globals.show_less(id, "abstract")' class="show_link">Show Less</a>
+        </p>
         <h6 *ngIf="contents">Contents</h6>
-        <p *ngIf="contents" class="item-contents" [innerHTML]="contents"></p>
+        <p *ngIf="contents" class="item-contents" [id]="id + '_content'">
+            {{ contents | truncate : 250 }}
+            <br>
+            <a *ngIf="contents.length > 250" (click)='globals.show_more(id, "content")' class="show_link">Show More</a>
+        </p>
+        <p *ngIf="contents" class="item-contents" [id]="id + '_content_full'" style="display: none">
+            {{ contents }}
+            <br>
+            <a (click)='globals.show_less(id, "content")' class="show_link">Show Less</a>
+        </p>
         <p *ngIf="publisher">Published by {{publisher}}<span *ngIf="publication_place">, {{publication_place}}</span><span *ngIf="record_year">, {{record_year}}</span></p>
         <p *ngIf="physical_description" [innerHTML]="physical_description"></p>
         <p *ngIf="electronic == true">Electronic resource from {{source}}</p>

@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { HttpModule } from '@angular/http';
+import { TruncateModule } from 'ng2-truncate';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CheckoutsPage } from '../pages/checkouts/checkouts';
@@ -45,7 +46,8 @@ import { BarcodePage } from '../pages/barcode/barcode';
         BrowserModule,
         IonicModule.forRoot(MyApp),
         HttpModule,
-        IonicStorageModule.forRoot()
+        IonicStorageModule.forRoot(),
+        TruncateModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

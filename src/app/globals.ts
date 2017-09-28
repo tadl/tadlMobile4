@@ -123,4 +123,19 @@ export class Globals {
         });
         alert.present();
     }
+
+    show_more(id, div_type){
+        var div_to_hide = id + '_' + div_type
+        var div_to_show = div_to_hide + '_full'
+        document.getElementById(div_to_show).setAttribute("style", "display: block")
+        document.getElementById(div_to_hide).setAttribute("style", "display: none")
+
+    }
+
+    show_less(id, div_type){
+        var div_to_show = id + '_' + div_type
+        var div_to_hide = div_to_show + '_full'
+        document.getElementById(div_to_show).setAttribute("style", "display: block")
+        document.getElementById(div_to_hide).setAttribute("style", "display: none")
+    }
 }
