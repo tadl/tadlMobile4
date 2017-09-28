@@ -5,7 +5,7 @@ import { Globals } from '../../app/globals';
 import { Http, URLSearchParams } from '@angular/http';
 import { Item } from '../../app/item';
 import { User } from '../../app/user';
-import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @IonicPage()
 @Component({
@@ -88,23 +88,27 @@ export class SearchPage {
 
         this.current_params = params.toString();
         params.append('page', this.page.toString());
-        this.http.get(this.globals.searchURL, {params}).map(res => res.json()).subscribe(data => {
-            if (data.items) {
-                this.more_results = data.more_results;
-                if (this.page == 0) {
-                    this.results = data.items;
-                    if (this.more_results == true) {
-                       this.events.publish('new_search');
-                    }
-                    loading.dismiss();
-                } else {
-                    this.results.push.apply(this.results, data.items);
-                    this.events.publish('infinite_done');
-                }
-                this.last_page = this.page;
-            } else {
-            }
-        });
+        this.http.get(this.globals.searchURL, {params})
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.items) {
+                        this.more_results = data.more_results;
+                        if (this.page == 0) {
+                            this.results = data.items;
+                            if (this.more_results == true) {
+                               this.events.publish('new_search');
+                            }
+                        } else {
+                            this.results.push.apply(this.results, data.items);
+                            this.events.publish('infinite_done');
+                        }
+                        this.last_page = this.page;
+                    } 
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     get_more_results(infiniteScroll){

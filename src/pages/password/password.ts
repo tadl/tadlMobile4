@@ -2,7 +2,7 @@ import { Component, NgModule, Injectable, } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams, IonicPageModule } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Globals } from '../../app/globals'
-import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @IonicPage()
 @Component({
@@ -30,13 +30,16 @@ export class PasswordModal {
     }
 
     reset_password() {
-        this.reset_sent = true;
-        this.http.get(this.globals.passwordResetURLPrefix + '?username=' + this.username).map(res => res.json()).subscribe(data => {
-            if (data.message) {
-                this.reset_sent = true;
-            } else {
-            }
-        });
+        this.http.get(this.globals.passwordResetURLPrefix + '?username=' + this.username)
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.message) {
+                        this.reset_sent = true;
+                    } 
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     close_modal() {
