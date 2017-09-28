@@ -33,12 +33,17 @@ export class FeaturedPage {
     get_feeds() {
         var loading = this.loadingCtrl.create({content:'Loading items...'});
         loading.present();
-        this.http.get(this.url).map(res => res.json()).subscribe(data => {
-            if (data.featured_items) {
-                this.items = data.featured_items;
-            }
-            loading.dismiss();
-        });
+        this.http.get(this.url)
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.featured_items) {
+                        this.items = data.featured_items;
+                    }
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     toggleSection(i) {

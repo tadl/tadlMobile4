@@ -372,9 +372,4 @@ export class User {
         let password_reset_modal = this.modalCtrl.create(PasswordModal, {});
         password_reset_modal.present();
     }
-
-    error_handler(){
-
-    }
-
 }
