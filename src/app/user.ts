@@ -77,6 +77,9 @@ export class User {
                 this.holds_count = data.holds;
                 this.fines = data.fine;
                 this.holds_ready = data.holds_ready;
+                if(data.holds_ready && (data.holds_ready != 0)){
+                    this.holds_ready_alert();
+                }
                 this.card = data.card;
                 this.token = data.token;
                 this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
@@ -158,6 +161,28 @@ export class User {
         });
     }
 
+    holds_ready_alert(){
+        let alert = this.alertCtrl.create({
+            title: 'Holds Ready for Pickup',
+            subTitle: 'One or more items are ready for you to pickup',
+            buttons: [
+                {
+                    text: 'Ok',
+                    handler: () => {
+                        return;
+                    },
+                },
+                {
+                    text: 'View Holds Ready for Pickup',
+                    handler: () => {
+                        this.events.publish('manage_holds',{ready: true});
+                    },
+                }
+            ]
+        });
+        alert.present();   
+    }
+
     /* Place Hold */
     place_hold(record_id, force) {
         let loading = this.loadingCtrl.create({content:'Placing Hold...'});
@@ -203,7 +228,7 @@ export class User {
                         {
                             text: 'Manage Holds',
                             handler: () => {
-                                this.events.publish('manage_holds');
+                                this.events.publish('manage_holds',{ready: false});
                             },
                         }
                     ]

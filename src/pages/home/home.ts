@@ -31,8 +31,12 @@ export class HomePage {
         public nav: Nav,
         public events: Events
     ){
-        events.subscribe('manage_holds', () => {
-            this.nav.push(this.holdsPage,{},{animate:false});
+        events.subscribe('manage_holds', (object) => {
+            if(object.ready != true){
+                this.nav.push(this.holdsPage,{},{animate:false});
+            }else{
+                this.nav.push(this.holdsPage,{ready_only: true},{animate:false});
+            }       
         });
 
         events.subscribe('logged_out', () => {
