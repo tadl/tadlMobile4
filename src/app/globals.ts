@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
+import { AlertController} from 'ionic-angular';
 import * as moment from 'moment';
 
 @Injectable()
 export class Globals {
+    
+    constructor(
+        private alertCtrl: AlertController,
+    ){}
+
+
     public systemShortName: string = 'TADL';
     public catalogHost: string = 'catalog.tadl.org';
     public websiteHost: string = 'www.tadl.org';
@@ -103,4 +110,17 @@ export class Globals {
         }
     }
 
+    error_handler(){
+        let alert = this.alertCtrl.create({
+            title: "Opps...",
+            subTitle: 'Network error. Check your internet connection or try again later',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    return
+                },
+            }]
+        });
+        alert.present();
+    }
 }
