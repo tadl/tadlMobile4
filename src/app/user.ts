@@ -285,7 +285,7 @@ export class User {
     suspend_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Suspending Hold...'});
         loading.present();
-        this.http.get('t' + this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend')
+        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend')
             .finally(() => loading.dismiss())
             .map(res => res.json())
             .subscribe(
