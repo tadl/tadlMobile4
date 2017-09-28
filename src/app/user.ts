@@ -5,7 +5,7 @@ import { AlertController, LoadingController, Content, Events, ModalController } 
 import { Md5 } from 'ts-md5/dist/md5';
 import { Globals } from './globals';
 import { PasswordModal } from '../pages/password/password';
-import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Component({
     providers: [Http]
@@ -21,9 +21,7 @@ export class User {
         public events: Events,
         public globals: Globals,
         public modalCtrl: ModalController,
-    ) {
-    }
-
+    ) {}
 
     username: string;
     password: any = ''
@@ -69,28 +67,34 @@ export class User {
             this.password = Md5.hashStr(this.password);
         }
         this.login_error = '';
-        this.http.get(this.globals.loginURL + '?username=' + this.username + '&hashed_password=' + this.password).map(res => res.json()).subscribe(data => {
-            if (data.token) {
-                this.logged_in = true;
-                this.full_name = data.full_name;
-                this.checkout_count = data.checkouts;
-                this.holds_count = data.holds;
-                this.fines = data.fine;
-                this.holds_ready = data.holds_ready;
-                if(data.holds_ready && (data.holds_ready != 0)){
-                    this.holds_ready_alert();
-                }
-                this.card = data.card;
-                this.token = data.token;
-                this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
-                this.storage.set('username', this.username);
-                this.storage.set('password', this.password);
-            } else {
-                this.login_error = "Unable to login with this username and password. Please try again or request a password reset."
-            }
-            loading.dismiss();
-        });
+        this.http.get(this.globals.loginURL + '?username=' + this.username + '&hashed_password=' + this.password)
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.token) {
+                        this.logged_in = true;
+                        this.full_name = data.full_name;
+                        this.checkout_count = data.checkouts;
+                        this.holds_count = data.holds;
+                        this.fines = data.fine;
+                        this.holds_ready = data.holds_ready;
+                        if(data.holds_ready && (data.holds_ready != 0)){
+                            this.holds_ready_alert();
+                        }
+                        this.card = data.card;
+                        this.token = data.token;
+                        this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
+                        this.storage.set('username', this.username);
+                        this.storage.set('password', this.password);
+                    } else {
+                        this.login_error = "Unable to login with this username and password. Please try again or request a password reset."
+                    }
+                },
+                err => this.globals.error_handler()
+            );
     }
+
 
     /* Logout User */
     logout() {
@@ -107,13 +111,17 @@ export class User {
         let loading = this.loadingCtrl.create({content:'Loading Checkouts...'});
         loading.present();
         this.checkout_errors.length = 0;
-        this.http.get(this.globals.checkoutsURL + '?token=' + this.token).map(res => res.json()).subscribe(data => {
-            if (data.checkouts) {
-                this.checkouts = data.checkouts;
-            } else {
-            }
-            loading.dismiss();
-        });
+        this.http.get(this.globals.checkoutsURL + '?token=' + this.token)
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.checkouts) {
+                        this.checkouts = data.checkouts;
+                    }
+                },
+                err => this.globals.error_handler()
+            )
     }
 
     /* Renew Items */
@@ -121,29 +129,34 @@ export class User {
         let loading = this.loadingCtrl.create({content:'Attempting renewal...'});
         loading.present();
         this.checkout_errors.length = 0;
-        this.http.get(this.globals.checkoutRenewURL + '?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids).map(res => res.json()).subscribe(data => {
-            if (data.checkouts) {
-                var message = '';
-                if (data.errors.length > 0 && !data.message.startsWith("Failed")) {
-                    message = data.message + ' ' + 'One or more items failed to renew.';
-                } else {
-                    message = data.message;
-                }
-                loading.dismiss();
-                let alert = this.alertCtrl.create({
-                    title: message,
-                    buttons: [{
-                        text: 'Ok',
-                        handler: () => {
-                            this.checkouts = data.checkouts
-                            this.checkout_errors = data.errors
-                            this.events.publish('renew')
-                        },
-                    }]
-                });
-                alert.present();
-            }
-        });
+        this.http.get(this.globals.checkoutRenewURL + '?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids)
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.checkouts) {
+                        var message = '';
+                        if (data.errors.length > 0 && !data.message.startsWith("Failed")) {
+                            message = data.message + ' ' + 'One or more items failed to renew.';
+                        } else {
+                            message = data.message;
+                        }
+                        let alert = this.alertCtrl.create({
+                            title: message,
+                            buttons: [{
+                                text: 'Ok',
+                                handler: () => {
+                                    this.checkouts = data.checkouts
+                                    this.checkout_errors = data.errors
+                                    this.events.publish('renew')
+                                },
+                            }]
+                        });
+                        alert.present()
+                    }
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     /* get holds */
@@ -151,14 +164,18 @@ export class User {
     load_holds() {
         let loading = this.loadingCtrl.create({content:'Loading Holds...'});
         loading.present();
-        this.http.get(this.globals.holdsURL + '?token=' + this.token).map(res => res.json()).subscribe(data => {
-            if (data.holds) {
-                this.holds = data.holds;
-                this.events.publish('got_holds');
-            } else {
-            }
-            loading.dismiss();
-        });
+        this.http.get(this.globals.holdsURL + '?token=' + this.token)
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.holds) {
+                        this.holds = data.holds;
+                        this.events.publish('got_holds');
+                    }
+                },
+                err => this.globals.error_handler()     
+            );
     }
 
     holds_ready_alert(){
@@ -191,97 +208,113 @@ export class User {
         if (force == true) {
             path = path + '&force=true';
         }
-        this.http.get(path).map(res => res.json()).subscribe(data => {
-            if (data.hold_confirmation[0].need_to_force == true) {
-                let alert = this.alertCtrl.create({
-                    title: data.hold_confirmation[0].message,
-                    subTitle: 'Pickup location: ' + this.default_pickup,
-                    buttons: [
-                        {
-                            text: 'Cancel',
-                            handler: () => {
-                                return;
-                            },
-                        },
-                        {
-                            text: 'Place Hold Anyway',
-                            handler: () => {
-                                this.place_hold(record_id, true);
-                            },
-                        }
-                    ]
-                });
-                alert.present();
-            }
-            else if (data.hold_confirmation) {
-                this.holds_count = data.user.holds;
-                let alert = this.alertCtrl.create({
-                    title: data.hold_confirmation[0].message,
-                    subTitle: 'Pickup location: ' + this.default_pickup,
-                    buttons: [
-                        {
-                            text: 'Ok',
-                            handler: () => {
-                                return;
-                            },
-                        },
-                        {
-                            text: 'Manage Holds',
-                            handler: () => {
-                                this.events.publish('manage_holds',{ready: false});
-                            },
-                        }
-                    ]
-                });
-                alert.present();
-            } else {
-            }
-            loading.dismiss();
-        });
+        this.http.get(path)
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.hold_confirmation[0].need_to_force == true) {
+                        let alert = this.alertCtrl.create({
+                            title: data.hold_confirmation[0].message,
+                            subTitle: 'Pickup location: ' + this.default_pickup,
+                            buttons: [
+                                {
+                                    text: 'Cancel',
+                                    handler: () => {
+                                        return;
+                                    },
+                                },
+                                {
+                                    text: 'Place Hold Anyway',
+                                    handler: () => {
+                                        this.place_hold(record_id, true);
+                                    },
+                                }
+                            ]
+                        });
+                        alert.present();
+                    }
+                    else if (data.hold_confirmation) {
+                        this.holds_count = data.user.holds;
+                        let alert = this.alertCtrl.create({
+                            title: data.hold_confirmation[0].message,
+                            subTitle: 'Pickup location: ' + this.default_pickup,
+                            buttons: [
+                                {
+                                    text: 'Ok',
+                                    handler: () => {
+                                        return;
+                                    },
+                                },
+                                {
+                                    text: 'Manage Holds',
+                                    handler: () => {
+                                        this.events.publish('manage_holds',{ready: false});
+                                    },
+                                }
+                            ]
+                        });
+                        alert.present();
+                    } 
+                },
+                err => this.globals.error_handler()  
+            );
     }
 
     /* Cancel Hold */
     cancel_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Canceling Hold...'});
         loading.present();
-        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=cancel').map(res => res.json()).subscribe(data => {
-            if (data.target_holds) {
-                this.holds = data.holds;
-                this.events.publish('got_holds');
-                this.holds_count = data.user.holds;
-                this.holds_ready = data.user.holds_ready;
-            } else {
-            }
-            loading.dismiss();
-        });
+        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=cancel')
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.target_holds) {
+                        this.holds = data.holds;
+                        this.events.publish('got_holds');
+                        this.holds_count = data.user.holds;
+                        this.holds_ready = data.user.holds_ready;
+                    }
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     /* Suspend Hold */
     suspend_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Suspending Hold...'});
         loading.present();
-        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend').map(res => res.json()).subscribe(data => {
-            if (data.target_holds) {
-                this.holds = data.holds;
-                this.events.publish('got_holds');
-            } else {
-            }
-            loading.dismiss();
-        });
+        this.http.get('t' + this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend')
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.target_holds) {
+                        this.holds = data.holds;
+                        this.events.publish('got_holds');
+                    }
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     /* Activate Hold */
     activate_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Activating Hold...'});
         loading.present();
-        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=activate').map(res => res.json()).subscribe(data => {
-            if (data.target_holds) {
-                this.holds = data.holds;
-                this.events.publish('got_holds');
-            } else {
-            }
-            loading.dismiss();
-        });
+        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=activate')
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.target_holds) {
+                        this.holds = data.holds;
+                        this.events.publish('got_holds');
+                    }
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     /* Change Hold Pickup Location */
@@ -296,21 +329,26 @@ export class User {
         if (state == 'Active') { holdState = 'f'; }
         else { holdState = 't'; }
         params.append('hold_state', holdState);
-        this.http.get(this.globals.holdPickupUpdateURL, {params} ).map(res => res.json()).subscribe(data => {
-            loading.dismiss();
-            if (data.message) {
-                let alert = this.alertCtrl.create({
-                    title: 'Pickup location changed to ' + data.message.pickup_location,
-                    buttons: [{
-                        text: 'Ok',
-                        handler: () => {
-                            this.load_holds();
-                        },
-                    }]
-                });
-                alert.present();
-            }
-        });
+        this.http.get(this.globals.holdPickupUpdateURL, {params} )
+            .finally(() => loading.dismiss())
+            .map(res => res.json())
+            .subscribe(
+                data => {
+                    if (data.message) {
+                        let alert = this.alertCtrl.create({
+                            title: 'Pickup location changed to ' + data.message.pickup_location,
+                            buttons: [{
+                                text: 'Ok',
+                                handler: () => {
+                                    this.load_holds();
+                                },
+                            }]
+                        });
+                        alert.present();
+                    }
+                },
+                err => this.globals.error_handler()
+            );
     }
 
     /* Renew all items */
@@ -333,6 +371,10 @@ export class User {
     reset_password() {
         let password_reset_modal = this.modalCtrl.create(PasswordModal, {});
         password_reset_modal.present();
+    }
+
+    error_handler(){
+
     }
 
 }
