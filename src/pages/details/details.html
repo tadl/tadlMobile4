@@ -15,9 +15,9 @@
         <img [src]="globals.coverURLPrefix + id" class="list_cover_image" float-left padding-right />
         <h5 *ngIf="author">{{author}}</h5>
         <h6 *ngIf="abstract">Description</h6>
-        <p *ngIf="abstract" [innerHTML]="abstract" padding-bottom></p>
+        <p *ngIf="abstract" [innerHTML]="abstract" padding-bottom class="item-description"></p>
         <h6 *ngIf="contents">Contents</h6>
-        <p *ngIf="contents" [innerHTML]="contents"></p>
+        <p *ngIf="contents" class="item-contents" [innerHTML]="contents"></p>
         <p *ngIf="publisher">Published by {{publisher}}<span *ngIf="publication_place">, {{publication_place}}</span><span *ngIf="record_year">, {{record_year}}</span></p>
         <p *ngIf="physical_description" [innerHTML]="physical_description"></p>
         <p *ngIf="electronic == true">Electronic resource from {{source}}</p>
