@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angu
 import { User } from '../../app/user';
 import { Globals } from '../../app/globals';
 import { Item } from '../../app/item';
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -31,6 +32,15 @@ export class CheckoutsPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad CheckoutsPage');
         this.user.load_checkouts();
+    }
+
+    dueCheck(dueDate) {
+        /* if due date is before now the item is overdue */
+        if (moment(dueDate).isBefore(moment())) { return 'overDue'; }
+        /* if 3 days from now is after due date the item is due soon */
+        else if (moment().add(3, 'days').isAfter(moment(dueDate))) { return 'dueSoon'; }
+        /* the item is not due soon or orverdue */
+        else { return 'green'; }
     }
 
 }
