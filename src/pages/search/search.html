@@ -13,14 +13,14 @@
 <ion-content>
     <form (ngSubmit)="get_results()" block>
         <ion-item col-sm-12>
-            <ion-toggle item-start [(ngModel)]="this.advanced" name="advanced"></ion-toggle>
             <ion-input autocapitalize="off" autocorrect="off" type="text" placeholder="Search" [(ngModel)]="this.query" name="query"></ion-input>
             <button ion-button item-end type="submit">Search</button>
         </ion-item>
+        <ion-item-divider>
+            <ion-toggle item-start [(ngModel)]="this.advanced" name="advanced"></ion-toggle>
+            <p item-content>ADVANCED OPTIONS</p>
+        </ion-item-divider>
         <div *ngIf="advanced">
-            <ion-item-divider>
-                ADVANCED SEARCH OPTIONS
-            </ion-item-divider>
             <ion-item>
                 <ion-label>Search Type</ion-label>
                 <ion-select [(ngModel)]="this.qtype" name="qtype" interface="popover" (ngModelChange)="get_results()">
