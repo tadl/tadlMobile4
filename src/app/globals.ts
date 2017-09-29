@@ -69,8 +69,11 @@ export class Globals {
     public hoursURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/json/parsed-hours.json';
 
     /* URLs for catalog things */
+    public coverURLBase: string = 'https://' + this.catalogHost + '/opac/extras/ac/jacket';
+    public coverURLLg: string = this.coverURLBase + '/large/r/';
+    public coverURLMd: string = this.coverURLBase + '/medium/r/';
+    public coverURLSm: string = this.coverURLBase + '/small/r/';
     public passwordResetURLPrefix: string = 'https://' + this.catalogHost + '/main/reset_password_request.json';
-    public coverURLPrefix: string = 'https://' + this.catalogHost + '/opac/extras/ac/jacket/medium/r/';
     public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json';
     public searchURL: string = 'https://' + this.catalogHost + '/search.json';
     public loginURL: string = 'https://' + this.catalogHost + '/main/login_hash.json';

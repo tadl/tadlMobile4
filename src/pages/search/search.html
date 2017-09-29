@@ -76,7 +76,7 @@
         <ion-item-sliding *ngFor="let result of this.results">
             <ion-item (tap)="item.details(result.id)">
                 <ion-thumbnail item-start>
-                    <img src="{{globals.coverURLPrefix}}{{result.id}}"/>
+                    <img src="{{globals.coverURLSm}}{{result.id}}"/>
                 </ion-thumbnail>
                 <h2 *ngIf="result.title">{{result.title}}</h2>
                 <h4 *ngIf="result.author">{{result.author}}</h4>
