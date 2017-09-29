@@ -74,9 +74,11 @@ export class Globals {
     public coverURLMd: string = this.coverURLBase + '/medium/r/';
     public coverURLSm: string = this.coverURLBase + '/small/r/';
     public passwordResetURLPrefix: string = 'https://' + this.catalogHost + '/main/reset_password_request.json';
+    public saveNewPasswordUrl: string = 'https://' + this.catalogHost + '/main/update_user_info.json'
     public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json';
     public searchURL: string = 'https://' + this.catalogHost + '/search.json';
-    public loginURL: string = 'https://' + this.catalogHost + '/main/login_hash.json';
+    public loginHashURL: string = 'https://' + this.catalogHost + '/main/login_hash.json';
+    public loginPasswordURL: string = 'https://' + this.catalogHost + '/main/login.json';
     public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json';
     public checkoutRenewURL: string = 'https://' + this.catalogHost + '/main/renew_checkouts.json';
     public holdsURL: string = 'https://' + this.catalogHost + '/holds.json';

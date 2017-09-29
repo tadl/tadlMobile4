@@ -63,11 +63,20 @@ export class User {
     login(auto: boolean = false) {
         let loading = this.loadingCtrl.create({content: 'Logging in...'});
         loading.present();
-        if (auto != true) {
+        let params = new URLSearchParams();
+        params.append('username', this.username);
+        var path = this.globals.loginHashURL
+        if (auto != true && this.password.length > 4 ) {
             this.password = Md5.hashStr(this.password);
+            params.append('hashed_password', this.password);
+        }else if(auto != true && this.password.length <= 4){
+            params.append('password', this.password)
+            path = this.globals.loginPasswordURL
+        }else{
+            params.append('hashed_password', this.password)
         }
         this.login_error = '';
-        this.http.get(this.globals.loginURL + '?username=' + this.username + '&hashed_password=' + this.password)
+        this.http.get(path, {params})
             .finally(() => loading.dismiss())
             .map(res => res.json())
             .subscribe(
@@ -86,9 +95,14 @@ export class User {
                         this.token = data.token;
                         this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
                         this.storage.set('username', this.username);
-                        this.storage.set('password', this.password);
+                        if (this.password.length <= 4){
+                            this.temp_password()    
+                        }else{
+                            this.storage.set('password', this.password);
+                        }
                     } else {
                         this.login_error = "Unable to login with this username and password. Please try again or request a password reset."
+                        this.password = ''
                     }
                 },
                 err => this.globals.error_handler()
@@ -372,4 +386,10 @@ export class User {
         let password_reset_modal = this.modalCtrl.create(PasswordModal, {});
         password_reset_modal.present();
     }
+
+    temp_password(){
+        let password_reset_modal = this.modalCtrl.create(PasswordModal, {temp: true, token: this.token, temp_password: this.password});
+        password_reset_modal.present();
+    }
+
 }
