@@ -24,6 +24,7 @@ import { NewsPage } from '../pages/news/news';
 import { EventDetailPage } from '../pages/event-detail/event-detail';
 import { PostDetailPage } from '../pages/post-detail/post-detail';
 import { BarcodePage } from '../pages/barcode/barcode';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { BarcodePage } from '../pages/barcode/barcode';
         IonicModule.forRoot(MyApp),
         HttpModule,
         IonicStorageModule.forRoot(),
-        TruncateModule
+        TruncateModule,
+        IonicImageViewerModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
