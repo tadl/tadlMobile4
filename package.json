@@ -28,7 +28,6 @@
         "cordova-android": "6.2.3",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-add-swift-support": "^1.7.0",
-        "cordova-plugin-console": "1.0.5",
         "cordova-plugin-device": "1.1.4",
         "cordova-plugin-inappbrowser": "^1.7.1",
         "cordova-plugin-ionic": "^1.1.9",
@@ -61,7 +60,6 @@
         "plugins": {
             "cordova-plugin-inappbrowser": {},
             "cordova-sqlite-storage": {},
-            "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-statusbar": {},
@@ -76,6 +74,7 @@
             }
         },
         "platforms": [
+            "android",
             "ios"
         ]
     }
