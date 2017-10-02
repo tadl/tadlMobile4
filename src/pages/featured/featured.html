@@ -13,7 +13,7 @@
 <ion-content>
     <ion-list class="accordion-list">
         <div *ngFor="let section of items; let i = index" no-lines no-padding>
-            <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': section.open, 'section': !section.open}">
+            <button ion-item (tap)="toggleSection(i)" detail-none [ngClass]="{'section-active': section.open, 'section': !section.open}">
                 <ion-icon item-left name="arrow-forward" *ngIf="!section.open"></ion-icon>
                 <ion-icon item-left name="arrow-down" *ngIf="section.open"></ion-icon>
                 {{ section.fancy_title }}
@@ -30,8 +30,8 @@
                         <p *ngIf="subitem.electronic != true"><ion-icon [name]="this.globals.itemType.get(subitem['format_type'])"></ion-icon> &bull; {{subitem.loc_copies_available}} available<span *ngIf="subitem.call_number"> &bull; {{subitem.call_number}}</span></p>
                     </ion-item>
                     <ion-item-options>
-                        <button ion-button (click)="item.details(subitem.id)">Details</button>
-                        <button ion-button color="secondary" *ngIf="this.user.logged_in && subitem.electronic != true" (click)="user.place_hold(subitem.id)">Place<br/>Hold</button>
+                        <button ion-button (tap)="item.details(subitem.id)">Details</button>
+                        <button ion-button color="secondary" *ngIf="this.user.logged_in && subitem.electronic != true" (tap)="user.place_hold(subitem.id)">Place<br/>Hold</button>
                         <button ion-button color="secondary" *ngIf="!this.user.logged_in && subitem.electronic != true" menuToggle menuToggle="right">Log In</button>
                     </ion-item-options>
                 </ion-item-sliding>

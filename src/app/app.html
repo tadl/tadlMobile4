@@ -6,12 +6,12 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button menuClose ion-item (click)="this.nav.push(homePage, {}, {animate:false});" menuToggle="left">Home</button>
-            <button menuClose ion-item (click)="this.nav.push(searchPage, {}, {animate:false})">Search Catalog</button>
-            <button menuClose ion-item (click)="this.nav.push(infoPage, {}, {animate:false})" menuToggle="left">Locations</button>
-            <button menuClose ion-item (click)="this.nav.push(eventsPage, {}, {animate:false})" menuToggle="left">Events</button>
-            <button menuClose ion-item (click)="this.nav.push(newsPage, {}, {animate:false})" menuToggle="left">News</button>
-            <button menuClose ion-item (click)="this.nav.push(featuredPage, {}, {animate:false})" menuToggle="left">New Items</button>
+            <button menuClose ion-item (tap)="this.nav.push(homePage, {}, {animate:false});" menuToggle="left">Home</button>
+            <button menuClose ion-item (tap)="this.nav.push(searchPage, {}, {animate:false})">Search Catalog</button>
+            <button menuClose ion-item (tap)="this.nav.push(infoPage, {}, {animate:false})" menuToggle="left">Locations</button>
+            <button menuClose ion-item (tap)="this.nav.push(eventsPage, {}, {animate:false})" menuToggle="left">Events</button>
+            <button menuClose ion-item (tap)="this.nav.push(newsPage, {}, {animate:false})" menuToggle="left">News</button>
+            <button menuClose ion-item (tap)="this.nav.push(featuredPage, {}, {animate:false})" menuToggle="left">New Items</button>
             <button menuClose ion-item menuToggle="right">Account</button>
         </ion-list>
     </ion-content>
@@ -45,8 +45,8 @@
                 </ion-row>
                 <ion-row>
                     <ion-col class="signup-col">
-                        <button ion-button class="submit-btn" block  (click)="user.login()">Login</button>
-                        <button ion-button class="register-btn" block clear (click)="user.reset_password()">Reset Password</button>
+                        <button ion-button class="submit-btn" block  (tap)="user.login()">Login</button>
+                        <button ion-button class="register-btn" block clear (tap)="user.reset_password()">Reset Password</button>
                     </ion-col>
                 </ion-row>      
             </form>
@@ -59,19 +59,19 @@
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item (click)="this.nav.push(checkoutsPage,{},{animate: false});" menuToggle="right">
+            <ion-item (tap)="this.nav.push(checkoutsPage,{},{animate: false});" menuToggle="right">
                 Checkouts
                 <ion-badge item-end>{{user.checkout_count}}</ion-badge>
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">
+            <ion-item (tap)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">
                 Holds
                 <ion-badge item-end>{{user.holds_count}}</ion-badge>
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item *ngIf="user.holds_ready != 0" (click)="this.nav.push(holdsPage,{ready_only: true},{animate:false});" menuToggle="right">
+            <ion-item *ngIf="user.holds_ready != 0" (tap)="this.nav.push(holdsPage,{ready_only: true},{animate:false});" menuToggle="right">
                 Holds Ready for Pickup
                 <ion-badge item-end>{{user.holds_ready}}</ion-badge>
             </ion-item>
@@ -83,7 +83,7 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <button ion-button icon-left full (click)="this.nav.push(barcodePage, {cardnumber: user.card}, {animate: false});" menuToggle="right">
+                <button ion-button icon-left full (tap)="this.nav.push(barcodePage, {cardnumber: user.card}, {animate: false});" menuToggle="right">
                     <ion-icon name="card"></ion-icon>
                     Show Library Card
                 </button>
@@ -91,7 +91,7 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <button ion-button class="submit-btn" color="danger" full (click)="user.logoutConfirm()">Logout</button>
+                <button ion-button class="submit-btn" color="danger" full (tap)="user.logoutConfirm()">Logout</button>
             </ion-col>
         </ion-row>
     </ion-content>

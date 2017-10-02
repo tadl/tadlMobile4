@@ -84,9 +84,9 @@
                 <p *ngIf="result.electronic == true"><ion-icon [name]="this.globals.itemType.get(result['format_type'])"></ion-icon> &bull; Electronic resource from {{result.source}}</p>
             </ion-item>
             <ion-item-options>
-                <button ion-button (click)="item.details(result.id)">Details</button>
-                <button ion-button color="secondary" *ngIf="result.electronic == true" (click)="openWebpage(result.eresource)">View<br/>Resource</button>
-                <button ion-button color="secondary" *ngIf="this.user.logged_in && result.electronic != true" (click)="user.place_hold(result.id)">Place<br/>Hold</button>
+                <button ion-button (tap)="item.details(result.id)">Details</button>
+                <button ion-button color="secondary" *ngIf="result.electronic == true" (tap)="openWebpage(result.eresource)">View<br/>Resource</button>
+                <button ion-button color="secondary" *ngIf="this.user.logged_in && result.electronic != true" (tap)="user.place_hold(result.id)">Place<br/>Hold</button>
                 <button ion-button color="secondary" *ngIf="!this.user.logged_in && result.electronic != true" menuToggle menuToggle="right">Login<br/>to Hold</button>
             </ion-item-options>
         </ion-item-sliding>
