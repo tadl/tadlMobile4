@@ -22,7 +22,8 @@ export class User {
         public globals: Globals,
         public modalCtrl: ModalController,
         public actionSheetCtrl: ActionSheetController
-    ) {}
+    ) {
+    }
 
     username: string;
     password: any = ''
@@ -121,6 +122,11 @@ export class User {
                     role: 'destructive',
                     handler: () => {
                         this.logout();
+                    }
+                }, {
+                    text: 'Restart App',
+                    handler: () => {
+                        document.location.href = '/';
                     }
                 }, {
                     text: 'Cancel',

@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { NavController, Nav, Events } from 'ionic-angular';
 import { Globals } from '../../app/globals';
 import { CheckoutsPage } from '../checkouts/checkouts';
@@ -29,14 +30,19 @@ export class HomePage {
         public navCtrl: NavController,
         public globals: Globals,
         public nav: Nav,
+        public splashScreen: SplashScreen,
         public events: Events
     ){
+        setTimeout(() => {
+            this.splashScreen.hide();
+        }, 100);
+
         events.subscribe('manage_holds', (object) => {
-            if(object.ready != true){
+            if (object.ready != true) {
                 this.nav.push(this.holdsPage,{},{animate:false});
-            }else{
+            } else {
                 this.nav.push(this.holdsPage,{ready_only: true},{animate:false});
-            }       
+            }
         });
 
         events.subscribe('logged_out', () => {
