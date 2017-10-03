@@ -30,10 +30,6 @@
         </button>
     </ion-list>
 
-    <ion-fab right bottom>
-        <button ion-fab color="light" (tap)="scrollToTop()"><ion-icon name="arrow-up"></ion-icon></button>
-    </ion-fab>
-
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="20%">
         <ion-infinite-scroll-content loadingText="Loading more events...">
         </ion-infinite-scroll-content>
