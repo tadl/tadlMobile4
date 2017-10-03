@@ -48,14 +48,14 @@ export class User {
             if (data) {
                 this.storage.get('username').then((val) => {
                     this.username = val;
-                });
-            }
-        });
-        this.storage.get('password').then(data => {
-            if (data) {
-                this.storage.get('password').then((val) => {
-                    this.password = val;
-                    this.login(true);
+                    this.storage.get('password').then(data => {
+                        if (data) {
+                            this.storage.get('password').then((val) => {
+                                this.password = val;
+                                this.login(true);
+                            });
+                        }
+                    });
                 });
             }
         });
@@ -67,15 +67,15 @@ export class User {
         loading.present();
         let params = new URLSearchParams();
         params.append('username', this.username);
-        var path = this.globals.loginHashURL
+        var path = this.globals.loginHashURL;
         if (auto != true && this.password.length > 4 ) {
             this.password = Md5.hashStr(this.password);
             params.append('hashed_password', this.password);
-        }else if(auto != true && this.password.length <= 4){
-            params.append('password', this.password)
-            path = this.globals.loginPasswordURL
-        }else{
-            params.append('hashed_password', this.password)
+        } else if (auto != true && this.password.length <= 4) {
+            params.append('password', this.password);
+            path = this.globals.loginPasswordURL;
+        } else {
+            params.append('hashed_password', this.password);
         }
         this.login_error = '';
         this.http.get(path, {params})
@@ -97,14 +97,14 @@ export class User {
                         this.token = data.token;
                         this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
                         this.storage.set('username', this.username);
-                        if (this.password.length <= 4){
+                        if (this.password.length <= 4) {
                             this.temp_password();
-                        }else{
+                        } else {
                             this.storage.set('password', this.password);
                         }
                     } else {
-                        this.login_error = "Unable to login with this username and password. Please try again or request a password reset."
-                        this.password = ''
+                        this.login_error = 'Unable to login with this username and password. Please try again or request a password reset.';
+                        this.password = '';
                     }
                 },
                 err => this.globals.error_handler()
