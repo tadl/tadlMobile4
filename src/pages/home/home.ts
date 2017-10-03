@@ -8,6 +8,7 @@ import { FeaturedPage } from '../featured/featured';
 import { InfoPage } from '../info/info';
 import { NewsPage } from '../news/news';
 import { HoldsPage } from '../holds/holds';
+import { User } from '../../app/user';
 
 @Component({
     selector: 'page-home',
@@ -30,7 +31,8 @@ export class HomePage {
         public globals: Globals,
         public nav: Nav,
         public events: Events,
-        public platform: Platform
+        public platform: Platform,
+        public user: User
     ){
         events.subscribe('manage_holds', (object) => {
             if (object.ready != true) {
@@ -46,9 +48,8 @@ export class HomePage {
     }
 
     ionViewDidLoad() {
-        alert('pizza')
         this.platform.resume.subscribe(() => {
-            alert('pie')
+            this.user.auto_login()
         });
     }
 }
