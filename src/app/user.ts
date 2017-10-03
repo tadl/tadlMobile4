@@ -1,7 +1,7 @@
 import { Component, ViewChild, Injectable, Input } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { AlertController, LoadingController, Content, Events, ModalController } from 'ionic-angular';
+import { AlertController, LoadingController, ActionSheetController, Content, Events, ModalController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Globals } from './globals';
 import { PasswordModal } from '../pages/password/password';
@@ -21,6 +21,7 @@ export class User {
         public events: Events,
         public globals: Globals,
         public modalCtrl: ModalController,
+        public actionSheetCtrl: ActionSheetController
     ) {}
 
     username: string;
@@ -96,7 +97,7 @@ export class User {
                         this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
                         this.storage.set('username', this.username);
                         if (this.password.length <= 4){
-                            this.temp_password()    
+                            this.temp_password();
                         }else{
                             this.storage.set('password', this.password);
                         }
@@ -111,6 +112,27 @@ export class User {
 
 
     /* Logout User */
+    logoutConfirm() {
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Do you wish to log out?',
+            buttons: [
+                {
+                    text: 'Log Out',
+                    role: 'destructive',
+                    handler: () => {
+                        this.logout();
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    }
+
     logout() {
         this.logged_in = false;
         this.username = '';
@@ -188,7 +210,7 @@ export class User {
                         this.events.publish('got_holds');
                     }
                 },
-                err => this.globals.error_handler()     
+                err => this.globals.error_handler()
             );
     }
 
@@ -211,8 +233,9 @@ export class User {
                 }
             ]
         });
-        alert.present();   
+        alert.present();
     }
+
 
     /* Place Hold */
     place_hold(record_id, force) {
@@ -269,9 +292,9 @@ export class User {
                             ]
                         });
                         alert.present();
-                    } 
+                    }
                 },
-                err => this.globals.error_handler()  
+                err => this.globals.error_handler()
             );
     }
 

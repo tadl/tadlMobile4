@@ -11,16 +11,16 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let post of this.posts" (click)="itemTapped($event, post)">
+        <button ion-item *ngFor="let post of this.posts" (tap)="itemTapped($event, post)">
             <ion-thumbnail item-start *ngIf="post.featured_image_urls.thumbnail">
                 <img src="{{post.featured_image_urls.thumbnail}}" />
             </ion-thumbnail>
             <h2 [innerHTML]="post.title.rendered"></h2>
             <p [innerHTML]="post.excerpt.rendered"></p>
             <p>Posted {{globals.fixDate(post.date, 1)}}</p>
-        </ion-item>
+        </button>
     </ion-list>
-    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="200px">
         <ion-infinite-scroll-content loadingText="Loading more news...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>

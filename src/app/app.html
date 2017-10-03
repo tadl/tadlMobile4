@@ -59,26 +59,27 @@
             </ion-item>
         </ion-row>
         <ion-row>
-            <ion-item (click)="this.nav.push(checkoutsPage,{},{animate: false});" menuToggle="right">
+            <button ion-item (click)="this.nav.push(checkoutsPage,{},{animate: false});" menuToggle="right">
                 Checkouts
                 <ion-badge item-end>{{user.checkout_count}}</ion-badge>
-            </ion-item>
+            </button>
         </ion-row>
         <ion-row>
-            <ion-item (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">
+            <button ion-item (click)="this.nav.push(holdsPage,{},{animate:false});" menuToggle="right">
                 Holds
                 <ion-badge item-end>{{user.holds_count}}</ion-badge>
-            </ion-item>
+            </button>
         </ion-row>
         <ion-row>
-            <ion-item *ngIf="user.holds_ready != 0" (click)="this.nav.push(holdsPage,{ready_only: true},{animate:false});" menuToggle="right">
+            <button ion-item *ngIf="user.holds_ready != 0" (click)="this.nav.push(holdsPage,{ready_only: true},{animate:false});" menuToggle="right">
                 Holds Ready for Pickup
                 <ion-badge item-end>{{user.holds_ready}}</ion-badge>
-            </ion-item>
+            </button>
         </ion-row>
         <ion-row>
             <ion-item *ngIf="user.fines != 0.00">
-                Fines: {{user.fines}}
+                Fines
+                <ion-badge item-end>{{user.fines}}</ion-badge>
             </ion-item>
         </ion-row>
         <ion-row>
@@ -91,7 +92,7 @@
         </ion-row>
         <ion-row>
             <ion-col>
-                <button ion-button class="submit-btn" color="danger" full (click)="user.logout()">Logout</button>
+                <button ion-button class="submit-btn" color="danger" full (click)="user.logoutConfirm()">Logout</button>
             </ion-col>
         </ion-row>
     </ion-content>
