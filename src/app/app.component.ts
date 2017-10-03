@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Globals } from '../app/globals';
 import { User } from '../app/user';
@@ -37,6 +38,7 @@ export class MyApp {
     constructor(
         public platform: Platform, 
         public statusBar: StatusBar, 
+        public splashScreen: SplashScreen,
         public globals: Globals,
         public user: User,
         public item: Item
@@ -51,6 +53,9 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
             this.user.check_legacy_storage();
+            setTimeout(() => {
+                this.splashScreen.hide();
+            }, 100);
         });
     }
 

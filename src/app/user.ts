@@ -124,11 +124,6 @@ export class User {
                         this.logout();
                     }
                 }, {
-                    text: 'Restart App',
-                    handler: () => {
-                        document.location.href = '/';
-                    }
-                }, {
                     text: 'Cancel',
                     role: 'cancel',
                     handler: () => {
