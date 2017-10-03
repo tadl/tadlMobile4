@@ -90,7 +90,7 @@ export class User {
                         this.holds_count = data.holds;
                         this.fines = data.fine;
                         this.holds_ready = data.holds_ready;
-                        if(data.holds_ready && (data.holds_ready != 0)){
+                        if (data.holds_ready && (data.holds_ready != 0)) {
                             this.holds_ready_alert();
                         }
                         this.card = data.card;
