@@ -49,7 +49,7 @@ export class HomePage {
 
     ionViewDidLoad() {
         this.platform.resume.subscribe(() => {
-            this.user.auto_login()
+            this.user.auto_login(true)
         });
     }
 }

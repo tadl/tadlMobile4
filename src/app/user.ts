@@ -43,7 +43,7 @@ export class User {
     checkout_errors: Array<{any}> = [];
 
     /* Auto Log User in if username and password in local storage */
-    auto_login() {
+    auto_login(background: boolean = false) {
         this.storage.get('username').then(data => {
             if (data) {
                 this.storage.get('username').then((val) => {
@@ -52,7 +52,7 @@ export class User {
                         if (data) {
                             this.storage.get('password').then((val) => {
                                 this.password = val;
-                                this.login(true);
+                                this.login(true, background);
                             });
                         }
                     });
@@ -62,9 +62,11 @@ export class User {
     }
 
     /* Login User */
-    login(auto: boolean = false) {
+    login(auto: boolean = false, background: boolean = false) {
         let loading = this.loadingCtrl.create({content: 'Logging in...'});
-        loading.present();
+        if(background != false){
+            loading.present();
+        }
         let params = new URLSearchParams();
         params.append('username', this.username);
         var path = this.globals.loginHashURL;
@@ -79,7 +81,12 @@ export class User {
         }
         this.login_error = '';
         this.http.get(path, {params})
-            .finally(() => loading.dismiss())
+            .finally(() => { 
+                    if (background != false){
+                        loading.dismiss()
+                    }
+                }
+            )
             .map(res => res.json())
             .subscribe(
                 data => {
@@ -89,9 +96,18 @@ export class User {
                         this.checkout_count = data.checkouts;
                         this.holds_count = data.holds;
                         this.fines = data.fine;
-                        this.holds_ready = data.holds_ready;
-                        if (data.holds_ready && (data.holds_ready != 0)) {
-                            this.holds_ready_alert();
+                        if(background == true){
+                            if((this.holds_ready != data.holds_ready) && data.holds_ready != 0){
+                                this.holds_ready = data.holds_ready 
+                                this.holds_ready_alert();
+                            }else{
+                                this.holds_ready = data.holds_ready     
+                            }
+                        }else{
+                            this.holds_ready = data.holds_ready;
+                            if (data.holds_ready && (data.holds_ready != 0)) {
+                                this.holds_ready_alert();
+                            }  
                         }
                         this.card = data.card;
                         this.token = data.token;
