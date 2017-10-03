@@ -16,6 +16,7 @@ import { SearchPage } from '../pages/search/search';
 import { InfoPage } from '../pages/info/info';
 import { NewsPage } from '../pages/news/news';
 import { BarcodePage } from '../pages/barcode/barcode';
+import { Subscription } from 'rxjs';
 
 @Component({
     templateUrl: 'app.html'
@@ -41,10 +42,19 @@ export class MyApp {
         public splashScreen: SplashScreen,
         public globals: Globals,
         public user: User,
-        public item: Item
+        public item: Item,
+        private subscription: Subscription;
     ) {
         this.initializeApp();
         user.auto_login();
+        this.subscription = platform.resume.subscribe(()=>{
+            alert('pizza')
+            user.auto_login();
+        });
+        ngOnDestroy() {
+            // always unsubscribe your subscriptions to prevent leaks
+            this.onResumeSubscription.unsubscribe();
+        }
     }
 
     initializeApp() {
@@ -56,10 +66,6 @@ export class MyApp {
             setTimeout(() => {
                 this.splashScreen.hide();
             }, 100);
-        });
-        this.platform.resume.subscribe(() => {
-            this.user.auto_login();
-            alert('pizza')
         });
     }
 
