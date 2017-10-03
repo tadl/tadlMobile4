@@ -64,7 +64,7 @@ export class User {
     /* Login User */
     login(auto: boolean = false, background: boolean = false) {
         let loading = this.loadingCtrl.create({content: 'Logging in...'});
-        if(background != false){
+        if(background != true){
             loading.present();
         }
         let params = new URLSearchParams();
@@ -97,7 +97,7 @@ export class User {
                         this.holds_count = data.holds;
                         this.fines = data.fine;
                         if(background == true){
-                            if((this.holds_ready != data.holds_ready) && data.holds_ready != 0){
+                            if((this.holds_ready < data.holds_ready) && data.holds_ready != 0){
                                 this.holds_ready = data.holds_ready 
                                 this.holds_ready_alert();
                             }else{
