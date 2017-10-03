@@ -82,7 +82,7 @@ export class User {
         this.login_error = '';
         this.http.get(path, {params})
             .finally(() => { 
-                    if (background != false){
+                    if (background != true){
                         loading.dismiss()
                     }
                 }
