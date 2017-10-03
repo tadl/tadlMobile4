@@ -57,6 +57,9 @@ export class MyApp {
                 this.splashScreen.hide();
             }, 100);
         });
+        this.platform.resume.subscribe(() => {
+            this.user.auto_login();
+        });
     }
 
     openPage(page) {
