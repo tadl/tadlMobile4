@@ -418,22 +418,22 @@ export class User {
 
     /* Check for usernames and hashed passwords from previous versions of apps */
 
-    check_legacy_storage(){
-        if(localStorage.username){
-            var username = localStorage.username
+    check_legacy_storage() {
+        if (localStorage.username) {
+            var username = localStorage.username;
+            this.storage.set('username', username);
+            localStorage.removeItem('username');
+        }
+        if (localStorage.hash) {
+            var password = localStorage.hash;
             this.storage.set('password', password);
-            localStorage.removeItem("username");
+            localStorage.removeItem('hash');
         }
-        if(localStorage.hash){
-            var password = localStorage.hash
-            this.storage.set('password', password);
-            localStorage.removeItem("hash");
+        if (localStorage.token) {
+            localStorage.removeItem('token');
         }
-        if(localStorage.token){
-            localStorage.removeItem("token");
-        }
-        if(localStorage.card){
-            localStorage.removeItem("hash");
+        if (localStorage.card) {
+            localStorage.removeItem('card');
         }
     }
 
