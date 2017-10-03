@@ -20,21 +20,21 @@
                 <ion-option *ngFor="let venue of globals.eventVenues" [value]="venue.venue">{{venue.name}}</ion-option>
             </ion-select>
         </ion-item>
-        <ion-item *ngFor="let event of this.events" (tap)="itemTapped($event, event)">
+        <button ion-item *ngFor="let event of this.events" (tap)="itemTapped($event, event)">
             <ion-thumbnail item-start *ngIf="event.image">
                 <img src="{{event.image.sizes.thumbnail.url}}" />
             </ion-thumbnail>
             <h2 [innerHTML]="event.title"></h2>
             <h4 [innerHTML]="globals.fixDate(event.start_date)"></h4>
             <p *ngIf="event.venue">{{event.venue.venue}}</p>
-        </ion-item>
+        </button>
     </ion-list>
 
     <ion-fab right bottom>
         <button ion-fab color="light" (tap)="scrollToTop()"><ion-icon name="arrow-up"></ion-icon></button>
     </ion-fab>
 
-    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="0px">
+    <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="20%">
         <ion-infinite-scroll-content loadingText="Loading more events...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
