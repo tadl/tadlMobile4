@@ -43,7 +43,7 @@ export class MyApp {
         public globals: Globals,
         public user: User,
         public item: Item,
-        private subscription: Subscription;
+        private subscription: Subscription,
     ) {
         this.initializeApp();
         user.auto_login();
@@ -51,10 +51,6 @@ export class MyApp {
             alert('pizza')
             user.auto_login();
         });
-        ngOnDestroy() {
-            // always unsubscribe your subscriptions to prevent leaks
-            this.onResumeSubscription.unsubscribe();
-        }
     }
 
     initializeApp() {
