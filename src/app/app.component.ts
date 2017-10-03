@@ -59,6 +59,7 @@ export class MyApp {
         });
         this.platform.resume.subscribe(() => {
             this.user.auto_login();
+            alert('pizza')
         });
     }
 
