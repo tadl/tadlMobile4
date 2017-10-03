@@ -387,9 +387,31 @@ export class User {
         password_reset_modal.present();
     }
 
+    /* Detect temporary passwords */
     temp_password(){
         let password_reset_modal = this.modalCtrl.create(PasswordModal, {temp: true, token: this.token, temp_password: this.password});
         password_reset_modal.present();
+    }
+
+    /* Check for usernames and hashed passwords from previous versions of apps */
+
+    check_legacy_storage(){
+        if(localStorage.username){
+            var username = localStorage.username
+            this.storage.set('password', password);
+            localStorage.removeItem("username");
+        }
+        if(localStorage.hash){
+            var password = localStorage.hash
+            this.storage.set('password', password);
+            localStorage.removeItem("hash");
+        }
+        if(localStorage.token){
+            localStorage.removeItem("token");
+        }
+        if(localStorage.card){
+            localStorage.removeItem("hash");
+        }
     }
 
 }

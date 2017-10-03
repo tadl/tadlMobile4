@@ -53,6 +53,7 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+            this.user.check_legacy_storage();
         });
     }
 
@@ -61,5 +62,4 @@ export class MyApp {
         // we wouldn't want the back button to show in this scenario
         this.nav.setRoot(page.component);
     }
-
 }
