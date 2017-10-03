@@ -16,7 +16,7 @@ import { SearchPage } from '../pages/search/search';
 import { InfoPage } from '../pages/info/info';
 import { NewsPage } from '../pages/news/news';
 import { BarcodePage } from '../pages/barcode/barcode';
-import { Subscription } from 'rxjs';
+
 
 @Component({
     templateUrl: 'app.html'
@@ -43,14 +43,9 @@ export class MyApp {
         public globals: Globals,
         public user: User,
         public item: Item,
-        private subscription: Subscription,
     ) {
         this.initializeApp();
         user.auto_login();
-        this.subscription = platform.resume.subscribe(()=>{
-            alert('pizza')
-            user.auto_login();
-        });
     }
 
     initializeApp() {
@@ -70,4 +65,5 @@ export class MyApp {
         // we wouldn't want the back button to show in this scenario
         this.nav.setRoot(page.component);
     }
+
 }

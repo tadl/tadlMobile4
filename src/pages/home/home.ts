@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Nav, Events } from 'ionic-angular';
+import { NavController, Nav, Events, Platform } from 'ionic-angular';
 import { Globals } from '../../app/globals';
 import { CheckoutsPage } from '../checkouts/checkouts';
 import { SearchPage } from '../search/search';
@@ -29,7 +29,8 @@ export class HomePage {
         public navCtrl: NavController,
         public globals: Globals,
         public nav: Nav,
-        public events: Events
+        public events: Events,
+        public platform: Platform
     ){
         events.subscribe('manage_holds', (object) => {
             if (object.ready != true) {
@@ -44,4 +45,10 @@ export class HomePage {
         });
     }
 
+    ionViewDidLoad() {
+        alert('pizza')
+        this.platform.resume.subscribe(() => {
+            alert('pie')
+        });
+    }
 }
