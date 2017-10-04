@@ -157,6 +157,14 @@ export class User {
         this.token = '';
         this.storage.clear();
         this.events.publish('logged_out');
+        this.checkouts = []
+        this.holds = []
+        this.card = ''
+        this.http.get(this.globals.logoutURL)
+            .subscribe(
+                data => {},
+                err => this.globals.error_handler()
+            )
     }
 
     /* Get Checkouts */
