@@ -160,12 +160,18 @@ export class User {
     }
 
     /* Get Checkouts */
-    load_checkouts() {
+    load_checkouts(background: boolean = false) {
         let loading = this.loadingCtrl.create({content:'Loading Checkouts...'});
-        loading.present();
+        if (background == false) {
+            loading.present();
+        }
         this.checkout_errors.length = 0;
         this.http.get(this.globals.checkoutsURL + '?token=' + this.token)
-            .finally(() => loading.dismiss())
+            .finally(() => {
+                if (background == false) {
+                    loading.dismiss();
+                }
+            })
             .map(res => res.json())
             .subscribe(
                 data => {
@@ -214,11 +220,17 @@ export class User {
 
     /* get holds */
 
-    load_holds() {
+    load_holds(background: boolean = false) {
         let loading = this.loadingCtrl.create({content:'Loading Holds...'});
-        loading.present();
+        if (background == false) {
+            loading.present();
+        }
         this.http.get(this.globals.holdsURL + '?token=' + this.token)
-            .finally(() => loading.dismiss())
+            .finally(() => {
+                if (background == false) {
+                    loading.dismiss();
+                }
+            })
             .map(res => res.json())
             .subscribe(
                 data => {

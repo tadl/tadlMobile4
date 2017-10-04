@@ -55,7 +55,7 @@ export class CheckoutsPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad CheckoutsPage');
         this.platform.resume.subscribe(() => {
-            this.user.load_checkouts();
+            this.user.load_checkouts(true);
         });
     }
 
