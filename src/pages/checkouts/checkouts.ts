@@ -1,5 +1,5 @@
 import { Component, Injectable, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Content, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Platform, Content, ActionSheetController } from 'ionic-angular';
 import { User } from '../../app/user';
 import { Globals } from '../../app/globals';
 import { Item } from '../../app/item';
@@ -23,11 +23,13 @@ export class CheckoutsPage {
         public user: User,
         public item: Item,
         public events: Events,
+        public platform: Platform,
         public globals: Globals
     ) {
         events.subscribe('renew', () => {
             this.content.scrollToTop();
         });
+        this.user.load_checkouts();
     }
 
     renewAll() {
@@ -52,16 +54,21 @@ export class CheckoutsPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad CheckoutsPage');
-        this.user.load_checkouts();
+        this.platform.resume.subscribe(() => {
+            this.user.load_checkouts();
+        });
     }
 
     dueCheck(dueDate) {
         /* if due date is before now the item is overdue */
         if (moment(dueDate).isBefore(moment())) { return 'overDue'; }
+
         /* if 3 days from now is after due date the item is due soon */
         else if (moment().add(3, 'days').isAfter(moment(dueDate))) { return 'dueSoon'; }
+
         /* the item is not due soon or orverdue */
         else { return 'green'; }
+
     }
 
 }
