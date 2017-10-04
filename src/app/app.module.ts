@@ -47,7 +47,10 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
         BrowserModule,
         IonicModule.forRoot(MyApp),
         HttpModule,
-        IonicStorageModule.forRoot(),
+        IonicStorageModule.forRoot({
+            name: '__db',
+            driverOrder: ['sqlite', 'websql']
+        }),
         TruncateModule,
         IonicImageViewerModule
     ],
