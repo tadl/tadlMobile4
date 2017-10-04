@@ -64,7 +64,7 @@ export class User {
     /* Login User */
     login(auto: boolean = false, background: boolean = false) {
         let loading = this.loadingCtrl.create({content: 'Logging in...'});
-        if(background != true){
+        if (background != true) {
             loading.present();
         }
         let params = new URLSearchParams();
@@ -81,9 +81,9 @@ export class User {
         }
         this.login_error = '';
         this.http.get(path, {params})
-            .finally(() => { 
-                    if (background != true){
-                        loading.dismiss()
+            .finally(() => {
+                    if (background != true) {
+                        loading.dismiss();
                     }
                 }
             )
@@ -97,17 +97,17 @@ export class User {
                         this.holds_count = data.holds;
                         this.fines = data.fine;
                         if(background == true){
-                            if((this.holds_ready < data.holds_ready) && data.holds_ready != 0){
-                                this.holds_ready = data.holds_ready 
+                            if ((this.holds_ready < data.holds_ready) && data.holds_ready != 0) {
+                                this.holds_ready = data.holds_ready;
                                 this.holds_ready_alert();
-                            }else{
-                                this.holds_ready = data.holds_ready     
+                            } else {
+                                this.holds_ready = data.holds_ready;
                             }
-                        }else{
+                        } else {
                             this.holds_ready = data.holds_ready;
                             if (data.holds_ready && (data.holds_ready != 0)) {
                                 this.holds_ready_alert();
-                            }  
+                            }
                         }
                         this.card = data.card;
                         this.token = data.token;
@@ -156,7 +156,7 @@ export class User {
         this.password = '';
         this.token = '';
         this.storage.clear();
-        this.events.publish('logged_out')
+        this.events.publish('logged_out');
     }
 
     /* Get Checkouts */

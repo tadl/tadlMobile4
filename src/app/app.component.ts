@@ -37,8 +37,8 @@ export class MyApp {
     pages: Array<{title: string, component: any}>;
 
     constructor(
-        public platform: Platform, 
-        public statusBar: StatusBar, 
+        public platform: Platform,
+        public statusBar: StatusBar,
         public splashScreen: SplashScreen,
         public globals: Globals,
         public user: User,
