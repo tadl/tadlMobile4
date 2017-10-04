@@ -23,6 +23,9 @@ export class User {
         public modalCtrl: ModalController,
         public actionSheetCtrl: ActionSheetController
     ) {
+        events.subscribe('log_me_out', () => {
+             this.logout()
+        });
     }
 
     username: string;
@@ -85,6 +88,7 @@ export class User {
                     if (background != true) {
                         loading.dismiss();
                     }
+                    this.events.publish('login_attempt')
                 }
             )
             .map(res => res.json())
@@ -154,17 +158,18 @@ export class User {
         this.logged_in = false;
         this.username = '';
         this.password = '';
-        this.token = '';
+        this.login_error = ''
         this.storage.clear();
         this.events.publish('logged_out');
         this.checkouts = []
         this.holds = []
         this.card = ''
-        this.http.get(this.globals.logoutURL)
+        this.http.get(this.globals.logoutURL + '?token=' + this.token)
             .subscribe(
                 data => {},
                 err => this.globals.error_handler()
             )
+        this.token = '';
     }
 
     /* Get Checkouts */
@@ -183,7 +188,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.checkouts) {
+                    if(data.user.error){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.load_checkouts()
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.checkouts) {
                         this.checkouts = data.checkouts;
                     }
                 },
@@ -201,7 +216,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.checkouts) {
+                    if(data.user.error){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.renew(checkout_ids, record_ids)
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.checkouts) {
                         var message = '';
                         if (data.errors.length > 0 && !data.message.startsWith("Failed")) {
                             message = data.message + ' ' + 'One or more items failed to renew.';
@@ -242,7 +267,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.holds) {
+                    if(data.user.error){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.load_holds()
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.holds) {
                         this.holds = data.holds;
                         this.events.publish('got_holds');
                     }
@@ -271,6 +306,9 @@ export class User {
             ]
         });
         alert.present();
+        this.events.subscribe('log_me_out', () => {
+            alert.dismiss()
+        });
     }
 
 
@@ -287,7 +325,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.hold_confirmation[0].need_to_force == true) {
+                    if(data.user.error){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.place_hold(record_id, force)
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.hold_confirmation[0].need_to_force == true) {
                         let alert = this.alertCtrl.create({
                             title: data.hold_confirmation[0].message,
                             subTitle: 'Pickup location: ' + this.default_pickup,
@@ -344,7 +392,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.target_holds) {
+                    if(data.user == "bad token"){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.cancel_hold(hold_id)
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.target_holds) {
                         this.holds = data.holds;
                         this.events.publish('got_holds');
                         this.holds_count = data.user.holds;
@@ -364,7 +422,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.target_holds) {
+                    if(data.user == "bad token"){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.suspend_hold(hold_id)
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.target_holds) {
                         this.holds = data.holds;
                         this.events.publish('got_holds');
                     }
@@ -382,7 +450,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.target_holds) {
+                    if(data.user == "bad token"){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.activate_hold(hold_id)
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.target_holds) {
                         this.holds = data.holds;
                         this.events.publish('got_holds');
                     }
@@ -408,7 +486,17 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.message) {
+                    if(data.message == "bad login"){
+                        this.auto_login(true)
+                        this.events.subscribe('login_attempt', () => {
+                            if(this.login_error == ''){
+                                this.change_hold_pickup(hold_id, state, event)
+                            }else{
+                                this.globals.logout_alert()
+                            }
+                        });
+                    }
+                    else if (data.message != "bad login") {
                         let alert = this.alertCtrl.create({
                             title: 'Pickup location changed to ' + data.message.pickup_location,
                             buttons: [{

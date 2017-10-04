@@ -90,7 +90,11 @@ export class PasswordModal {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.message == 'success') {
+                    if(data.user.error){
+                        this.close_modal()
+                        this.globals.logout_alert()
+                    }
+                    else if (data.message == 'success') {
                         this.password_success = true
                         var password = Md5.hashStr(this.new_password_1);
                         this.storage.set('password', password);

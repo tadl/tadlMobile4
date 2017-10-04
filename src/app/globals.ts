@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController} from 'ionic-angular';
+import { AlertController, Events} from 'ionic-angular';
 import * as moment from 'moment';
 
 @Injectable()
@@ -7,6 +7,7 @@ export class Globals {
     
     constructor(
         private alertCtrl: AlertController,
+        public events: Events
     ){}
 
 
@@ -124,6 +125,20 @@ export class Globals {
                 text: 'Ok',
                 handler: () => {
                     return
+                },
+            }]
+        });
+        alert.present();
+    }
+
+    logout_alert(){
+        let alert = this.alertCtrl.create({
+            title: "Opps...",
+            subTitle: 'Your login has expired please login and try again',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    this.events.publish('log_me_out')
                 },
             }]
         });
