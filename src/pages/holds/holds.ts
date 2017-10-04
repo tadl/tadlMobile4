@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, Events, Platform } from 'ionic-angular';
 import { Globals } from '../../app/globals';
 import { User } from '../../app/user';
 import { Item } from '../../app/item';
@@ -22,7 +22,8 @@ export class HoldsPage {
         public events: Events,
         public user: User,
         public item: Item,
-        public globals: Globals
+        public globals: Globals,
+        public platform: Platform
     ) {
         this.user.load_holds();
         events.subscribe('got_holds', () => {
@@ -63,6 +64,12 @@ export class HoldsPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HoldsPage');
+        this.platform.resume.subscribe(() => {
+            this.user.load_holds();
+            this.events.subscribe('got_holds', () => {
+                this.process_holds();
+            });
+        });
     }
 
 }
