@@ -52,6 +52,15 @@ export class HoldsPage {
         actionSheet.present();
     }
 
+    doRefresh(refresher) {
+        /* this is messed up because of the whole events business */
+        /* we either need to return an observable (to .subscribe()) or 
+            a promise (to .then()) */
+        /* could probably setTimeout() but that's not great either. */
+        this.user.load_holds();
+        refresher.complete();
+    }
+
     process_holds() {
         if (this.ready_only == true) {
             this.processed_holds = this.user.holds.filter(
@@ -64,9 +73,6 @@ export class HoldsPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HoldsPage');
-        this.platform.resume.subscribe(() => {
-            this.user.load_holds(true);
-        });
     }
 
 }

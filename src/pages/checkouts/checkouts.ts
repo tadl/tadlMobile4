@@ -52,11 +52,18 @@ export class CheckoutsPage {
         actionSheet.present();
     }
 
+    doRefresh(refresher) {
+        /* this is messed up because of the whole events business */
+        /* we either need to return an observable (to .subscribe()) or
+            a promise (to .then()) */
+        /* could probably setTimeout() but that's not great either. */
+        this.user.load_checkouts();
+        refresher.complete();
+    }
+
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad CheckoutsPage');
-        this.platform.resume.subscribe(() => {
-            this.user.load_checkouts(true);
-        });
     }
 
     dueCheck(dueDate) {

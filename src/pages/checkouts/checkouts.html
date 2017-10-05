@@ -11,6 +11,15 @@
 </ion-header>
 
 <ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingText="">
+        </ion-refresher-content>
+    </ion-refresher>
+
     <button *ngIf="user.checkouts.length > 0" ion-button block (tap)="this.renewAll()">Renew All</button>
     <ion-card *ngIf="user.checkout_errors.length > 0">
         <ion-card-content class="warning">
@@ -48,5 +57,5 @@
             </ion-row>
         </ion-grid>
     </ion-card>
-</ion-content>
 
+</ion-content>

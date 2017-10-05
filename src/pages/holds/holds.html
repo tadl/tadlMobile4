@@ -14,6 +14,15 @@
 </ion-header>
 
 <ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingText="">
+        </ion-refresher-content>
+    </ion-refresher>
+
     <ion-card *ngFor="let hold of this.processed_holds">
         <ion-card-header><strong>{{hold['title']}}</strong></ion-card-header>
         <ion-grid>
@@ -52,4 +61,5 @@
             </ion-row>
         </ion-grid>
     </ion-card>
+
 </ion-content>
