@@ -73,17 +73,8 @@ export class User {
         }
         let params = new URLSearchParams();
         params.append('username', this.username);
-        var path = this.globals.loginHashURL;
-        if (auto != true && this.password.length > 4 ) {
-            this.password = Md5.hashStr(this.password);
-            params.append('hashed_password', this.password);
-        } else if (auto != true && this.password.length <= 4) {
-            params.append('password', this.password);
-            path = this.globals.loginPasswordURL;
-        } else {
-            params.append('hashed_password', this.password);
-        }
-        alert(path)
+        params.append('password', this.password)
+        var path = this.globals.loginPasswordURL;
         this.login_error = '';
         this.http.get(path, {params})
             .finally(() => {
