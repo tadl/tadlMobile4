@@ -12,6 +12,14 @@
 
 <ion-content>
 
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingText="">
+        </ion-refresher-content>
+    </ion-refresher>
+
     <ion-list>
         <ion-item>
             <ion-label>Location</ion-label>

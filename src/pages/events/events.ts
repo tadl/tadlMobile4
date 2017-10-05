@@ -39,6 +39,13 @@ export class EventsPage {
         });
     }
 
+    doRefresh(refresher) {
+        this.loadEvents(1, '').then(data => {
+            this.events = data['events'];
+            refresher.complete();
+        });
+    }
+
     loadEvents(page, loc?) {
         let urlAppend:string = '';
         if (loc) {

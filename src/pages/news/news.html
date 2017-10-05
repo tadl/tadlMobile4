@@ -9,7 +9,17 @@
         </button>
     </ion-navbar>
 </ion-header>
+
 <ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Pull to refresh"
+            refreshingText="">
+        </ion-refresher-content>
+    </ion-refresher>
+
     <ion-list>
         <button ion-item *ngFor="let post of this.posts" (tap)="itemTapped($event, post)">
             <ion-thumbnail item-start *ngIf="post.featured_image_urls.thumbnail">
@@ -20,8 +30,10 @@
             <p>Posted {{globals.fixDate(post.date, 1)}}</p>
         </button>
     </ion-list>
+
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="200px">
         <ion-infinite-scroll-content loadingText="Loading more news...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
 </ion-content>

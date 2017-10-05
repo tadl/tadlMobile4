@@ -37,6 +37,13 @@ export class NewsPage {
         });
     }
 
+    doRefresh(refresher) {
+        this.loadPosts(1).then(data => {
+            this.posts = data;
+            refresher.complete();
+        });
+    }
+
     loadPosts(page) {
         if (!page) {
             let page = 1;
