@@ -66,6 +66,7 @@ export class User {
 
     /* Login User */
     login(auto: boolean = false, background: boolean = false) {
+        alert(this.password)
         let loading = this.loadingCtrl.create({content: 'Logging in...'});
         if (background != true) {
             loading.present();
@@ -83,13 +84,12 @@ export class User {
             params.append('hashed_password', this.password);
         }
         this.login_error = '';
-        let login_request = this.http.get(path, {params})
+        this.http.get(path, {params})
             .finally(() => {
                 if (background != true) {
                     loading.dismiss();
                 }
                 this.events.publish('login_attempt')
-                login_request.unsubscribe()
             })
             .map(res => res.json())
             .subscribe(
@@ -159,9 +159,14 @@ export class User {
     logout() {
         this.http.get(this.globals.logoutURL + '?token=' + this.token)
             .finally(() => {
-                this.logged_in = true;
+                this.username = ''
+                this.token = ''
+                this.password = ''
+                this.checkouts = []
+                this.holds = []
+                this.logged_in = false;
                 this.storage.clear();
-                window.location.reload(true);
+                this.events.publish('logged_out');
             })
             .subscribe(
                 data => {},

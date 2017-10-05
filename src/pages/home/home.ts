@@ -43,6 +43,9 @@ export class HomePage {
             }
         });
 
+        events.subscribe('logged_out', () => {
+            this.nav.goToRoot({});
+        });
     }
 
     ionViewDidLoad() {
