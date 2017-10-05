@@ -10,7 +10,7 @@ import JsBarcode from 'jsbarcode';
 export class BarcodePage {
 
     @ViewChild('barcode') barcode: ElementRef;
-    cardnumber: string = this.navParams.get('cardnumber') || '32202';
+    cardnumber: string = this.navParams.get('cardnumber') || '0';
 
     constructor(
         private nav: NavController,

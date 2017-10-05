@@ -40,7 +40,9 @@ export class EventsPage {
     }
 
     doRefresh(refresher) {
-        this.loadEvents(1, '').then(data => {
+        var loc = '';
+        if (this.location != '') { loc = this.location; } else { loc = ''; }
+        this.loadEvents(1, loc).then(data => {
             this.events = data['events'];
             refresher.complete();
         });
@@ -58,6 +60,7 @@ export class EventsPage {
                 resolve(data);
             }, (err) => {
                 this.lastPageReached = true;
+                this.globals.error_handler()
             });
         });
     }

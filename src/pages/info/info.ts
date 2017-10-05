@@ -29,12 +29,13 @@ export class InfoPage {
     get_info() {
         let loading = this.loadingCtrl.create({content:'Loading...'});
         loading.present();
-        this.http.get(this.url).map(res => res.json()).subscribe(data => {
-            loading.dismiss();
-            if (data.locations) {
-                this.locations = data.locations;
-            }
-        });
+        this.http.get(this.url).finally(() => loading.dismiss()).map(res => res.json()).subscribe(
+            data => {
+                if (data.locations) {
+                    this.locations = data.locations;
+                }
+            }, err => this.globals.error_handler()
+        );
     }
 
     ionViewDidLoad() {
