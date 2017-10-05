@@ -95,6 +95,7 @@ export class User {
             .subscribe(
                 data => {
                     if (data.token) {
+                        alert('good password')
                         this.logged_in = true;
                         this.full_name = data.full_name;
                         this.checkout_count = data.checkouts;
@@ -123,6 +124,7 @@ export class User {
                             this.storage.set('password', this.password);
                         }
                     } else {
+                        alert('bad password')
                         this.login_error = 'Unable to login with this username and password. Please try again or request a password reset.';
                         this.password = '';
                     }
@@ -157,6 +159,7 @@ export class User {
     logout() {
         this.http.get(this.globals.logoutURL + '?token=' + this.token)
             .finally(() => {
+                this.logged_in = true;
                 this.storage.clear();
                 window.location.reload(true);
             })
