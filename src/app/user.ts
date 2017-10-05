@@ -159,7 +159,8 @@ export class User {
         this.password = '';
         this.login_error = '';
         this.storage.clear();
-        this.events.publish('logged_out');
+        //this.events.publish('logged_out');
+        window.location.reload(true);
         this.checkouts = [];
         this.holds = [];
         this.card = '';
