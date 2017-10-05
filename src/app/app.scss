@@ -15,21 +15,12 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-body {
-    cursor: url('https://ionicframework.com/img/finger.png'), auto;
-}
-
 .warning {
     color: red;
 }
 
 ion-navbar[hidebackbutton] button[menutoggle] {
     display: block !important;
-}
-
-.list_cover_image {
-    width: 150px;
-    height: auto;
 }
 
 .full_width_select {

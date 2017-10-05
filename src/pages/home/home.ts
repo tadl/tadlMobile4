@@ -35,6 +35,7 @@ export class HomePage {
         public user: User
     ){
         events.subscribe('manage_holds', (object) => {
+            console.log('manage_holds event fired: ' + object);
             if (object.ready != true) {
                 this.nav.push(this.holdsPage,{},{animate:false});
             } else {
