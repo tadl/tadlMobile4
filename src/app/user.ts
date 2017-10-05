@@ -155,15 +155,15 @@ export class User {
     }
 
     logout() {
-        this.storage.clear();
         this.http.get(this.globals.logoutURL + '?token=' + this.token)
+            .finally(() => {
+                this.storage.clear();
+                window.location.reload(true);
+            })
             .subscribe(
-                data => {
-                    this.token = '';
-                },
+                data => {},
                 err => this.globals.error_handler()
             )
-        window.location.reload(true);
     }
 
     /* Get Checkouts */
