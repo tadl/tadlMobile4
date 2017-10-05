@@ -83,6 +83,7 @@ export class User {
         } else {
             params.append('hashed_password', this.password);
         }
+        alert(path)
         this.login_error = '';
         this.http.get(path, {params})
             .finally(() => {
