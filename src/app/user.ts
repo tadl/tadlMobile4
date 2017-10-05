@@ -83,12 +83,13 @@ export class User {
             params.append('hashed_password', this.password);
         }
         this.login_error = '';
-        this.http.get(path, {params})
+        let login_request = this.http.get(path, {params})
             .finally(() => {
                 if (background != true) {
                     loading.dismiss();
                 }
                 this.events.publish('login_attempt')
+                login_request.unsubscribe()
             })
             .map(res => res.json())
             .subscribe(
@@ -128,7 +129,6 @@ export class User {
                 },
                 err => this.globals.error_handler()
             )
-
     }
 
 
