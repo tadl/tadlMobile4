@@ -80,7 +80,7 @@ export class Globals {
     public searchURL: string = 'https://' + this.catalogHost + '/search.json';
     public loginHashURL: string = 'https://' + this.catalogHost + '/main/login_hash.json';
     public loginPasswordURL: string = 'https://' + this.catalogHost + '/main/login.json';
-    public logoutURL: string = 'https://' + this.catalogHost + '/main/logout.json'
+    public logoutURL: string = 'https://' + this.catalogHost + '/main/logout.json';
     public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json';
     public checkoutRenewURL: string = 'https://' + this.catalogHost + '/main/renew_checkouts.json';
     public holdsURL: string = 'https://' + this.catalogHost + '/holds.json';

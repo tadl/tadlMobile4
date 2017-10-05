@@ -100,7 +100,7 @@ export class User {
                         this.checkout_count = data.checkouts;
                         this.holds_count = data.holds;
                         this.fines = data.fine;
-                        if(background == true){
+                        if (background == true) {
                             if ((this.holds_ready < data.holds_ready) && data.holds_ready != 0) {
                                 this.holds_ready = data.holds_ready;
                                 this.holds_ready_alert();
@@ -158,18 +158,19 @@ export class User {
         this.logged_in = false;
         this.username = '';
         this.password = '';
-        this.login_error = ''
+        this.login_error = '';
         this.storage.clear();
         this.events.publish('logged_out');
-        this.checkouts = []
-        this.holds = []
-        this.card = ''
+        this.checkouts = [];
+        this.holds = [];
+        this.card = '';
         this.http.get(this.globals.logoutURL + '?token=' + this.token)
             .subscribe(
-                data => {},
+                data => {
+                    this.token = '';
+                },
                 err => this.globals.error_handler()
             )
-        this.token = '';
     }
 
     /* Get Checkouts */
@@ -188,13 +189,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user.error){
-                        this.auto_login(true)
+                    if (data.user.error) {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.load_checkouts()
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.load_checkouts();
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
@@ -216,13 +217,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user.error){
-                        this.auto_login(true)
+                    if (data.user.error) {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.renew(checkout_ids, record_ids)
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.renew(checkout_ids, record_ids);
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
@@ -244,7 +245,7 @@ export class User {
                                 },
                             }]
                         });
-                        alert.present()
+                        alert.present();
                     }
                 },
                 err => this.globals.error_handler()
@@ -267,13 +268,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user.error){
-                        this.auto_login(true)
+                    if (data.user.error) {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.load_holds()
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.load_holds();
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
@@ -325,13 +326,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user.error){
-                        this.auto_login(true)
+                    if (data.user.error) {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.place_hold(record_id, force)
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.place_hold(record_id, force);
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
@@ -392,13 +393,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user == "bad token"){
-                        this.auto_login(true)
+                    if (data.user == "bad token") {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.cancel_hold(hold_id)
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.cancel_hold(hold_id);
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
@@ -422,13 +423,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user == "bad token"){
-                        this.auto_login(true)
+                    if (data.user == "bad token") {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.suspend_hold(hold_id)
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.suspend_hold(hold_id);
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
@@ -450,13 +451,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user == "bad token"){
-                        this.auto_login(true)
+                    if (data.user == "bad token") {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.activate_hold(hold_id)
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.activate_hold(hold_id);
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
@@ -486,13 +487,13 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.message == "bad login"){
-                        this.auto_login(true)
+                    if (data.message == "bad login") {
+                        this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
-                            if(this.login_error == ''){
-                                this.change_hold_pickup(hold_id, state, event)
-                            }else{
-                                this.globals.logout_alert()
+                            if (this.login_error == '') {
+                                this.change_hold_pickup(hold_id, state, event);
+                            } else {
+                                this.globals.logout_alert();
                             }
                         });
                     }
