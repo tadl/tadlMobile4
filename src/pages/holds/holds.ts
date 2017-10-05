@@ -66,9 +66,6 @@ export class HoldsPage {
         console.log('ionViewDidLoad HoldsPage');
         this.platform.resume.subscribe(() => {
             this.user.load_holds(true);
-            this.events.subscribe('got_holds', () => {
-                this.process_holds();
-            });
         });
     }
 
