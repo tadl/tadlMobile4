@@ -85,12 +85,11 @@ export class User {
         this.login_error = '';
         this.http.get(path, {params})
             .finally(() => {
-                    if (background != true) {
-                        loading.dismiss();
-                    }
-                    this.events.publish('login_attempt')
+                if (background != true) {
+                    loading.dismiss();
                 }
-            )
+                this.events.publish('login_attempt')
+            })
             .map(res => res.json())
             .subscribe(
                 data => {
