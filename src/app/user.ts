@@ -30,6 +30,7 @@ export class User {
 
     username: string;
     password: any = ''
+    hashed_password: any = ''
     logged_in : boolean;
     full_name: string;
     checkout_count: string;
@@ -51,10 +52,10 @@ export class User {
             if (data) {
                 this.storage.get('username').then((val) => {
                     this.username = val;
-                    this.storage.get('password').then(data => {
+                    this.storage.get('hashed_password').then(data => {
                         if (data) {
-                            this.storage.get('password').then((val) => {
-                                this.password = val;
+                            this.storage.get('hashed_password').then((val) => {
+                                this.hashed_password = val;
                                 this.login(true, background);
                             });
                         }
@@ -72,15 +73,13 @@ export class User {
         }
         let params = new URLSearchParams();
         params.append('username', this.username);
-        var path = this.globals.loginHashURL;
-        if (auto != true && this.password.length > 4 ) {
-            this.password = Md5.hashStr(this.password);
-            params.append('hashed_password', this.password);
-        } else if (auto != true && this.password.length <= 4) {
+        var path = ''
+        if(auto != true){
             params.append('password', this.password);
             path = this.globals.loginPasswordURL;
-        } else {
-            params.append('hashed_password', this.password);
+        }else{
+            params.append('hashed_password', this.hashed_password);
+            path = this.globals.loginHashURL;
         }
         this.login_error = '';
         this.http.get(path, {params})
@@ -116,10 +115,11 @@ export class User {
                         this.token = data.token;
                         this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
                         this.storage.set('username', this.username);
-                        if (this.password.length <= 4) {
+                        if (this.hashed_password == '' && this.password.length <= 4) {
                             this.temp_password();
                         } else {
-                            this.storage.set('password', this.password);
+                            var hashed_password = Md5.hashStr(this.password);
+                            this.storage.set('hashed_password', hashed_password);
                         }
                     } else {
                         this.login_error = 'Unable to login with this username and password. Please try again or request a password reset.';
