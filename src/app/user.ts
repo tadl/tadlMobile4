@@ -522,8 +522,8 @@ export class User {
             localStorage.removeItem('username');
         }
         if (localStorage.hash) {
-            var password = localStorage.hash;
-            this.storage.set('hashed_password', password);
+            var pass = localStorage.hash;
+            this.storage.set('hashed_password', pass);
             localStorage.removeItem('hash');
         }
         if (localStorage.token) {
