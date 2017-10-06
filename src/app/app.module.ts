@@ -49,7 +49,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
         HttpModule,
         IonicStorageModule.forRoot({
             name: '__db',
-            driverOrder: ['localstorage']
+            driverOrder: ['sqlite', 'indexeddb', 'websql']
         }),
         TruncateModule,
         IonicImageViewerModule
