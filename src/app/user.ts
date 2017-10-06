@@ -112,7 +112,7 @@ export class User {
                         this.token = data.token;
                         this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
                         this.storage.set('username', this.username);
-                        if (this.password.length <= 4) {
+                        if (data.temp_code) {
                             this.temp_password();
                         } else {         
                             this.storage.set('hashed_password', this.hashed_password);
