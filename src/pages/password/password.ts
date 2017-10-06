@@ -96,8 +96,8 @@ export class PasswordModal {
                     }
                     else if (data.message == 'success') {
                         this.password_success = true
-                        var password = Md5.hashStr(this.new_password_1);
-                        this.storage.set('password', password);
+                        var hashed_password = Md5.hashStr(this.new_password_1);
+                        this.storage.set('hashed_password', hashed_password);
                     }else{
                         this.globals.error_handler()
                     }

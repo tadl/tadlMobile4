@@ -72,15 +72,12 @@ export class User {
             loading.present();
         }
         let params = new URLSearchParams();
-        params.append('username', this.username);
-        var path = ''
         if(auto != true){
-            params.append('password', this.password);
-            path = this.globals.loginPasswordURL;
-        }else{
-            params.append('hashed_password', this.hashed_password);
-            path = this.globals.loginHashURL;
+            this.hashed_password = Md5.hashStr(this.password);
         }
+        params.append('username', this.username);
+        params.append('hashed_password', this.hashed_password);
+        var path = this.globals.loginHashURL;
         this.login_error = '';
         this.http.get(path, {params})
             .finally(() => {
@@ -115,11 +112,10 @@ export class User {
                         this.token = data.token;
                         this.default_pickup = this.globals.pickupLocations.get(data.pickup_library);
                         this.storage.set('username', this.username);
-                        if (this.hashed_password == '' && this.password.length <= 4) {
+                        if (this.password.length <= 4) {
                             this.temp_password();
-                        } else {
-                            var hashed_password = Md5.hashStr(this.password);
-                            this.storage.set('hashed_password', hashed_password);
+                        } else {         
+                            this.storage.set('hashed_password', this.hashed_password);
                         }
                     } else {
                         this.login_error = 'Unable to login with this username and password. Please try again or request a password reset.';
@@ -552,7 +548,7 @@ export class User {
         }
         if (localStorage.hash) {
             var password = localStorage.hash;
-            this.storage.set('password', password);
+            this.storage.set('hashed_password', password);
             localStorage.removeItem('hash');
         }
         if (localStorage.token) {
