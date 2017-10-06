@@ -46,6 +46,9 @@ export class MyApp {
     ) {
         this.initializeApp();
         user.auto_login();
+        this.platform.resume.subscribe(() => {
+            this.user.auto_login(true);
+        });
     }
 
     initializeApp() {

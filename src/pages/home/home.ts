@@ -46,8 +46,6 @@ export class HomePage {
     }
 
     ionViewDidLoad() {
-        this.platform.resume.subscribe(() => {
-            this.user.auto_login(true);
-        });
+        console.log('ionViewDidLoad HomePage');
     }
 }
