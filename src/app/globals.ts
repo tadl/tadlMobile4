@@ -119,7 +119,7 @@ export class Globals {
 
     error_handler(){
         let alert = this.alertCtrl.create({
-            title: "Opps...",
+            title: "Oops...",
             subTitle: 'Network error. Check your internet connection or try again later',
             buttons: [{
                 text: 'Ok',
@@ -133,7 +133,7 @@ export class Globals {
 
     logout_alert(){
         let alert = this.alertCtrl.create({
-            title: "Opps...",
+            title: "Oops...",
             subTitle: 'Your login has expired please login and try again',
             buttons: [{
                 text: 'Ok',

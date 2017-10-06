@@ -1,7 +1,7 @@
 import { Component, ViewChild, Injectable, Input } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { AlertController, LoadingController, ActionSheetController, Content, Events, ModalController } from 'ionic-angular';
+import { AlertController, LoadingController, ActionSheetController, Content, Events, ModalController, ToastController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Globals } from './globals';
 import { PasswordModal } from '../pages/password/password';
@@ -17,11 +17,12 @@ export class User {
         private alertCtrl: AlertController,
         private http: Http,
         public loadingCtrl: LoadingController,
-        private storage: Storage,
         public events: Events,
         public globals: Globals,
         public modalCtrl: ModalController,
-        public actionSheetCtrl: ActionSheetController
+        public actionSheetCtrl: ActionSheetController,
+        public toastCtrl: ToastController,
+        private storage: Storage
     ) {
         events.subscribe('log_me_out', () => {
              this.logout()
@@ -98,14 +99,14 @@ export class User {
                         if (background == true) {
                             if ((this.holds_ready < data.holds_ready) && data.holds_ready != 0) {
                                 this.holds_ready = data.holds_ready;
-                                this.holds_ready_alert();
+                                this.showToast('You have one or more holds available for pickup.');
                             } else {
                                 this.holds_ready = data.holds_ready;
                             }
                         } else {
                             this.holds_ready = data.holds_ready;
                             if (data.holds_ready && (data.holds_ready != 0)) {
-                                this.holds_ready_alert();
+                                this.showToast('You have one or more holds available for pickup.');
                             }
                         }
                         this.card = data.card;
@@ -282,32 +283,6 @@ export class User {
                 err => this.globals.error_handler()
             );
     }
-
-    holds_ready_alert(){
-        let alert = this.alertCtrl.create({
-            title: 'Holds Ready for Pickup',
-            subTitle: 'One or more items are ready for you to pickup',
-            buttons: [
-                {
-                    text: 'Ok',
-                    handler: () => {
-                        return;
-                    },
-                },
-                {
-                    text: 'View Holds Ready for Pickup',
-                    handler: () => {
-                        this.events.publish('manage_holds',{ready: true});
-                    },
-                }
-            ]
-        });
-        alert.present();
-        this.events.subscribe('log_me_out', () => {
-            alert.dismiss()
-        });
-    }
-
 
     /* Place Hold */
     place_hold(record_id, force) {
@@ -557,6 +532,22 @@ export class User {
         if (localStorage.card) {
             localStorage.removeItem('card');
         }
+    }
+
+    showToast(message) {
+        const toast = this.toastCtrl.create({
+            message: message,
+            showCloseButton: true,
+            closeButtonText: 'OK',
+            dismissOnPageChange: true,
+            position: 'top'
+        });
+
+        toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+
+        toast.present();
     }
 
 }
