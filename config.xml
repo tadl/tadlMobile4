@@ -95,5 +95,4 @@
         <variable name="MAX_STORE" value="2" />
     </plugin>
     <engine name="ios" spec="~4.4.0" />
-    <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
 </widget>
