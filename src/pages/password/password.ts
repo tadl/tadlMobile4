@@ -85,7 +85,7 @@ export class PasswordModal {
         params.append('password', this.temp_password)
         params.append('new_password', this.new_password_1)
         params.append('token', this.token)
-        params.append('from_mobile', true)
+        params.append('from_mobile', 'true')
         this.http.get(this.globals.saveNewPasswordUrl, {params})
             .finally(() => loading.dismiss())
             .map(res => res.json())
