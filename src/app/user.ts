@@ -150,20 +150,20 @@ export class User {
     }
 
     logout() {
-        this.logged_in = false;
-        this.username = '';
-        this.password = '';
-        this.login_error = '';
-        this.storage.clear();
-        //this.events.publish('logged_out');
-        window.location.reload(true);
-        this.checkouts = [];
-        this.holds = [];
-        this.card = '';
         this.http.get(this.globals.logoutURL + '?token=' + this.token)
             .subscribe(
                 data => {
                     this.token = '';
+                    this.username = '';
+                    this.password = '';
+                    this.hashed_password = '';
+                    this.card = '';
+                    this.login_error = '';
+                    this.storage.clear();
+                    this.checkouts = [];
+                    this.holds = [];
+                    this.logged_in = false;
+                    this.events.publish('logged_out');
                 },
                 err => this.globals.error_handler()
             )
