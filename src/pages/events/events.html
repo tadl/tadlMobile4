@@ -32,6 +32,7 @@
             <ion-thumbnail item-start *ngIf="event.image">
                 <img src="{{event.image.sizes.thumbnail.url}}" />
             </ion-thumbnail>
+            <h2 item-end>{{event.start_date_details.month}}.{{event.start_date_details.day}}</h2>
             <h2 [innerHTML]="event.title"></h2>
             <h4 [innerHTML]="globals.fixDate(event.start_date)"></h4>
             <p *ngIf="event.venue">{{event.venue.venue}}</p>
