@@ -24,6 +24,9 @@ export class ItemDetailsModal {
     ){
         events.subscribe('manage_holds', () => {
             this.viewCtrl.dismiss();
+            events.unsubscribe('manage_holds', () => {
+                console.log('removed')
+            });
         });
     }
 

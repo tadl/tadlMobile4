@@ -34,6 +34,7 @@ export class User {
     hashed_password: any = ''
     logged_in : boolean;
     full_name: string;
+    ils_username: string;
     checkout_count: string;
     holds_count: string;
     holds_ready: string;
@@ -96,6 +97,7 @@ export class User {
                         this.checkout_count = data.checkouts;
                         this.holds_count = data.holds;
                         this.fines = data.fine;
+                        this.ils_username = data.username;
                         if (background == true) {
                             if ((this.holds_ready < data.holds_ready) && data.holds_ready != 0) {
                                 this.holds_ready = data.holds_ready;

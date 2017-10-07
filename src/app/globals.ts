@@ -67,6 +67,7 @@ export class Globals {
     public newsURL: string = 'https://' + this.websiteHost + '/wp-json/wp/v2/posts?per_page=20&categories_exclude=' + this.newsCategoryExclude;
     public eventsURL: string = 'https://' + this.websiteHost + '/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
     public logoURL: string = 'https://' + this.websiteHost + '/' + this.logoFileName;
+    public squareLogoURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/2017/10/logo-clock-only.png';
     public hoursURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/json/parsed-hours.json';
 
     /* URLs for catalog things */

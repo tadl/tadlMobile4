@@ -12,10 +12,25 @@
 
 <ion-content padding>
     <ion-grid>
-        <ion-row>
+        <ion-row *ngIf="!user.logged_in">
             <div class="home-image" col-sm-12>
                 <img alt="Logo" [src]="globals.logoURL" />
             </div>
+        </ion-row>
+        <ion-row *ngIf="user.logged_in" no-padding no-margin>
+            <ion-col col-sm-12 no-padding no-margin>
+                <ion-list no-padding no-margin>
+                    <ion-item no-padding no-margin>
+                        <ion-thumbnail item-start><img [src]="globals.squareLogoURL"/></ion-thumbnail>
+                        <h2 *ngIf="user.ils_username">Hello, {{user.ils_username}}!</h2>
+                        <p *ngIf="user.checkout_count > 0 || user.holds_count > 0 || user.fines != 0.00" text-wrap>
+                            You have<span *ngIf="user.checkout_count > 0"> {{user.checkout_count}} items checked out</span><span *ngIf="user.holds_count == 0 && user.fines == 0.00">.</span><span *ngIf="user.checkout_count > 0 && user.holds_count > 0">,</span><span *ngIf="user.holds_count > 0"> {{user.holds_count}} items on hold<span *ngIf="user.holds_ready > 0"> ({{user.holds_ready}} ready for pickup!)</span><span *ngIf="user.holds_ready == 0 && user.fines == 0.00">.</span><span *ngIf="user.fines != 0.00"><span *ngIf="user.checkout_count > 0 || user.holds_count > 0"> and</span> {{user.fines}} in fines.</span></span>
+                        </p>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+        <ion-row>
             <ion-col col-sm-12>
                 <form (ngSubmit)="this.nav.push(searchPage, {query: this.query}, {animate:false});this.advanced=0;" block>
                     <ion-item col-sm-12>
