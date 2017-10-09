@@ -74,7 +74,7 @@ export class User {
             loading.present();
         }
         let params = new URLSearchParams();
-        if(auto != true){
+        if (auto != true) {
             this.hashed_password = Md5.hashStr(this.password);
         }
         params.append('username', this.username);
@@ -117,7 +117,7 @@ export class User {
                         this.storage.set('username', this.username);
                         if (data.temp_code) {
                             this.temp_password();
-                        } else {         
+                        } else {
                             this.storage.set('hashed_password', this.hashed_password);
                         }
                     } else {
@@ -510,7 +510,7 @@ export class User {
     }
 
     /* Detect temporary passwords */
-    temp_password(){
+    temp_password() {
         let password_reset_modal = this.modalCtrl.create(PasswordModal, {temp: true, token: this.token, temp_password: this.password});
         password_reset_modal.present();
     }
