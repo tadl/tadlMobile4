@@ -241,9 +241,8 @@ export class User {
                             buttons: [{
                                 text: 'Ok',
                                 handler: () => {
-                                    this.checkouts = data.checkouts
-                                    this.checkout_errors = data.errors
-                                    this.events.publish('renew')
+                                    this.checkouts = data.checkouts;
+                                    this.checkout_errors = data.errors;
                                 },
                             }]
                         });
