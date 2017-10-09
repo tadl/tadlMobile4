@@ -63,6 +63,13 @@ export class CheckoutsPage {
         console.log('ionViewDidLoad CheckoutsPage');
     }
 
+    ionViewDidEnter() {
+        console.log('ionViewDidEnter CheckoutsPage');
+    }
+    ionViewDidLeave() {
+        console.log('ionViewDidLeave CheckoutsPage');
+    }
+
     dueCheck(dueDate) {
         /* if due date is before now the item is overdue */
         if (moment(dueDate).isBefore(moment())) { return 'overDue'; }

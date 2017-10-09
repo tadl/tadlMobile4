@@ -26,10 +26,6 @@ export class HoldsPage {
         public platform: Platform
     ) {
         this.user.load_holds();
-        events.subscribe('got_holds', () => {
-            this.process_holds();
-            console.log('triggered got_holds event');
-        });
     }
 
     cancelHold(holdId, holdTitle) {
@@ -75,5 +71,17 @@ export class HoldsPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad HoldsPage');
     }
+    ionViewDidEnter() {
+        console.log('ionViewDidEnter HoldsPage');
+        this.events.subscribe('got_holds', () => {
+            this.process_holds();
+            console.log('triggered got_holds event');
+        });
+    }
+    ionViewDidLeave() {
+        console.log('ionViewDidLeave HoldsPage');
+        this.events.unsubscribe('got_holds');
+    }
+
 
 }

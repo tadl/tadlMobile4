@@ -124,13 +124,15 @@ export class SearchPage {
             console.log('triggered infinite_done event');
             if (this.more_results == false) {
                 infiniteScroll.enable(false);
+                this.events.subscribe('new_search', () => {
+                    console.log('triggered new_search event');
+                    if (this.more_results == true) {
+                        infiniteScroll.enable(true);
+                    }
+                    this.events.unsubscribe('new_search');
+                });
             }
-        });
-        this.events.subscribe('new_search', () => {
-            console.log('triggered new_search event');
-            if (this.more_results == true) {
-                infiniteScroll.enable(true);
-            }
+            this.events.unsubscribe('infinite_done');
         });
     }
 
