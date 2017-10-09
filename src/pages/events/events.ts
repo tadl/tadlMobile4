@@ -53,7 +53,6 @@ export class EventsPage {
         if (loc) {
             this.location = loc;
             urlAppend = '&venue=' + loc;
-            console.log("loc  " + loc);
         }
         return new Promise(resolve => {
             this.http.get(this.url + '&page=' + page + urlAppend).map(res => res.json()).subscribe(data => {
@@ -94,10 +93,6 @@ export class EventsPage {
 
     isLastPageReached():boolean {
         return this.lastPageReached;
-    }
-
-    scrollToTop() {
-        this.content.scrollToTop();
     }
 
     itemTapped(event, item) {
