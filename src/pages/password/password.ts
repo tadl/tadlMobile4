@@ -21,7 +21,7 @@ export class PasswordModal {
         public navCtrl: NavController,
         public navParams: NavParams,
         public viewCtrl: ViewController,
-        public globals: Globals,
+        public globals: Globals
     ) {
     }
 
@@ -33,8 +33,8 @@ export class PasswordModal {
     temp: boolean = this.navParams.get('temp') || false;
     temp_password: string = this.navParams.get('temp_password') || ''
     valid_password: boolean = false;
-    username: string
-    token: string = this.navParams.get('token') || ''
+    username: string;
+    token: string = this.navParams.get('token') || '';
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad PasswordModal');
@@ -58,54 +58,53 @@ export class PasswordModal {
         this.viewCtrl.dismiss();
     }
 
-    validate_new_password(event){
-        this.password_error = ''
-        this.valid_password = false
-        if(this.new_password_1.length < 7){
-            this.password_error =  'Password must be at least 7 characters. '
+    validate_new_password(event) {
+        this.password_error = '';
+        this.valid_password = false;
+        if (this.new_password_1.length < 7) {
+            this.password_error =  'Password must be at least 7 characters.';
         }
-        if(!this.new_password_1.match(/\d/)){
-            this.password_error = this.password_error + 'Password must contain at least one number. '
+        if (!this.new_password_1.match(/\d/)) {
+            this.password_error = this.password_error + 'Password must contain at least one number.';
         }
-        if(!this.new_password_1.match(/[a-zA-Z]/)){
-            this.password_error = this.password_error + 'Password must contain at least one letter. '
+        if (!this.new_password_1.match(/[a-zA-Z]/)) {
+            this.password_error = this.password_error + 'Password must contain at least one letter.';
         }
-        if(this.new_password_1 != this.new_password_2){
-            this.password_error = this.password_error + 'New passwords do not match. '
+        if (this.new_password_1 != this.new_password_2) {
+            this.password_error = this.password_error + 'New passwords do not match.';
         }
-        if(this.password_error == ''){
-            this.valid_password = true
+        if (this.password_error == '') {
+            this.valid_password = true;
         }
     }
 
-    save_new_password(){
+    save_new_password() {
         let loading = this.loadingCtrl.create({content: 'Saving new password...'});
         loading.present();
         let params = new URLSearchParams();
-        params.append('password', this.temp_password)
-        params.append('new_password', this.new_password_1)
-        params.append('token', this.token)
-        params.append('from_mobile', 'true')
+        params.append('password', this.temp_password);
+        params.append('new_password', this.new_password_1);
+        params.append('token', this.token);
+        params.append('from_mobile', 'true');
         this.http.get(this.globals.saveNewPasswordUrl, {params})
             .finally(() => loading.dismiss())
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if(data.user.error){
-                        this.close_modal()
-                        this.globals.logout_alert()
+                    if (data.user.error) {
+                        this.close_modal();
+                        this.globals.logout_alert();
                     }
                     else if (data.message == 'success') {
-                        this.password_success = true
+                        this.password_success = true;
                         var hashed_password = Md5.hashStr(this.new_password_1);
                         this.storage.set('hashed_password', hashed_password);
-                    }else{
-                        this.globals.error_handler()
+                    } else {
+                        this.globals.error_handler();
                     }
                 },
                 err => this.globals.error_handler()
             );
-
     }
 
 }
