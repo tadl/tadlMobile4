@@ -28,6 +28,7 @@ export class CheckoutsPage {
     ) {
         events.subscribe('renew', () => {
             this.content.scrollToTop();
+            console.log('triggered renew event');
         });
         this.user.load_checkouts();
     }

@@ -25,7 +25,8 @@ export class User {
         private storage: Storage
     ) {
         events.subscribe('log_me_out', () => {
-             this.logout()
+            console.log('triggered log_me_out event');
+            this.logout()
         });
     }
 
@@ -191,6 +192,7 @@ export class User {
                     if (data.user.error) {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event');
                             if (this.login_error == '') {
                                 this.load_checkouts();
                             } else {
@@ -219,6 +221,7 @@ export class User {
                     if (data.user.error) {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event within renew');
                             if (this.login_error == '') {
                                 this.renew(checkout_ids, record_ids);
                             } else {
@@ -270,6 +273,7 @@ export class User {
                     if (data.user.error) {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event within load_holds');
                             if (this.login_error == '') {
                                 this.load_holds();
                             } else {
@@ -302,6 +306,7 @@ export class User {
                     if (data.user.error) {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event within place_holds');
                             if (this.login_error == '') {
                                 this.place_hold(record_id, force);
                             } else {
@@ -369,6 +374,7 @@ export class User {
                     if (data.user == "bad token") {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event within cancel_hold');
                             if (this.login_error == '') {
                                 this.cancel_hold(hold_id);
                             } else {
@@ -399,6 +405,7 @@ export class User {
                     if (data.user == "bad token") {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event within suspend_hold');
                             if (this.login_error == '') {
                                 this.suspend_hold(hold_id);
                             } else {
@@ -427,6 +434,7 @@ export class User {
                     if (data.user == "bad token") {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event within activate_hold');
                             if (this.login_error == '') {
                                 this.activate_hold(hold_id);
                             } else {
@@ -463,6 +471,7 @@ export class User {
                     if (data.message == "bad login") {
                         this.auto_login(true);
                         this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt event within change_hold_pickup');
                             if (this.login_error == '') {
                                 this.change_hold_pickup(hold_id, state, event);
                             } else {

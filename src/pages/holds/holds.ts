@@ -28,6 +28,7 @@ export class HoldsPage {
         this.user.load_holds();
         events.subscribe('got_holds', () => {
             this.process_holds();
+            console.log('triggered got_holds event');
         });
     }
 
