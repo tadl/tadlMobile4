@@ -48,6 +48,7 @@ export class User {
     checkouts: Array<{any}> = [];
     checkout_mesages: string;
     checkout_errors: Array<{any}> = [];
+    attempt: number = 0;
 
     /* Auto Log User in if username and password in local storage */
     auto_login(background: boolean = false) {
@@ -189,19 +190,21 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    if (data.user.error) {
+                    let that = this;
+                    this.attempt++;
+                    console.log('attempt ' + this.attempt);
+                    if (this.attempt > 5) {
+                        console.log('welp. we tried');
+                        this.attempt = 0;
+                        this.globals.logout_alert();
+                    } else if ((data.user.error == 'bad token') && (this.attempt < 5)) {
                         this.auto_login(true);
-                        this.events.subscribe('login_attempt', () => {
-                            console.log('triggered login_attempt event');
-                            if (this.login_error == '') {
-                                this.load_checkouts();
-                            } else {
-                                this.globals.logout_alert();
-                            }
-                        });
-                    }
-                    else if (data.checkouts) {
+                        setTimeout(function() {
+                            that.load_checkouts();
+                        }, 3000);
+                    } else if (data.checkouts != "login") {
                         this.checkouts = data.checkouts;
+                        this.attempt = 0;
                     }
                 },
                 err => this.globals.error_handler(err)
@@ -253,18 +256,13 @@ export class User {
             );
     }
 
-    /* get holds */
-
-    load_holds(background: boolean = false) {
+    /* load holds */
+    load_holds(available: boolean = false) {
         let loading = this.loadingCtrl.create({content:'Loading Holds...'});
-        if (background == false) {
-            loading.present();
-        }
+        loading.present();
         this.http.get(this.globals.holdsURL + '?token=' + this.token)
             .finally(() => {
-                if (background == false) {
-                    loading.dismiss();
-                }
+                loading.dismiss()
             })
             .map(res => res.json())
             .subscribe(
@@ -281,15 +279,20 @@ export class User {
                         });
                     }
                     else if (data.holds) {
-                        this.holds = data.holds;
-                        this.events.publish('got_holds');
+                        if (available == true) { /* process only available holds */
+                            this.holds = data.holds.filter(
+                                hold => hold['queue_status'].startsWith('Ready')
+                            );
+                        } else { /* process all holds */
+                            this.holds = data.holds;
+                        }
                     }
                 },
                 err => this.globals.error_handler(err)
             );
     }
 
-    /* Place Hold */
+    /* place hold */
     place_hold(record_id, force) {
         let loading = this.loadingCtrl.create({content:'Placing Hold...'});
         loading.present();
@@ -383,7 +386,6 @@ export class User {
                     }
                     else if (data.target_holds) {
                         this.holds = data.holds;
-                        this.events.publish('got_holds');
                         this.holds_count = data.user.holds;
                         this.holds_ready = data.user.holds_ready;
                     }
@@ -414,7 +416,6 @@ export class User {
                     }
                     else if (data.target_holds) {
                         this.holds = data.holds;
-                        this.events.publish('got_holds');
                     }
                 },
                 err => this.globals.error_handler(err)
@@ -443,7 +444,6 @@ export class User {
                     }
                     else if (data.target_holds) {
                         this.holds = data.holds;
-                        this.events.publish('got_holds');
                     }
                 },
                 err => this.globals.error_handler(err)

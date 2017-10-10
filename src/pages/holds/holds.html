@@ -23,7 +23,7 @@
         </ion-refresher-content>
     </ion-refresher>
 
-    <ion-card *ngFor="let hold of this.processed_holds">
+    <ion-card *ngFor="let hold of user.holds">
         <ion-card-header><strong>{{hold['title']}}</strong></ion-card-header>
         <ion-grid>
             <ion-row>

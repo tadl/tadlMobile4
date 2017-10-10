@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Globals } from '../app/globals';
@@ -43,6 +43,7 @@ export class MyApp {
         public globals: Globals,
         public user: User,
         public item: Item,
+        public events: Events
     ) {
         this.initializeApp();
         user.auto_login();

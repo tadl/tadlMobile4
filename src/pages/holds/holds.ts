@@ -13,7 +13,6 @@ export class HoldsPage {
 
     confirmation: string = "0"; /* ????? */
     ready_only: boolean = this.navParams.get('ready_only') || false;
-    processed_holds: Array<{any}> = [];
 
     constructor(
         public navCtrl: NavController,
@@ -25,7 +24,7 @@ export class HoldsPage {
         public globals: Globals,
         public platform: Platform
     ) {
-        this.user.load_holds();
+        this.user.load_holds(this.ready_only);
     }
 
     cancelHold(holdId, holdTitle) {
@@ -58,29 +57,14 @@ export class HoldsPage {
         refresher.complete();
     }
 
-    process_holds() {
-        if (this.ready_only == true) {
-            this.processed_holds = this.user.holds.filter(
-                hold => hold['queue_status'].startsWith('Ready')
-            );
-        } else {
-            this.processed_holds = this.user.holds;
-        }
-    }
-
     ionViewDidLoad() {
         console.log('ionViewDidLoad HoldsPage');
-        this.events.subscribe('got_holds', () => {
-            this.process_holds();
-            console.log('triggered got_holds event');
-        });
     }
     ionViewDidEnter() {
         console.log('ionViewDidEnter HoldsPage');
     }
     ionViewDidLeave() {
         console.log('ionViewDidLeave HoldsPage');
-        this.events.unsubscribe('got_holds');
     }
 
 
