@@ -11,7 +11,6 @@ import { Item } from '../../app/item';
 })
 export class HoldsPage {
 
-    confirmation: string = "0"; /* ????? */
     ready_only: boolean = this.navParams.get('ready_only') || false;
 
     constructor(
