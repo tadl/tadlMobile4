@@ -33,17 +33,7 @@ export class HomePage {
         public events: Events,
         public platform: Platform,
         public user: User
-    ){
-        events.subscribe('manage_holds', (object) => {
-            console.log('manage_holds event fired: ' + object);
-            if (object.ready != true) {
-                this.nav.push(this.holdsPage,{},{animate:false});
-            } else {
-                this.nav.push(this.holdsPage,{ready_only: true},{animate:false});
-            }
-        });
-
-    }
+    ){}
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HomePage');

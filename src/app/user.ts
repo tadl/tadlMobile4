@@ -1,7 +1,7 @@
 import { Component, ViewChild, Injectable, Input } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
-import { AlertController, LoadingController, ActionSheetController, Content, Events, ModalController, ToastController } from 'ionic-angular';
+import { App, AlertController, LoadingController, ActionSheetController, Content, Events, ModalController, ToastController } from 'ionic-angular';
 import { Md5 } from 'ts-md5/dist/md5';
 import { Globals } from './globals';
 import { PasswordModal } from '../pages/password/password';
@@ -13,6 +13,7 @@ import 'rxjs/Rx';
 
 export class User {
     @ViewChild(Content) content: Content;
+    pages = {};
     constructor(
         private alertCtrl: AlertController,
         private http: Http,
@@ -22,12 +23,14 @@ export class User {
         public modalCtrl: ModalController,
         public actionSheetCtrl: ActionSheetController,
         public toastCtrl: ToastController,
-        private storage: Storage
+        private storage: Storage,
+        public appCtrl: App
     ) {
         events.subscribe('log_me_out', () => {
             console.log('triggered log_me_out event');
             this.logout()
         });
+        this.pages['holdsPage'] = require('../pages/holds/holds').HoldsPage;
     }
 
     username: string;
@@ -360,6 +363,7 @@ export class User {
                                 {
                                     text: 'Manage Holds',
                                     handler: () => {
+                                        this.appCtrl.getRootNav().push(this.pages['holdsPage'])
                                         this.events.publish('manage_holds',{ready: false});
                                     },
                                 }
