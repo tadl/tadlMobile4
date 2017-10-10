@@ -70,13 +70,13 @@ export class HoldsPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad HoldsPage');
-    }
-    ionViewDidEnter() {
-        console.log('ionViewDidEnter HoldsPage');
         this.events.subscribe('got_holds', () => {
             this.process_holds();
             console.log('triggered got_holds event');
         });
+    }
+    ionViewDidEnter() {
+        console.log('ionViewDidEnter HoldsPage');
     }
     ionViewDidLeave() {
         console.log('ionViewDidLeave HoldsPage');

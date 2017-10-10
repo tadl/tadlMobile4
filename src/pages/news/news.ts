@@ -44,10 +44,7 @@ export class NewsPage {
         });
     }
 
-    loadPosts(page) {
-        if (!page) {
-            let page = 1;
-        }
+    loadPosts(page: number = 1) {
         return new Promise(resolve => {
             this.http.get( this.url + '&page=' + page ).map(res => res.json()).subscribe(data => {
                 resolve(data);
