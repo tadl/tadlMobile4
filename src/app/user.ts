@@ -277,16 +277,23 @@ export class User {
                                 this.globals.logout_alert();
                             }
                         });
-                    }
-                    else if (data.holds) {
-                        if (available == true) { /* process only available holds */
-                            this.holds = data.holds.filter(
-                                hold => hold['queue_status'].startsWith('Ready')
-                            );
-                        } else { /* process all holds */
-                            this.holds = data.holds;
+                    } else {
+                        if (data.holds) {
+                            if (available == true) { /* process only available holds */
+                                this.holds = data.holds.filter(
+                                    hold => hold['queue_status'].startsWith('Ready')
+                                );
+                            } else { /* process all holds */
+                                this.holds = data.holds;
+                            }
+                        }
+                        if (data.user) {
+                            this.checkout_count = data.user.checkouts;
+                            this.holds_count = data.user.holds;
+                            this.fines = data.user.fine;
                         }
                     }
+
                 },
                 err => this.globals.error_handler(err)
             );
