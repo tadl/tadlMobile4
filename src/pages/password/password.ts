@@ -100,7 +100,6 @@ export class PasswordModal {
                         this.storage.set('hashed_password', hashed_password);
                     } else {
                         this.globals.error_handler(data)
->>>>>>> start beefing up error handler, reformat some other things
                     }
                 },
                 err => this.globals.error_handler(err)
