@@ -59,7 +59,9 @@ export class EventsPage {
                 resolve(data);
             }, (err) => {
                 this.lastPageReached = true;
-                this.globals.error_handler()
+                if (err.status != 400 ) {
+                    this.globals.error_handler(err)
+                }
             });
         });
     }

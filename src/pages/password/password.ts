@@ -50,7 +50,7 @@ export class PasswordModal {
                         this.reset_sent = true;
                     } 
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -94,16 +94,16 @@ export class PasswordModal {
                     if (data.user.error) {
                         this.close_modal();
                         this.globals.logout_alert();
-                    }
-                    else if (data.message == 'success') {
-                        this.password_success = true;
+                    } else if (data.message == 'success') {
+                        this.password_success = true
                         var hashed_password = Md5.hashStr(this.new_password_1);
                         this.storage.set('hashed_password', hashed_password);
                     } else {
-                        this.globals.error_handler();
+                        this.globals.error_handler(data)
+>>>>>>> start beefing up error handler, reformat some other things
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 

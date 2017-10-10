@@ -42,7 +42,7 @@ export class FeaturedPage {
                         this.items = data.featured_items;
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 

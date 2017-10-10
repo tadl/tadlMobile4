@@ -53,7 +53,7 @@ export class NewsPage {
                 resolve(data);
             }, (err) => {
                 this.lastPageReached = true;
-                this.globals.error_handler()
+                this.globals.error_handler(err)
             });
         });
     }

@@ -126,7 +126,7 @@ export class User {
                         this.password = '';
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -169,7 +169,7 @@ export class User {
                     this.logged_in = false;
                     this.events.publish('logged_out');
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             )
     }
 
@@ -204,7 +204,7 @@ export class User {
                         this.checkouts = data.checkouts;
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             )
     }
 
@@ -249,7 +249,7 @@ export class User {
                         alert.present();
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -285,7 +285,7 @@ export class User {
                         this.events.publish('got_holds');
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -357,7 +357,7 @@ export class User {
                         alert.present();
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -388,7 +388,7 @@ export class User {
                         this.holds_ready = data.user.holds_ready;
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -417,7 +417,7 @@ export class User {
                         this.events.publish('got_holds');
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -446,7 +446,7 @@ export class User {
                         this.events.publish('got_holds');
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 
@@ -491,7 +491,7 @@ export class User {
                         alert.present();
                     }
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 

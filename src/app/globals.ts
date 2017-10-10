@@ -118,21 +118,28 @@ export class Globals {
         }
     }
 
-    error_handler(){
-        let alert = this.alertCtrl.create({
-            title: "Oops...",
-            subTitle: 'Network error. Check your internet connection or try again later',
-            buttons: [{
-                text: 'Ok',
-                handler: () => {
-                    return
-                },
-            }]
-        });
-        alert.present();
+    error_handler(err) {
+        let message = '';
+        if (err.status == 404) { message = 'somehow encountered a 404'; }
+        if (err.status == 400) { message = 'somehow encountered a 400'; }
+        if (message == '') {
+            let alert = this.alertCtrl.create({
+                title: "Oops...",
+                subTitle: 'Network error. Check your internet connection or try again later',
+                buttons: [{
+                    text: 'Ok',
+                    handler: () => {
+                        return
+                    },
+                }]
+            });
+            alert.present();
+        } else {
+            //toast something
+        }
     }
 
-    logout_alert(){
+    logout_alert() {
         let alert = this.alertCtrl.create({
             title: "Oops...",
             subTitle: 'Your login has expired please login and try again',
@@ -146,11 +153,11 @@ export class Globals {
         alert.present();
     }
 
-    show_more(id, div_type){
-        var div_to_hide = id + '_' + div_type
-        var div_to_show = div_to_hide + '_full'
-        document.getElementById(div_to_show).setAttribute("style", "display: block")
-        document.getElementById(div_to_hide).setAttribute("style", "display: none")
+    show_more(id, div_type) {
+        var div_to_hide = id + '_' + div_type;
+        var div_to_show = div_to_hide + '_full';
+        document.getElementById(div_to_show).setAttribute('style', 'display: block');
+        document.getElementById(div_to_hide).setAttribute('style', 'display: none');
 
     }
 
