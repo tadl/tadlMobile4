@@ -107,7 +107,7 @@ export class SearchPage {
                         this.last_page = this.page;
                     } 
                 },
-                err => this.globals.error_handler()
+                err => this.globals.error_handler(err)
             );
     }
 

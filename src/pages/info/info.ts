@@ -34,7 +34,7 @@ export class InfoPage {
                 if (data.locations) {
                     this.locations = data.locations;
                 }
-            }, err => this.globals.error_handler()
+            }, err => this.globals.error_handler(err)
         );
     }
 
