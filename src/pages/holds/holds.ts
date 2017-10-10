@@ -52,7 +52,7 @@ export class HoldsPage {
         /* we either need to return an observable (to .subscribe()) or 
             a promise (to .then()) */
         /* could probably setTimeout() but that's not great either. */
-        this.user.load_holds();
+        this.user.load_holds(this.ready_only);
         refresher.complete();
     }
 

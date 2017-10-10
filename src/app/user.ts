@@ -287,10 +287,11 @@ export class User {
                                 this.holds = data.holds;
                             }
                         }
-                        if (data.user) {
+                        if (data.user) { /* update user dashboard */
                             this.checkout_count = data.user.checkouts;
                             this.holds_count = data.user.holds;
                             this.fines = data.user.fine;
+                            this.holds_ready = data.user.holds_ready;
                         }
                     }
 
