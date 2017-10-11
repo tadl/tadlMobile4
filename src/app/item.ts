@@ -25,7 +25,7 @@ export class Item {
     details(record_id) {
         let loading = this.loadingCtrl.create({content:'Loading Details...'});
         loading.present();
-        this.http.get(this.globals.itemDetailsURL + '?id=' + record_id).map(res => res.json()).subscribe(data=>{
+        this.http.get(this.globals.itemDetailsURL + '&id=' + record_id).map(res => res.json()).subscribe(data=>{
             loading.dismiss();
             if (data.id) {
                 let details_modal = this.modalCtrl.create(ItemDetailsModal, data);

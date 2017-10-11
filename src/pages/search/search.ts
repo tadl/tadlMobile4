@@ -72,6 +72,7 @@ export class SearchPage {
         params.append('loc', this.location);
         params.append('availability', available_on);
         params.append('physical', physcial_on);
+        params.append('from_mobile', 'true');
 
         /* If user changes any parameter it is a new search that starts on page 0 */
         if(this.current_params != params.toString()){

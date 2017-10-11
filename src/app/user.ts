@@ -83,6 +83,7 @@ export class User {
         }
         params.append('username', this.username);
         params.append('hashed_password', this.hashed_password);
+        params.append('from_mobile', 'true');
         var path = this.globals.loginHashURL;
         this.login_error = '';
         this.http.get(path, {params})
@@ -158,7 +159,7 @@ export class User {
     }
 
     logout() {
-        this.http.get(this.globals.logoutURL + '?token=' + this.token)
+        this.http.get(this.globals.logoutURL + '&token=' + this.token)
             .subscribe(
                 data => {
                     this.token = '';
@@ -184,7 +185,7 @@ export class User {
             loading.present();
         }
         this.checkout_errors.length = 0;
-        this.http.get(this.globals.checkoutsURL + '?token=' + this.token)
+        this.http.get(this.globals.checkoutsURL + '&token=' + this.token)
             .finally(() => {
                 if (background == false) {
                     loading.dismiss();
@@ -224,7 +225,7 @@ export class User {
         let loading = this.loadingCtrl.create({content:'Attempting renewal...'});
         loading.present();
         this.checkout_errors.length = 0;
-        this.http.get(this.globals.checkoutRenewURL + '?token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids)
+        this.http.get(this.globals.checkoutRenewURL + '&token=' + this.token + '&checkout_ids=' + checkout_ids + '&record_ids=' + record_ids)
             .finally(() => loading.dismiss())
             .map(res => res.json())
             .subscribe(
@@ -268,7 +269,7 @@ export class User {
     load_holds(available: boolean = false) {
         let loading = this.loadingCtrl.create({content:'Loading Holds...'});
         loading.present();
-        this.http.get(this.globals.holdsURL + '?token=' + this.token)
+        this.http.get(this.globals.holdsURL + '&token=' + this.token)
             .finally(() => {
                 loading.dismiss()
             })
@@ -312,7 +313,7 @@ export class User {
     place_hold(record_id, force) {
         let loading = this.loadingCtrl.create({content:'Placing Hold...'});
         loading.present();
-        var path = this.globals.holdPlaceURL + '?token=' + this.token + '&record_id=' + record_id;
+        var path = this.globals.holdPlaceURL + '&token=' + this.token + '&record_id=' + record_id;
         if (force == true) {
             path = path + '&force=true';
         }
@@ -385,7 +386,7 @@ export class User {
     cancel_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Canceling Hold...'});
         loading.present();
-        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=cancel')
+        this.http.get(this.globals.holdManageURL + '&token=' + this.token + '&hold_id=' + hold_id + '&task=cancel')
             .finally(() => loading.dismiss())
             .map(res => res.json())
             .subscribe(
@@ -415,7 +416,7 @@ export class User {
     suspend_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Suspending Hold...'});
         loading.present();
-        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=suspend')
+        this.http.get(this.globals.holdManageURL + '&token=' + this.token + '&hold_id=' + hold_id + '&task=suspend')
             .finally(() => loading.dismiss())
             .map(res => res.json())
             .subscribe(
@@ -443,7 +444,7 @@ export class User {
     activate_hold(hold_id) {
         let loading = this.loadingCtrl.create({content:'Activating Hold...'});
         loading.present();
-        this.http.get(this.globals.holdManageURL + '?token=' + this.token + '&hold_id=' + hold_id + '&task=activate')
+        this.http.get(this.globals.holdManageURL + '&token=' + this.token + '&hold_id=' + hold_id + '&task=activate')
             .finally(() => loading.dismiss())
             .map(res => res.json())
             .subscribe(
@@ -476,6 +477,7 @@ export class User {
         params.append('token', this.token);
         params.append('hold_id', hold_id);
         params.append('new_pickup', event);
+        params.append('from_mobile', 'true');
         if (state == 'Active') { holdState = 'f'; }
         else { holdState = 't'; }
         params.append('hold_state', holdState);

@@ -42,7 +42,7 @@ export class PasswordModal {
     }
 
     reset_password() {
-        this.http.get(this.globals.passwordResetURLPrefix + '?username=' + this.username)
+        this.http.get(this.globals.passwordResetURLPrefix + '&username=' + this.username)
             .map(res => res.json())
             .subscribe(
                 data => {

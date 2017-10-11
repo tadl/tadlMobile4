@@ -78,10 +78,10 @@ export class Globals {
     public coverURLMd: string = this.coverURLBase + '/medium/r/';
     public coverURLSm: string = this.coverURLBase + '/small/r/';
     public passwordResetURLPrefix: string = 'https://' + this.catalogHost + '/main/reset_password_request.json' + this.fromMobileParam;
-    public saveNewPasswordUrl: string = 'https://' + this.catalogHost + '/main/update_user_info.json' + this.fromMobileParam;
+    public saveNewPasswordUrl: string = 'https://' + this.catalogHost + '/main/update_user_info.json'; /* uses params object in password.ts */
     public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json' + this.fromMobileParam;
-    public searchURL: string = 'https://' + this.catalogHost + '/search.json' + this.fromMobileParam;
-    public loginHashURL: string = 'https://' + this.catalogHost + '/main/login_hash.json' + this.fromMobileParam;
+    public searchURL: string = 'https://' + this.catalogHost + '/search.json'; /* uses params object in search.ts */
+    public loginHashURL: string = 'https://' + this.catalogHost + '/main/login_hash.json'; /* uses params object in user.ts */
     public loginPasswordURL: string = 'https://' + this.catalogHost + '/main/login.json' + this.fromMobileParam;
     public logoutURL: string = 'https://' + this.catalogHost + '/main/logout.json' + this.fromMobileParam;
     public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json' + this.fromMobileParam;
@@ -89,7 +89,7 @@ export class Globals {
     public holdsURL: string = 'https://' + this.catalogHost + '/holds.json' + this.fromMobileParam;
     public holdPlaceURL: string = 'https://' + this.catalogHost + '/place_hold.json' + this.fromMobileParam;
     public holdManageURL: string = 'https://' + this.catalogHost + '/main/manage_hold.json' + this.fromMobileParam;
-    public holdPickupUpdateURL: string = 'https://' + this.catalogHost + '/main/update_hold_pickup.json' + this.fromMobileParam;
+    public holdPickupUpdateURL: string = 'https://' + this.catalogHost + '/main/update_hold_pickup.json'; /* uses params object in user.ts */
     public itemDetailsURL: string = 'https://' + this.catalogHost + '/main/details.json' + this.fromMobileParam;
 
     /* this is in use by featured, search and details */
