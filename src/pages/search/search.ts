@@ -44,6 +44,7 @@ export class SearchPage {
     current_params: string;
     last_page: number;
     more_results: boolean;
+    loading: boolean = false;
 
     results: Array<{any}> = [];
 
@@ -90,7 +91,10 @@ export class SearchPage {
         this.current_params = params.toString();
         params.append('page', this.page.toString());
         this.http.get(this.globals.searchURL, {params})
-            .finally(() => loading.dismiss())
+            .finally(() => {
+                loading.dismiss();
+                this.loading = false;
+            })
             .map(res => res.json())
             .subscribe(
                 data => {
@@ -112,9 +116,10 @@ export class SearchPage {
             );
     }
 
-    get_more_results(infiniteScroll){
+    get_more_results(infiniteScroll) {
         if (this.results.length > 1 && this.more_results == true) {
             this.page++;
+            this.loading = true;
             this.get_results();
         } else {
             infiniteScroll.complete();

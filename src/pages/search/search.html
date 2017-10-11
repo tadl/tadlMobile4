@@ -13,7 +13,8 @@
 <ion-content>
     <form (ngSubmit)="get_results()" block>
         <ion-item col-sm-12>
-            <ion-input autocapitalize="off" autocorrect="off" type="text" placeholder="Search" [(ngModel)]="this.query" name="query" clearInput></ion-input>
+            <button ion-button clear *ngIf="this.query" item-start margin-right><ion-icon color="primary" name="close-circle" (tap)="this.query='';this.results=[];" large> </ion-icon></button>
+            <ion-input autocapitalize="off" autocorrect="off" type="text" placeholder="Search" [(ngModel)]="this.query" name="query"></ion-input>
             <button ion-button item-end type="submit">Search</button>
         </ion-item>
         <ion-item-divider>
@@ -93,8 +94,8 @@
     </ion-list>
 
     <ion-infinite-scroll (ionInfinite)="this.get_more_results($event)" threshold="200px">
+        <div *ngIf="this.results != '' && this.more_results == true && this.loading == false" text-center>Keep scrolling to load more</div>
         <ion-infinite-scroll-content loadingText="Loading more results..."></ion-infinite-scroll-content>
-        <ion-item text-center>Keep scrolling to load more</ion-item>
     </ion-infinite-scroll>
 
 </ion-content>
