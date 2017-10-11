@@ -199,7 +199,7 @@ export class User {
                         this.events.subscribe('login_attempt', () => {
                             console.log('triggered login_attempt within load_checkouts');
                             if (this.login_error =='') {
-                                this.load_holds();
+                                this.load_checkouts();
                             } else {
                                 this.globals.logout_alert();
                             }
