@@ -17,6 +17,7 @@ export class EventsPage {
 
     url: string = this.globals.eventsURL;
     lastPageReached: boolean = false;
+    loading: boolean = false;
     events: any;
     location: any = '';
     page: any;
@@ -35,6 +36,7 @@ export class EventsPage {
         this.loadEvents(this.page, '').then(data => {
             if (!data['next_rest_url']) { this.lastPageReached = true; }
             this.events = data['events'];
+            this.loading = false;
             loading.dismiss();
         });
     }
@@ -49,6 +51,7 @@ export class EventsPage {
     }
 
     loadEvents(page, loc?) {
+        this.loading = true;
         let urlAppend:string = '';
         if (loc) {
             this.location = loc;
@@ -77,6 +80,7 @@ export class EventsPage {
             }
             this.events.push.apply(this.events, data['events']);
             infiniteScroll.complete();
+            this.loading = false;
         });
     }
 

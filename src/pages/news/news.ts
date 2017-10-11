@@ -17,6 +17,7 @@ export class NewsPage {
 
     url: string = this.globals.newsURL;
     lastPageReached: boolean = false;
+    loading: boolean = false;
     posts: any;
     page: any;
 
@@ -34,6 +35,7 @@ export class NewsPage {
         this.loadPosts(this.page).then(data => {
             this.posts = data;
             loading.dismiss();
+            this.loading = false;
         });
     }
 
@@ -45,6 +47,7 @@ export class NewsPage {
     }
 
     loadPosts(page: number = 1) {
+        this.loading = true;
         return new Promise(resolve => {
             this.http.get( this.url + '&page=' + page ).map(res => res.json()).subscribe(data => {
                 resolve(data);
@@ -66,6 +69,7 @@ export class NewsPage {
             }
             this.posts.push.apply(this.posts , data);
             infiniteScroll.complete();
+            this.loading = false;
         });
     }
 

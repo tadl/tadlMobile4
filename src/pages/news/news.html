@@ -32,9 +32,9 @@
     </ion-list>
 
     <ion-infinite-scroll *ngIf="!isLastPageReached()" (ionInfinite)="loadMore($event)" threshold="200px">
+        <div *ngIf="this.posts != '' && this.lastPageReached == false && this.loading == false" text-center>Keep scrolling to load more</div>
         <ion-infinite-scroll-content loadingText="Loading more news...">
         </ion-infinite-scroll-content>
-        <ion-item text-center>Keep scrolling to load more</ion-item>
     </ion-infinite-scroll>
 
 </ion-content>
