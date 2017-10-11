@@ -14,7 +14,8 @@ export class Globals {
     public systemShortName: string = 'TADL';
     public catalogHost: string = 'catalog.tadl.org';
     public websiteHost: string = 'www.tadl.org';
-    public logoFileName: string = 'logo.png';
+    public logoFileName: string = 'logo.png'; /* redirected by nginx */
+    public squareLogoFileName: string = 'logo-clock-only.png'; /* redirected by nginx */
     public newsCategoryExclude: string = '93'; /* 93=Announcement */
 
     public multi_location: boolean = true;
@@ -67,28 +68,29 @@ export class Globals {
     public newsURL: string = 'https://' + this.websiteHost + '/wp-json/wp/v2/posts?per_page=20&categories_exclude=' + this.newsCategoryExclude;
     public eventsURL: string = 'https://' + this.websiteHost + '/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
     public logoURL: string = 'https://' + this.websiteHost + '/' + this.logoFileName;
-    public squareLogoURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/2017/10/logo-clock-only.png';
+    public squareLogoURL: string = 'https://' + this.websiteHost + '/' + this.squareLogoFileName;
     public hoursURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/json/parsed-hours.json';
 
     /* URLs for catalog things */
+    public fromMobileParam: string = '?from_mobile=true';
     public coverURLBase: string = 'https://' + this.catalogHost + '/opac/extras/ac/jacket';
     public coverURLLg: string = this.coverURLBase + '/large/r/';
     public coverURLMd: string = this.coverURLBase + '/medium/r/';
     public coverURLSm: string = this.coverURLBase + '/small/r/';
-    public passwordResetURLPrefix: string = 'https://' + this.catalogHost + '/main/reset_password_request.json';
-    public saveNewPasswordUrl: string = 'https://' + this.catalogHost + '/main/update_user_info.json'
-    public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json';
-    public searchURL: string = 'https://' + this.catalogHost + '/search.json';
-    public loginHashURL: string = 'https://' + this.catalogHost + '/main/login_hash.json';
-    public loginPasswordURL: string = 'https://' + this.catalogHost + '/main/login.json';
-    public logoutURL: string = 'https://' + this.catalogHost + '/main/logout.json';
-    public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json';
-    public checkoutRenewURL: string = 'https://' + this.catalogHost + '/main/renew_checkouts.json';
-    public holdsURL: string = 'https://' + this.catalogHost + '/holds.json';
-    public holdPlaceURL: string = 'https://' + this.catalogHost + '/place_hold.json';
-    public holdManageURL: string = 'https://' + this.catalogHost + '/main/manage_hold.json';
-    public holdPickupUpdateURL: string = 'https://' + this.catalogHost + '/main/update_hold_pickup.json';
-    public itemDetailsURL: string = 'https://' + this.catalogHost + '/main/details.json';
+    public passwordResetURLPrefix: string = 'https://' + this.catalogHost + '/main/reset_password_request.json' + this.fromMobileParam;
+    public saveNewPasswordUrl: string = 'https://' + this.catalogHost + '/main/update_user_info.json' + this.fromMobileParam;
+    public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json' + this.fromMobileParam;
+    public searchURL: string = 'https://' + this.catalogHost + '/search.json' + this.fromMobileParam;
+    public loginHashURL: string = 'https://' + this.catalogHost + '/main/login_hash.json' + this.fromMobileParam;
+    public loginPasswordURL: string = 'https://' + this.catalogHost + '/main/login.json' + this.fromMobileParam;
+    public logoutURL: string = 'https://' + this.catalogHost + '/main/logout.json' + this.fromMobileParam;
+    public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json' + this.fromMobileParam;
+    public checkoutRenewURL: string = 'https://' + this.catalogHost + '/main/renew_checkouts.json' + this.fromMobileParam;
+    public holdsURL: string = 'https://' + this.catalogHost + '/holds.json' + this.fromMobileParam;
+    public holdPlaceURL: string = 'https://' + this.catalogHost + '/place_hold.json' + this.fromMobileParam;
+    public holdManageURL: string = 'https://' + this.catalogHost + '/main/manage_hold.json' + this.fromMobileParam;
+    public holdPickupUpdateURL: string = 'https://' + this.catalogHost + '/main/update_hold_pickup.json' + this.fromMobileParam;
+    public itemDetailsURL: string = 'https://' + this.catalogHost + '/main/details.json' + this.fromMobileParam;
 
     /* this is in use by featured, search and details */
     itemType = new Map<string, string>([
@@ -142,7 +144,7 @@ export class Globals {
     logout_alert() {
         let alert = this.alertCtrl.create({
             title: "Oops...",
-            subTitle: 'Your login has expired please login and try again',
+            subTitle: 'Your login has expired. Please log in and try again',
             buttons: [{
                 text: 'Ok',
                 handler: () => {
