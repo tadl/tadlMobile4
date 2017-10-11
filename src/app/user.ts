@@ -91,7 +91,8 @@ export class User {
                 if (background != true) {
                     loading.dismiss();
                 }
-                this.events.publish('login_attempt')
+                this.events.publish('login_attempt');
+                this.events.unsubscribe('login_attempt');
             })
             .map(res => res.json())
             .subscribe(
