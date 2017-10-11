@@ -13,13 +13,13 @@
 <ion-content>
     <form (ngSubmit)="get_results()" block>
         <ion-item col-sm-12>
-            <button ion-button clear *ngIf="this.query" item-start margin-right (click)="this.query='';this.results=[];"><ion-icon color="primary" name="close-circle" large> </ion-icon></button>
             <ion-input autocapitalize="off" autocorrect="off" type="text" placeholder="Search" [(ngModel)]="this.query" name="query"></ion-input>
             <button ion-button item-end type="submit">Search</button>
         </ion-item>
         <ion-item-divider>
             <ion-toggle item-start [(ngModel)]="this.advanced" name="advanced"></ion-toggle>
             <p item-content>ADVANCED OPTIONS</p>
+            <button ion-button small item-end margin-right color="primary" *ngIf="this.query" (click)="this.query='';this.results=[];">clear</button>
         </ion-item-divider>
         <div *ngIf="advanced">
             <ion-item>
