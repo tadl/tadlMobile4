@@ -34,7 +34,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col col-3>
-                    <img src="{{globals.coverURLLg}}{{checkout['record_id']}}"/>
+                    <img src="{{globals.coverURLMd}}{{checkout['record_id']}}"/>
                 </ion-col>
                 <ion-col col-9>
                     <p><strong>{{checkout['author']}}</strong></p>
@@ -49,10 +49,10 @@
             </ion-row>
             <ion-row>
                 <ion-col col-6>
-                    <button ion-button block (tap)='item.details(checkout["record_id"])'>Details</button>
+                    <button ion-button block (click)='item.details(checkout["record_id"])'>Details</button>
                 </ion-col>
                 <ion-col col-6>
-                    <button ion-button block [disabled]="checkout['renew_attempts'] == 0" color="secondary" (tap)='user.renew(checkout["checkout_id"], checkout["record_id"])'>Renew</button>
+                    <button ion-button block [disabled]="checkout['renew_attempts'] == 0" color="secondary" (click)='user.renew(checkout["checkout_id"], checkout["record_id"])'>Renew</button>
                 </ion-col>
             </ion-row>
         </ion-grid>

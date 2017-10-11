@@ -28,11 +28,11 @@
         <ion-grid>
             <ion-row>
                 <ion-col col-3>
-                    <img src="{{globals.coverURLLg}}{{hold['record_id']}}"/>
+                    <img src="{{globals.coverURLMd}}{{hold['record_id']}}"/>
                 </ion-col>
                 <ion-col col-9>
                     <p><strong>{{hold['author']}}</strong></p>
-                    <p *ngIf="hold.hold_status != ''">Position {{hold['queue_state'][0]}} in queue with {{hold['queue_state'][1]}} eligible cop<span *ngIf="hold.queue_state[1] > 1">ies</span><span *ngIf="hold.queue_state[1] == 1">y</span></p>
+                    <p *ngIf="hold.hold_status != ''">Position {{hold['queue_state'][0]}} in queue with {{hold['queue_state'][1]}} eligible cop<span *ngIf="hold.queue_state[1] > 1 || hold.queue_state[1] == 0">ies</span><span *ngIf="hold.queue_state[1] == 1">y</span></p>
                     <p *ngIf="globals.multi_location==true">Pickup location: {{hold['pickup_location']}}</p>
                     <p *ngIf="hold.hold_status != ''">Hold status: 
                         <span *ngIf="hold.hold_status == 'Suspended'"><strong ion-text color="danger">{{hold.hold_status}}</strong></span>
@@ -49,14 +49,14 @@
             </ion-row>
             <ion-row>
                 <ion-col col-4>
-                    <button *ngIf="hold.hold_status == 'Suspended'" ion-button block (tap)="user.activate_hold(hold.hold_id)">Activate</button>
-                    <button *ngIf="hold.hold_status != 'Suspended' && !hold.queue_status.startsWith('Ready')" ion-button block (tap)="user.suspend_hold(hold.hold_id)">Suspend</button>
+                    <button *ngIf="hold.hold_status == 'Suspended'" ion-button block (click)="user.activate_hold(hold.hold_id)">Activate</button>
+                    <button *ngIf="hold.hold_status != 'Suspended' && !hold.queue_status.startsWith('Ready')" ion-button block (click)="user.suspend_hold(hold.hold_id)">Suspend</button>
                 </ion-col>
                 <ion-col col-4>
-                    <button ion-button block (tap)='item.details(hold["record_id"])'>Details</button>
+                    <button ion-button block (click)='item.details(hold["record_id"])'>Details</button>
                 </ion-col>
                 <ion-col col-4>
-                    <button ion-button block (tap)="this.cancelHold(hold.hold_id, hold.title)">Cancel</button>
+                    <button ion-button block (click)="this.cancelHold(hold.hold_id, hold.title)">Cancel</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
