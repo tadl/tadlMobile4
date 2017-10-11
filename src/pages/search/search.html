@@ -94,7 +94,8 @@
     </ion-list>
 
     <ion-infinite-scroll (ionInfinite)="this.get_more_results($event)" threshold="200px">
-        <ion-infinite-scroll-content loadingText="Loading more results...">Keep scrolling to load more</ion-infinite-scroll-content>
+        <ion-infinite-scroll-content loadingText="Loading more results..."></ion-infinite-scroll-content>
+        <ion-item text-center>Keep scrolling to load more</ion-item>
     </ion-infinite-scroll>
 
 </ion-content>
