@@ -30,7 +30,6 @@ export class Item {
             if (data.id) {
                 let details_modal = this.modalCtrl.create(ItemDetailsModal, data);
                 details_modal.present();
-            } else {
             }
         });
     }

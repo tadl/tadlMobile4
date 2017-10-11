@@ -8,8 +8,8 @@ export class Globals {
     constructor(
         private alertCtrl: AlertController,
         public events: Events
-    ){}
-
+    ){
+    }
 
     public systemShortName: string = 'TADL';
     public catalogHost: string = 'catalog.tadl.org';
@@ -65,32 +65,34 @@ export class Globals {
     public appName: string = this.systemShortName + ' Mobile';
 
     /* URLs for website things */
-    public newsURL: string = 'https://' + this.websiteHost + '/wp-json/wp/v2/posts?per_page=20&categories_exclude=' + this.newsCategoryExclude;
-    public eventsURL: string = 'https://' + this.websiteHost + '/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
-    public logoURL: string = 'https://' + this.websiteHost + '/' + this.logoFileName;
-    public squareLogoURL: string = 'https://' + this.websiteHost + '/' + this.squareLogoFileName;
-    public hoursURL: string = 'https://' + this.websiteHost + '/wp-content/uploads/json/parsed-hours.json';
+    public websiteHostBase: string = 'https://' + this.websiteHost;
+    public newsURL: string = this.websiteHostBase + '/wp-json/wp/v2/posts?per_page=20&categories_exclude=' + this.newsCategoryExclude;
+    public eventsURL: string = this.websiteHostBase + '/wp-json/tribe/events/v1/events?per_page=20&start_date=now';
+    public logoURL: string = this.websiteHostBase + '/' + this.logoFileName;
+    public squareLogoURL: string = this.websiteHostBase + '/' + this.squareLogoFileName;
+    public hoursURL: string = this.websiteHostBase + '/wp-content/uploads/json/parsed-hours.json';
 
     /* URLs for catalog things */
+    public catalogHostBase: string = 'https://' + this.catalogHost;
     public fromMobileParam: string = '?from_mobile=true';
-    public coverURLBase: string = 'https://' + this.catalogHost + '/opac/extras/ac/jacket';
+    public coverURLBase: string = this.catalogHostBase + '/opac/extras/ac/jacket';
     public coverURLLg: string = this.coverURLBase + '/large/r/';
     public coverURLMd: string = this.coverURLBase + '/medium/r/';
     public coverURLSm: string = this.coverURLBase + '/small/r/';
-    public passwordResetURLPrefix: string = 'https://' + this.catalogHost + '/main/reset_password_request.json' + this.fromMobileParam;
-    public saveNewPasswordUrl: string = 'https://' + this.catalogHost + '/main/update_user_info.json'; /* uses params object in password.ts */
-    public featuredURL: string = 'https://' + this.catalogHost + '/main/index.json' + this.fromMobileParam;
-    public searchURL: string = 'https://' + this.catalogHost + '/search.json'; /* uses params object in search.ts */
-    public loginHashURL: string = 'https://' + this.catalogHost + '/main/login_hash.json'; /* uses params object in user.ts */
-    public loginPasswordURL: string = 'https://' + this.catalogHost + '/main/login.json' + this.fromMobileParam;
-    public logoutURL: string = 'https://' + this.catalogHost + '/main/logout.json' + this.fromMobileParam;
-    public checkoutsURL: string = 'https://' + this.catalogHost + '/checkouts.json' + this.fromMobileParam;
-    public checkoutRenewURL: string = 'https://' + this.catalogHost + '/main/renew_checkouts.json' + this.fromMobileParam;
-    public holdsURL: string = 'https://' + this.catalogHost + '/holds.json' + this.fromMobileParam;
-    public holdPlaceURL: string = 'https://' + this.catalogHost + '/place_hold.json' + this.fromMobileParam;
-    public holdManageURL: string = 'https://' + this.catalogHost + '/main/manage_hold.json' + this.fromMobileParam;
-    public holdPickupUpdateURL: string = 'https://' + this.catalogHost + '/main/update_hold_pickup.json'; /* uses params object in user.ts */
-    public itemDetailsURL: string = 'https://' + this.catalogHost + '/main/details.json' + this.fromMobileParam;
+    public passwordResetURLPrefix: string = this.catalogHostBase + '/main/reset_password_request.json' + this.fromMobileParam;
+    public saveNewPasswordUrl: string = this.catalogHostBase + '/main/update_user_info.json'; /* uses params object in password.ts */
+    public featuredURL: string = this.catalogHostBase + '/main/index.json' + this.fromMobileParam;
+    public searchURL: string = this.catalogHostBase + '/search.json'; /* uses params object in search.ts */
+    public loginHashURL: string = this.catalogHostBase + '/main/login_hash.json'; /* uses params object in user.ts */
+    public loginPasswordURL: string = this.catalogHostBase + '/main/login.json' + this.fromMobileParam;
+    public logoutURL: string = this.catalogHostBase + '/main/logout.json' + this.fromMobileParam;
+    public checkoutsURL: string = this.catalogHostBase + '/checkouts.json' + this.fromMobileParam;
+    public checkoutRenewURL: string = this.catalogHostBase + '/main/renew_checkouts.json' + this.fromMobileParam;
+    public holdsURL: string = this.catalogHostBase + '/holds.json' + this.fromMobileParam;
+    public holdPlaceURL: string = this.catalogHostBase + '/place_hold.json' + this.fromMobileParam;
+    public holdManageURL: string = this.catalogHostBase + '/main/manage_hold.json' + this.fromMobileParam;
+    public holdPickupUpdateURL: string = this.catalogHostBase + '/main/update_hold_pickup.json'; /* uses params object in user.ts */
+    public itemDetailsURL: string = this.catalogHostBase + '/main/details.json' + this.fromMobileParam;
 
     /* this is in use by featured, search and details */
     itemType = new Map<string, string>([
@@ -137,7 +139,7 @@ export class Globals {
             });
             alert.present();
         } else {
-            //toast something
+            // maybe do something here, maybe not
         }
     }
 
