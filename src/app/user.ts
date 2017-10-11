@@ -51,7 +51,6 @@ export class User {
     checkouts: Array<{any}> = [];
     checkout_mesages: string;
     checkout_errors: Array<{any}> = [];
-    attempt: number = 0;
 
     /* Auto Log User in if username and password in local storage */
     auto_login(background: boolean = false) {
@@ -194,21 +193,26 @@ export class User {
             .map(res => res.json())
             .subscribe(
                 data => {
-                    let that = this;
-                    this.attempt++;
-                    console.log('attempt ' + this.attempt);
-                    if (this.attempt > 5) {
-                        console.log('welp. we tried');
-                        this.attempt = 0;
-                        this.globals.logout_alert();
-                    } else if ((data.user.error == 'bad token') && (this.attempt < 5)) {
+                    if (data.user.error) {
                         this.auto_login(true);
-                        setTimeout(function() {
-                            that.load_checkouts();
-                        }, 3000);
-                    } else if (data.checkouts != "login") {
-                        this.checkouts = data.checkouts;
-                        this.attempt = 0;
+                        this.events.subscribe('login_attempt', () => {
+                            console.log('triggered login_attempt within load_checkouts');
+                            if (this.login_error =='') {
+                                this.load_holds();
+                            } else {
+                                this.globals.logout_alert();
+                            }
+                        });
+                    } else {
+                        if (data.checkouts) {
+                            this.checkouts = data.checkouts;
+                        }
+                        if (data.user) {
+                            this.checkout_count = data.user.checkouts;
+                            this.holds_count = data.user.holds;
+                            this.fines = data.user.fine;
+                            this.holds_ready = data.user.holds_ready;
+                        }
                     }
                 },
                 err => this.globals.error_handler(err)
