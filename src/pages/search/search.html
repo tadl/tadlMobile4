@@ -11,6 +11,9 @@
 </ion-header>
 
 <ion-content>
+    <ion-item no-lines *ngIf="this.query" col-sm-12>
+        <button ion-button block (click)="this.query='';this.results=[];">Reset</button>
+    </ion-item>
     <form (ngSubmit)="get_results()" block>
         <ion-item col-sm-12>
             <ion-input autocapitalize="off" autocorrect="off" type="text" placeholder="Search" [(ngModel)]="this.query" name="query"></ion-input>
@@ -19,7 +22,6 @@
         <ion-item-divider>
             <ion-toggle item-start [(ngModel)]="this.advanced" name="advanced"></ion-toggle>
             <p item-content>ADVANCED OPTIONS</p>
-            <button ion-button small item-end margin-right color="primary" *ngIf="this.query" (click)="this.query='';this.results=[];">clear</button>
         </ion-item-divider>
         <div *ngIf="advanced">
             <ion-item>
@@ -77,7 +79,7 @@
         <ion-item-sliding *ngFor="let result of this.results">
             <ion-item (tap)="item.details(result.id)">
                 <ion-thumbnail item-start>
-                    <img src="{{globals.coverURLSm}}{{result.id}}"/>
+                    <img [src]="globals.coverURLSm + result.id"/>
                 </ion-thumbnail>
                 <h2 *ngIf="result.title">{{result.title}}</h2>
                 <h4 *ngIf="result.author">{{result.author}}</h4>
