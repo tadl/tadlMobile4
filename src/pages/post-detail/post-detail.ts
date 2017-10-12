@@ -12,8 +12,8 @@ export class PostDetailPage {
     selectedItem: any;
 
     constructor(
-        private nav: NavController,
         private navParams: NavParams,
+        private nav: NavController,
         public globals: Globals
     ) {
         this.selectedItem = navParams.get('item');

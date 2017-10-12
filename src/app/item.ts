@@ -1,7 +1,6 @@
-import { NgModule, Component, ViewChild, Injectable, Input} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
-import { Storage } from '@ionic/storage';
-import { AlertController, LoadingController, Content, ModalController} from 'ionic-angular';
+import { LoadingController, Content, ModalController} from 'ionic-angular';
 import { ItemDetailsModal } from '../pages/details/details';
 import { Globals } from './globals';
 import 'rxjs/add/operator/map';
@@ -14,7 +13,6 @@ export class Item {
     @ViewChild(Content) content: Content;
 
     constructor(
-        private alertCtrl: AlertController,
         private http: Http, 
         public globals: Globals,
         public loadingCtrl: LoadingController,

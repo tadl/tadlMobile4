@@ -1,10 +1,10 @@
-import { Component, ViewChild, Injectable, Input } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { App, AlertController, LoadingController, ActionSheetController, Content, Events, ModalController, ToastController } from 'ionic-angular';
-import { Md5 } from 'ts-md5/dist/md5';
-import { Globals } from './globals';
 import { PasswordModal } from '../pages/password/password';
+import { Globals } from './globals';
+import { Md5 } from 'ts-md5/dist/md5';
 import 'rxjs/Rx';
 
 @Component({

@@ -1,5 +1,5 @@
-import { Component, NgModule, Injectable, } from '@angular/core';
-import { IonicPage, ViewController, NavController, NavParams, IonicPageModule, LoadingController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, ViewController, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Http, URLSearchParams } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { Md5 } from 'ts-md5/dist/md5';

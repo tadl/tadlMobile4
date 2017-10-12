@@ -14,7 +14,7 @@ export class BarcodePage {
 
     constructor(
         private nav: NavController,
-        public navParams: NavParams,
+        public navParams: NavParams
     ) {
     }
 

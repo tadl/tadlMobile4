@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, Nav, Events, Platform } from 'ionic-angular';
 import { Globals } from '../../app/globals';
 import { CheckoutsPage } from '../checkouts/checkouts';
