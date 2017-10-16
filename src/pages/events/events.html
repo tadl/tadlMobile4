@@ -29,7 +29,7 @@
             </ion-select>
         </ion-item>
         <button ion-item *ngFor="let event of this.events" (tap)="itemTapped($event, event)">
-            <ion-thumbnail item-start *ngIf="event.image">
+            <ion-thumbnail item-start *ngIf="event.image && event.image.extension != 'pdf'">
                 <img src="{{event.image.sizes.thumbnail.url}}" />
             </ion-thumbnail>
             <h2 [innerHTML]="event.title"></h2>
