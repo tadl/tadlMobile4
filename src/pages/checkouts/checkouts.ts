@@ -72,12 +72,15 @@ export class CheckoutsPage {
 
     dueCheck(dueDate) {
         /* if due date is before now the item is overdue */
-        if (moment(dueDate).isBefore(moment())) { return 'overDue'; }
+        if (moment(dueDate).isBefore(moment().format('YYYY-MM-DD'), 'day')) { return 'overDue'; }
+
+        /* if due date is today */
+        if (moment(dueDate).isSame(moment().format('YYYY-MM-DD'), 'day')) { return 'dueToday'; }
 
         /* if 3 days from now is after due date the item is due soon */
         else if (moment().add(3, 'days').isAfter(moment(dueDate))) { return 'dueSoon'; }
 
-        /* the item is not due soon or orverdue */
+        /* the item is not due soon or overdue */
         else { return 'green'; }
 
     }
