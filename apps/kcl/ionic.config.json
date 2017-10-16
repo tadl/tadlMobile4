@@ -1,0 +1,8 @@
+{
+  "name": "tadlMobile4",
+  "app_id": "b370abbf",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
