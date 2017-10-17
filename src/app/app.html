@@ -8,7 +8,7 @@
         <ion-list>
             <button menuClose ion-item (click)="this.nav.push(homePage, {}, {animate:false});" menuToggle="left">Home</button>
             <button menuClose ion-item (click)="this.nav.push(searchPage, {}, {animate:false})">Search Catalog</button>
-            <button menuClose ion-item (click)="this.nav.push(infoPage, {}, {animate:false})" menuToggle="left">Locations</button>
+            <button menuClose ion-item (click)="this.nav.push(infoPage, {}, {animate:false})" menuToggle="left">Location<span *ngIf="globals.multi_location == true">s</span></button>
             <button menuClose ion-item (click)="this.nav.push(eventsPage, {}, {animate:false})" menuToggle="left">Events</button>
             <button menuClose ion-item (click)="this.nav.push(newsPage, {}, {animate:false})" menuToggle="left">News</button>
             <button menuClose ion-item (click)="this.nav.push(featuredPage, {}, {animate:false})" menuToggle="left">New Items</button>
