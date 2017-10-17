@@ -14,8 +14,8 @@ export class Globals {
     public systemShortName: string = 'SBBDL';
     public catalogHost: string = 'catalog.sbbdl.org';
     public websiteHost: string = 'www.sbbdl.org';
-    public logoFileName: string = 'logo.png'; /* redirected by nginx */
-    public squareLogoFileName: string = 'logo-clock-only.png'; /* redirected by nginx */
+    public logoFileName: string = 'logo.jpg'; /* redirected by nginx */
+    public squareLogoFileName: string = 'logo-square.jpg'; /* redirected by nginx */
     public newsCategoryExclude: string = '0'; /* 93=Announcement for TADL */
 
     public multi_location: boolean = false;
