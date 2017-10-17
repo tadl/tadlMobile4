@@ -27,6 +27,12 @@ if [[ $target == "kcl" || $target == "sbbdl" ]]; then
     echo "Running npm install"
     npm install
 
+    echo "Removing .git and re-initing"
+    rm -rf .git
+    git init
+    git add .
+    git commit -m "deploy for ${target} on `date`"
+
     echo "Adding ionic remote: git@git.ionicjs.com:tadltech/${target}.git"
     git remote add ionic git@git.ionicjs.com:tadltech/${target}.git
 
