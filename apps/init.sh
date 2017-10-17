@@ -15,6 +15,8 @@ if [[ $target == "kcl" || $target == "sbbdl" ]]; then
 
     cd ${target}Mobile
 
+    cp -Rv apps/${target}/* .
+
     npm install
 
     git remote add ionic git@git.ionicjs.com:tadltech/${target}.git
