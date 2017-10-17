@@ -50,6 +50,7 @@ export class NewsPage {
         this.loading = true;
         return new Promise(resolve => {
             this.http.get( this.url + '&page=' + page ).map(res => res.json()).subscribe(data => {
+                if (data.length < 20) { this.lastPageReached = true; }
                 resolve(data);
             }, (err) => {
                 this.lastPageReached = true;
