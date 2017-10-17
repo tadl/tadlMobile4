@@ -21,7 +21,7 @@
     </ion-refresher>
 
     <ion-list>
-        <ion-item>
+        <ion-item *ngIf="globals.multi_location == true">
             <ion-label>Location</ion-label>
             <ion-select [(ngModel)]="location" interface="popover" (ionChange)="venueEvents(location)">
                 <ion-option value="">All Locations</ion-option>
