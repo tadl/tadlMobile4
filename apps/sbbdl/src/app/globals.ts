@@ -19,8 +19,17 @@ export class Globals {
     public newsCategoryExclude: string = '0'; /* 93=Announcement for TADL */
 
     public multi_location: boolean = false;
+    public allLocationsValue: string = '';
+
+    /* this array is used to build the search formats */
+    public searchFormats: Array<{name: string, code: string}> = [
+        { name: 'All Formats', code: 'all' },
+        { name: 'Books', code: 'a' },
+        { name: 'Movies / TV', code: 'g' }
+    ];
 
     /* this array is iterated to generate the change pickup select options */
+    /* also to generate search location, in combination with allLocationsValue */
     public pickup_locations: Array<{name: string, code: string}> = [
     ];
 
