@@ -27,6 +27,16 @@ if [[ $target == "kcl" || $target == "sbbdl" ]]; then
     echo "Running npm install"
     npm install
 
+    echo "Adding ios platform"
+    ionic cordova platform add ios
+
+    echo "Adding android platform"
+    ionic cordova platform add android
+
+    echo "Applying android spec/version tweak for ionic"
+    sed -i 's/"cordova-android": "^/"cordova-android": "/' package.json
+    sed -i 's/<engine name="android" spec="~/<engine name="android" spec="/' config.xml
+
     echo "Removing .git and re-initing"
     rm -rf .git
     git init
@@ -35,12 +45,6 @@ if [[ $target == "kcl" || $target == "sbbdl" ]]; then
 
     echo "Adding ionic remote: git@git.ionicjs.com:tadltech/${target}.git"
     git remote add ionic git@git.ionicjs.com:tadltech/${target}.git
-
-    echo "Adding ios platform"
-    ionic cordova platform add ios
-
-    echo "Adding android platform"
-    ionic cordova platform add android
 
     echo "Done! You may now cd ${base}/${target}Mobile and do 'ionic serve' to test!"
 
