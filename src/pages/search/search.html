@@ -39,26 +39,14 @@
             <ion-item>
                 <ion-label>Format</ion-label>
                 <ion-select [(ngModel)]="this.format" name="format" interface="popover" (ngModelChange)="get_results()">
-                    <ion-option value="all">All Formats</ion-option>
-                    <ion-option value="a">Books</ion-option>
-                    <ion-option value="534">Large Print</ion-option>
-                    <ion-option value="515,518,546,571,572,582,584,590,597,680">Audiobooks</ion-option>
-                    <ion-option value="ebooks">eBooks</ion-option>
-                    <ion-option value="g">Movies / TV</ion-option>
-                    <ion-option value="j">Music</ion-option>
-                    <ion-option value="777">Video Games</ion-option>
+                    <ion-option *ngFor="let format of globals.searchFormats" [value]="format.code">{{format.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item *ngIf="globals.multi_location == true">
                 <ion-label>Location</ion-label>
                 <ion-select [(ngModel)]="this.location" name="location" interface="popover" (ngModelChange)="get_results()">
-                    <ion-option value="22">All Locations</ion-option>
-                    <ion-option value="23">Main Library</ion-option>
-                    <ion-option value="24">Interlochen</ion-option>
-                    <ion-option value="25">Kingsley</ion-option>
-                    <ion-option value="26">Peninsula</ion-option>
-                    <ion-option value="27">Fife Lake</ion-option>
-                    <ion-option value="28">East Bay</ion-option>
+                    <ion-option [value]="globals.allLocationsValue">All Locations</ion-option>
+                    <ion-option *ngFor="let location of globals.pickup_locations" [value]="location.code">{{location.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
