@@ -11,53 +11,39 @@ export class Globals {
     ){
     }
 
-    public systemShortName: string = 'TADL';
-    public catalogHost: string = 'catalog.tadl.org';
-    public websiteHost: string = 'www.tadl.org';
+    public systemShortName: string = 'KCL';
+    public catalogHost: string = 'catalog.kalkaskalibrary.org';
+    public websiteHost: string = 'www.kalkaskalibrary.org';
     public logoFileName: string = 'logo.png'; /* redirected by nginx */
-    public squareLogoFileName: string = 'logo-clock-only.png'; /* redirected by nginx */
-    public newsCategoryExclude: string = '93'; /* 93=Announcement */
+    public squareLogoFileName: string = 'logo-square.png'; /* redirected by nginx */
+    public newsCategoryExclude: string = '0'; /* 93=Announcement */
 
-    public multi_location: boolean = true;
+    public multi_location: boolean = false;
+    public allLocationsValue: string = '22';
+
+    /* this array is used to build the search formats */
+    public searchFormats: Array<{name: string, code: string}> = [
+        { name: 'All Formats', code: 'all' },
+        { name: 'Books', code: 'a' },
+        { name: 'Movies / TV', code: 'g' }
+    ];
 
     /* this array is iterated to generate the change pickup select options */
+    /* also to generate search location, in combination with allLocationsValue */
     public pickup_locations: Array<{name: string, code: string}> = [
-        { name: 'Woodmere', code: '23' },
-        { name: 'Interlochen', code: '24' },
-        { name: 'Kingsley', code: '25' },
-        { name: 'Peninsula', code: '26' },
-        { name: 'Fife Lake', code: '27' },
-        { name: 'East Bay', code: '28' }
     ];
 
     /* this map is used to convert location code to location name */
     pickupLocations = new Map<string, string>([
-        ['23', 'Woodmere'],
-        ['24', 'Interlochen'],
-        ['25', 'Kingsley'],
-        ['26', 'Peninsula'],
-        ['27', 'Fife Lake'],
-        ['28', 'East Bay']
     ]);
 
     /* Used for displaying location name on item details */
     locationName = new Map<string, string>([
-        ['TADL-EBB', 'East Bay Branch Library'],
-        ['TADL-KBL', 'Kingsley Branch Library'],
-        ['TADL-PCL', 'Peninsula Community Library'],
-        ['TADL-IPL', 'Interlochen Public Library'],
-        ['TADL-FLPL', 'Fife Lake Public Library'],
-        ['TADL-WOOD', 'TADL Main Library']
     ]);
 
     /* this is in use by events, to filter by location */
     public eventVenues: Array<{venue: number, name: string}> = [
-        { venue: 97, name: 'Woodmere (Main)' },
-        { venue: 98, name: 'East Bay' },
-        { venue: 99, name: 'Fife Lake' },
-        { venue: 100, name: 'Interlochen' },
-        { venue: 101, name: 'Kingsley' },
-        { venue: 102, name: 'Peninsula' }
+        { venue: 55, name: 'Kalkaska County Library' }
     ];
 
     /* NO NEED TO EDIT BELOW THIS LINE */
