@@ -3,23 +3,23 @@
 target=$1
 base=$HOME/deploy
 
-mkdir -p $base
+mkdir -p $base || exit
 
 if [[ $target == "kcl" || $target == "sbbdl" ]]; then
 
     echo "Preparing build for ${target}"
 
     echo "Changing to workdir: ${base}"
-    cd $base
+    cd $base || exit
 
     echo "Removing previous build (if exists)"
-    rm -rf ${target}Mobile
+    rm -rf ${base}/${target}Mobile
 
     echo "Checking out tadlMobile4 as ${target}Mobile"
     git clone https://github.com/tadl/tadlMobile4.git ${target}Mobile
 
     echo "Changing to workdir: ${target}Mobile"
-    cd ${target}Mobile
+    cd ${target}Mobile || exit
 
     echo "Copying ${target} configs and settings to app"
     cp -Rv apps/${target}/* .
