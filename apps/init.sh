@@ -22,7 +22,7 @@ if [[ $target == "kcl" || $target == "sbbdl" ]]; then
     cd "${target}Mobile" || exit
 
     echo "Copying ${target} configs and settings to app"
-    cp -Rv "apps/${target}/*" .
+    cp -Rv "apps/${target}"/* .
 
     echo "Running npm install"
     npm install
