@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Globals } from '../../app/globals';
 import JsBarcode from 'jsbarcode';
 
 @IonicPage()
@@ -14,7 +15,8 @@ export class BarcodePage {
 
     constructor(
         private nav: NavController,
-        public navParams: NavParams
+        public navParams: NavParams,
+        public globals: Globals
     ) {
     }
 
