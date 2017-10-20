@@ -8,7 +8,7 @@ page-featured {
         color: #000;
     }
     .section-active {
-        background: #294a70;
+        background: map-get($colors, primary);
         color: #fff;
     }
 
