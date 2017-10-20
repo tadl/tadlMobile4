@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.tadl.kcl" version="4.0.0" android-activityName="KCL" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="org.tadl.kcl" version="3.9.9" android-activityName="KCL" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>KCL</name>
     <description>Kalkaska County Library Mobile</description>
     <author email="tech@tadl.org" href="https://www.tadl.org/">Traverse Area District Library Technology Team</author>
