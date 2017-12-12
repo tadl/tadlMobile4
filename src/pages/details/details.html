@@ -16,22 +16,22 @@
         <h5 *ngIf="author">{{author}}</h5>
         <h6 *ngIf="abstract">Description</h6>
         <p *ngIf="abstract" padding-bottom class="item-description" [id]="id + '_abstract'">
-            {{abstract | truncate : 250}}
+            {{abstract_array[0] | truncate : 250}}
             <button ion-button small float-right color="light" *ngIf="abstract.length > 250" (tap)='globals.show_more(id, "abstract")'>Show More</button>
         </p>
         <p *ngIf="abstract" padding-bottom class="item-description" [id]="id + '_abstract_full'" style="display: none">
-            {{abstract}}
+            {{abstract_array[0]}}
             <button ion-button small float-right color="light" (tap)='globals.show_less(id, "abstract")'>Show Less</button>
         </p>
         <h6 *ngIf="contents">Contents</h6>
         <p *ngIf="contents" class="item-contents" [id]="id + '_content'">
-            {{ contents | truncate : 250 }}
+            {{ contents_array[0] | truncate : 250 }}
             <button ion-button small float-right color="light" *ngIf="contents.length > 250" (tap)='globals.show_more(id, "content")'>Show More</button>
         </p>
-        <p *ngIf="contents" class="item-contents" [id]="id + '_content_full'" style="display: none">
-            {{ contents }}
+        <div *ngIf="contents" class="item-contents" [id]="id + '_content_full'" style="display: none">
+            <p [innerHTML]="contents_joined"></p>
             <button ion-button small float-right color="light" (tap)='globals.show_less(id, "content")'>Show Less</button>
-        </p>
+        </div>
         <p *ngIf="publisher">Published by {{publisher}}<span *ngIf="publication_place">, {{publication_place}}</span><span *ngIf="record_year">, {{record_year}}</span></p>
         <p *ngIf="physical_description" [innerHTML]="physical_description"></p>
         <p *ngIf="electronic == true">Electronic resource from {{source}}</p>

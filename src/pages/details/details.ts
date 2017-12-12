@@ -33,7 +33,16 @@ export class ItemDetailsModal {
     title: string = this.navParams.get('title');
     author: string = this.navParams.get('author');
     abstract: string = this.navParams.get('abstract');
+    abstract_array: Array<{any}> = this.navParams.get('abstract_array');
     contents: string = this.navParams.get('contents');
+    contents_array: Array<{any}> = this.navParams.get('contents_array');
+/* FIXME this doesn't work at all
+    if (contents_array[1] != null) {
+        contents_joined: string = this.contents_array.join('</p><p>');
+    } else {
+        contents_joined: string = this.contents;
+    }
+*/
     id: number = this.navParams.get('id');
     electronic: boolean = this.navParams.get('electronic');
     eresource: string = this.navParams.get('eresource');
