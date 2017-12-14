@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { IonicPage, NavController, NavParams, Nav, LoadingController, Events} from 'ionic-angular';
 import { Globals } from '../../app/globals';
 import { Http, URLSearchParams } from '@angular/http';
@@ -26,7 +25,6 @@ export class SearchPage {
         public user: User,
         public events: Events,
         private http: Http,
-        private inAppBrowser: InAppBrowser
     ) {
         if (this.navParams.get('query')) {
             this.get_results();
@@ -144,13 +142,6 @@ export class SearchPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SearchPage');
-    }
-
-    openWebpage(url: string) {
-        const options: InAppBrowserOptions = {
-            zoom: 'no'
-        }
-        const browser = this.inAppBrowser.create(url, '_self', options);
     }
 
 }

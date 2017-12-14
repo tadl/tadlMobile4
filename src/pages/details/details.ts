@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavController, NavParams, Events } from 'ionic-angular';
-import { InAppBrowser, InAppBrowserOptions } from "@ionic-native/in-app-browser";
 import { Globals } from '../../app/globals';
 import { User } from '../../app/user';
 
@@ -20,7 +19,6 @@ export class ItemDetailsModal {
         public globals: Globals,
         public user: User,
         public events: Events,
-        private inAppBrowser: InAppBrowser
     ){
         events.subscribe('manage_holds', () => {
             this.viewCtrl.dismiss();
@@ -75,13 +73,6 @@ export class ItemDetailsModal {
             let output = this.abstract_array.join('</p><p>');
         }
         return output;
-    }
-
-    openWebpage(url: string) {
-        const options: InAppBrowserOptions = {
-            zoom: 'no'
-        }
-        const browser = this.inAppBrowser.create(url, '_self', options);
     }
 
     ionViewDidLoad() {

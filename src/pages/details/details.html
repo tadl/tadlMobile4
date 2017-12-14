@@ -40,7 +40,7 @@
         <p *ngIf="physical_description" [innerHTML]="physical_description"></p>
         <p *ngIf="electronic == true">Electronic resource from {{source}}</p>
         <p *ngIf="all_copies_total > 0"><span *ngIf="holds > 0">{{holds}} hold<span *ngIf="holds > 1">s</span> on </span>{{all_copies_total}} cop<span *ngIf="all_copies_total == 1">y</span><span *ngIf="all_copies_total > 1">ies</span><span *ngIf="all_copies_available > 0">, {{all_copies_available}} available</span>.</p>
-        <button ion-button *ngIf="electronic==true" (tap)="openWebpage(eresource)" float-right>View Resource</button>
+        <a button ion-button *ngIf="electronic==true" [href]="eresource" float-right>View Resource</a>
         <button ion-button *ngIf="this.user.logged_in && electronic != true" (tap)="user.place_hold(id)" float-right>Place Hold</button>
         <button ion-button *ngIf="!this.user.logged_in && electronic != true" menuToggle menuToggle="right" (click)="close_modal()" float-right>Log In to Place Hold</button>
     </div>
