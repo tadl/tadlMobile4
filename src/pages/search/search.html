@@ -77,8 +77,8 @@
             <ion-item-options>
                 <button ion-button (tap)="item.details(result.id)">Details</button>
                 <a button ion-button color="secondary" *ngIf="result.electronic == true" [href]="result.eresource">View<br/>Resource</a>
-                <button ion-button color="secondary" *ngIf="this.user.logged_in && result.electronic != true" (tap)="user.place_hold(result.id)">Place<br/>Hold</button>
-                <button ion-button color="secondary" *ngIf="!this.user.logged_in && result.electronic != true" menuToggle menuToggle="right">Login<br/>to Hold</button>
+                <button ion-button color="secondary" *ngIf="this.user.logged_in && result.electronic != true && result.holdable == true" (tap)="user.place_hold(result.id)">Place<br/>Hold</button>
+                <button ion-button color="secondary" *ngIf="!this.user.logged_in && result.electronic != true && result.holdable == true" menuToggle menuToggle="right">Login<br/>to Hold</button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>

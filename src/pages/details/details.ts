@@ -46,6 +46,7 @@ export class ItemDetailsModal {
     physical_description: string = this.navParams.get('physical_description');
     holds: number = this.navParams.get('holds');
     holdings: Array<{any}> = this.navParams.get('holdings');
+    holdable: boolean = this.navParams.get('holdable');
     availability: Array<{any}> = this.navParams.get('availability');
     loc_copies_available: number = this.navParams.get('loc_copies_available');
     loc_copies_total: number = this.navParams.get('loc_copies_total');
@@ -59,18 +60,20 @@ export class ItemDetailsModal {
     }
 
     showContents() {
+        var output = '';
         if (this.contents_array[1] == null) {
-            let output = this.contents;
+            output = this.contents;
         } else {
-            let output = this.contents_array.join('</p><p>');
+            output = this.contents_array.join('</p><p>');
         }
         return output;
     }
     showAbstract() {
+        var output = '';
         if (this.abstract_array[1] == null) {
-            let output = this.abstract;
+            output = this.abstract;
         } else {
-            let output = this.abstract_array.join('</p><p>');
+            output = this.abstract_array.join('</p><p>');
         }
         return output;
     }
