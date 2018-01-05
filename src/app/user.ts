@@ -42,6 +42,7 @@ export class User {
     checkout_count: string;
     holds_count: string;
     holds_ready: string;
+    overdue: string;
     fines: string;
     card: string;
     token: string;
@@ -111,10 +112,20 @@ export class User {
                             } else {
                                 this.holds_ready = data.holds_ready;
                             }
+                            if ((this.overdue < data.overdue) && data.overdue != 0) {
+                                this.overdue = data.overdue;
+                                this.showToast('You have one or more items overdue.');
+                            } else {
+                                this.overdue = data.overdue;
+                            }
                         } else {
                             this.holds_ready = data.holds_ready;
+                            this.overdue = data.overdue;
                             if (data.holds_ready && (data.holds_ready != 0)) {
                                 this.showToast('You have one or more holds available for pickup.');
+                            }
+                            if (data.overdue && (data.overdue != 0)) {
+                                this.showToast('You have one or more items overdue.');
                             }
                         }
                         this.card = data.card;
