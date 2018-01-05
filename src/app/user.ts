@@ -224,6 +224,7 @@ export class User {
                             this.holds_count = data.user.holds;
                             this.fines = data.user.fine;
                             this.holds_ready = data.user.holds_ready;
+                            this.overdue = data.user.overdue;
                         }
                     }
                 },
@@ -312,6 +313,7 @@ export class User {
                             this.holds_count = data.user.holds;
                             this.fines = data.user.fine;
                             this.holds_ready = data.user.holds_ready;
+                            this.overdue = data.user.overdue;
                         }
                     }
 
@@ -417,6 +419,7 @@ export class User {
                         this.holds = data.holds;
                         this.holds_count = data.user.holds;
                         this.holds_ready = data.user.holds_ready;
+                        this.overdue = data.user.overdue;
                     }
                 },
                 err => this.globals.error_handler(err)
