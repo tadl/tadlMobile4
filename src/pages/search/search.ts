@@ -87,7 +87,9 @@ export class SearchPage {
         }
 
         this.current_params = params.toString();
-        params.append('page', this.page.toString());
+        if (this.page != 0) {
+            params.append('page', this.page.toString());
+        }
         this.http.get(this.globals.searchURL, {params})
             .finally(() => {
                 loading.dismiss();
