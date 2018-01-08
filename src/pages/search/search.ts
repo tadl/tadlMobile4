@@ -46,7 +46,7 @@ export class SearchPage {
 
     results: Array<{any}> = [];
 
-    get_results(){
+    get_results() {
         var loading = this.loadingCtrl.create({content:'Searching...'})
 
         /* Start ugly stuff we need to do to match current API */
@@ -56,11 +56,11 @@ export class SearchPage {
         } else {
             available_on = 'off';
         }
-        var physcial_on: string;
+        var physical_on: string;
         if (this.physical == true) {
-            physcial_on = 'on';
+            physical_on = 'on';
         } else {
-            physcial_on = 'off';
+            physical_on = 'off';
         }
         /* End ugly stuff */
 
@@ -70,11 +70,11 @@ export class SearchPage {
         params.append('fmt', this.format);
         params.append('loc', this.location);
         params.append('availability', available_on);
-        params.append('physical', physcial_on);
+        params.append('physical', physical_on);
         params.append('from_mobile', 'true');
 
         /* If user changes any parameter it is a new search that starts on page 0 */
-        if(this.current_params != params.toString()){
+        if (this.current_params != params.toString()) {
             this.page = 0;
             loading.present();
         }
@@ -108,7 +108,7 @@ export class SearchPage {
                             this.events.publish('infinite_done');
                         }
                         this.last_page = this.page;
-                    } 
+                    }
                 },
                 err => this.globals.error_handler(err)
             );
