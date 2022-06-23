@@ -50,7 +50,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
     "@types/jquery": "^3.2.12",
-    "jsdom": "11.2.0",
+    "jsdom": "16.5.0",
     "jsdom-global": "3.0.2",
     "typescript": "2.3.4"
   },
